@@ -19,7 +19,7 @@ class User extends Authenticatable
     ];
     /**
      * The attributes that should be hidden for arrays.
-     * Prueba de inicio
+     * 
      * @var array
      */
     protected $hidden = [
