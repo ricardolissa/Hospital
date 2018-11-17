@@ -1,0 +1,38 @@
+[
+    {
+        "model-name": "Telefono",
+        "resource-file": "telefonos.json"
+    },
+    {
+        "model-name": "Obrasocial",
+        "resource-file": "obrasocials.json"
+    },
+    {
+        "model-name": "Paciente",
+        "resource-file": "pacientes.json"
+    },
+    {
+        "model-name": "Padministrativo",
+        "resource-file": "padministrativos.json"
+    },
+    {
+        "model-name": "Medico",
+        "resource-file": "medicos.json"
+    },
+    {
+        "model-name": "Especialidad",
+        "resource-file": "especialidads.json"
+    },
+    {
+        "model-name": "Guardia",
+        "resource-file": "guardias.json"
+    },
+    {
+        "model-name": "Prioridad",
+        "resource-file": "prioridads.json"
+    },
+    {
+        "model-name": "Consulta",
+        "resource-file": "consultas.json"
+    }
+]
