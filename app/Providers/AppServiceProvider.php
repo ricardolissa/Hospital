@@ -22,7 +22,10 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        //
+    { 
+     if ($this->app->runningInConsole()) {
+    $this->app->register('CrestApps\CodeGenerator\CodeGeneratorServiceProvider');   
+        }//
     }
+
 }
