@@ -51,6 +51,24 @@ class Persona extends Model
     protected $casts = [];
     
 
+//Scope
+   
+ /*   public function scopeApellido($query, $apellido)
+   
+    {
 
+    if($apellido)
+        return $query->where('apellido','LIKE',"%$apellido%");
+    }
+*/
+    public function scopeDni($query, $dni)
+   
+    {
+
+    if($dni)
+
+       return $query->where('dni', $dni);
+      // return $query->where('dni','LIKE',"%$dni%");
+    }
 
 }

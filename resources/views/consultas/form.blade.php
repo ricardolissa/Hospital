@@ -18,31 +18,48 @@
 <div class="form-group {{ $errors->has('fecha') ? 'has-error' : '' }}">
     <label for="fecha" class="col-md-2 control-label">Fecha</label>
     <div class="col-md-10">
-        <input class="form-control" name="fecha" type="text" id="fecha" value="{{ old('fecha', optional($consulta)->fecha) }}" minlength="1" placeholder="Enter fecha here...">
+        <input class="form-control" name="fecha" type="date" id="fecha" value="{{ old('fecha', optional($consulta)->fecha) }}" minlength="1" placeholder="Enter fecha here...">
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
+
 <div class="form-group {{ $errors->has('arribo') ? 'has-error' : '' }}">
-    <label for="arribo" class="col-md-2 control-label">Arribo</label>
+    <label for="egreso" class="col-md-2 control-label">Arribo</label>
     <div class="col-md-10">
-        <input class="form-control" name="arribo" type="text" id="arribo" value="{{ old('arribo', optional($consulta)->arribo) }}" minlength="1" placeholder="Enter arribo here...">
-        {!! $errors->first('arribo', '<p class="help-block">:message</p>') !!}
-    </div>
+    <input class="form-control" name="arribo" id="arribo" value="{{ old('arribo', optional($consulta)->arribo) }}" type="datetime-local"  min="2017-06-01T08:00" max="2050-06-30T16:30"
+           pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
+    <span class="validity"></span>
+    {!! $errors->first('arribo', '<p class="help-block">:message</p>') !!}
+  <input type="hidden" id="timezone" name="timezone" value="-08:00">
+  </div>
 </div>
+
 
 <div class="form-group {{ $errors->has('egreso') ? 'has-error' : '' }}">
     <label for="egreso" class="col-md-2 control-label">Egreso</label>
     <div class="col-md-10">
-        <input class="form-control" name="egreso" type="text" id="egreso" value="{{ old('egreso', optional($consulta)->egreso) }}" minlength="1" placeholder="Enter egreso here...">
-        {!! $errors->first('egreso', '<p class="help-block">:message</p>') !!}
-    </div>
+    <input class="form-control" name="egreso" id="egreso" value="{{ old('egreso', optional($consulta)->egreso) }}" type="datetime-local"  min="2017-06-01T08:00" max="2050-06-30T16:30"
+           pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
+    <span class="validity"></span>
+    {!! $errors->first('egreso', '<p class="help-block">:message</p>') !!}
+  <input type="hidden" id="timezone" name="timezone" value="-08:00">
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 <div class="form-group {{ $errors->has('tiempo_consulta') ? 'has-error' : '' }}">
     <label for="tiempo_consulta" class="col-md-2 control-label">Tiempo Consulta</label>
     <div class="col-md-10">
-        <input class="form-control" name="tiempo_consulta" type="text" id="tiempo_consulta" value="{{ old('tiempo_consulta', optional($consulta)->tiempo_consulta) }}" minlength="1" placeholder="Enter tiempo consulta here...">
+        <input class="form-control" name="tiempo_consulta" type="time" id="tiempo_consulta" value="{{ old('tiempo_consulta', optional($consulta)->tiempo_consulta) }}" minlength="1"   required>
         {!! $errors->first('tiempo_consulta', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

@@ -85,6 +85,15 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{!! url('/') !!}">Home</a></li>
           </ul>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{!! route('regpacientes.regpaciente.index') !!}">Buscar Paciente</a></li>
+          </ul>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{!! route('regpacientes.regpaciente.cpaciente') !!}">Nuevo Paciente</a></li>
+          </ul>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{!! url('/') !!}">Lista de espera</a></li>
+          </ul>
 
           @if (Route::has('login'))
             <ul class="nav navbar-nav navbar-right">

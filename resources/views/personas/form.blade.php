@@ -34,7 +34,7 @@
 <div class="form-group {{ $errors->has('fecha_nacimiento') ? 'has-error' : '' }}">
     <label for="fecha_nacimiento" class="col-md-2 control-label">Fecha Nacimiento</label>
     <div class="col-md-10">
-        <input class="form-control" name="fecha_nacimiento" type="text" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', optional($persona)->fecha_nacimiento) }}" minlength="1" placeholder="Enter fecha nacimiento here...">
+        <input class="form-control" name="fecha_nacimiento" type="date" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', optional($persona)->fecha_nacimiento) }}" minlength="1" placeholder="Enter fecha nacimiento here...">
         {!! $errors->first('fecha_nacimiento', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

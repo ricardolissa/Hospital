@@ -32,7 +32,7 @@ class PacientesController extends Controller
     public function create()
     {
         $personas = Persona::pluck('nombre','id')->all();
-$obrasocials = Obrasocial::pluck('numero_socio','id')->all();
+        $obrasocials = Obrasocial::pluck('nombre','id')->all();
         
         return view('pacientes.create', compact('personas','obrasocials'));
     }
@@ -86,8 +86,8 @@ $obrasocials = Obrasocial::pluck('numero_socio','id')->all();
     public function edit($id)
     {
         $paciente = Paciente::findOrFail($id);
-        $personas = Persona::pluck('created_at','id')->all();
-$obrasocials = Obrasocial::pluck('numero_socio','id')->all();
+        $personas = Persona::pluck('nombre','id')->all();
+$obrasocials = Obrasocial::pluck('nombre','id')->all();
 
         return view('pacientes.edit', compact('paciente','personas','obrasocials'));
     }

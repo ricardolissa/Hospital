@@ -28,8 +28,6 @@ class Obrasocial extends Model
      * @var array
      */
     protected $fillable = [
-                  'numero_socio',
-                  'plan',
                   'nombre'
               ];
 

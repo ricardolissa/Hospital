@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('pdf','ReportController@generar');
 
 //prueba de controlador
 Route::group(
@@ -29,13 +29,23 @@ Route::group(
     Route::get('/paciente', 'RegPacientesController@cpaciente')
          ->name('regpacientes.regpaciente.cpaciente');
     
-    Route::get('/persona', 'RegPacientesController@cpersona')
-         ->name('regpacientes.regpaciente.cpersona');
-    
-    Route::post('/', 'PersonasController@store')
-         ->name('regpacientes.regpersona.store');
+    Route::post('/', 'RegPacientesController@store')
+         ->name('regpacientes.regpaciente.store');
              
+    Route::post('/bpersona', 'RegPacientesController@bpersona')
+         ->name('regpacientes.regpaciente.bpersona');
 
+    Route::get('/bpersona/{persona}','RegPacientesController@edit')
+         ->name('regpacientes.regpaciente.edit')
+         ->where('id', '[0-9]+');
+
+    Route::put('bpersona/{persona}', 'RegPacientesController@update')
+        ->name('regpacientes.regpaciente.update')
+        ->where('id', '[0-9]+');
+
+    Route::get('/pdf', 'RegPacientesController@pdf')
+         ->name('regpacientes.regpaciente.pdf');
+        
 });
 
 
@@ -199,6 +209,9 @@ Route::group(
          ->name('padministrativos.padministrativo.destroy')
          ->where('id', '[0-9]+');
 
+    Route::get('/', 'PadministrativosController@indexpad')
+         ->name('padministrativos.padministrativo.indexpad');
+
 });
 
 Route::group(
@@ -231,6 +244,8 @@ Route::group(
          ->name('medicos.medicos.destroy')
          ->where('id', '[0-9]+');
 
+    Route::get('/indexmed', 'MedicosController@indexmed')
+         ->name('medicos.medicos.indexmed');
 });
 
 Route::group(

@@ -65,23 +65,23 @@ class Consulta extends Model
     /**
      * Get the medico for this model.
      */
-    public function medico()
+   /* public function medico()
     {
-        return $this->belongsTo('App\Models\Medico','medico_id');
+        return $this->belongsTo('App\Models\Medicos','medico_id');
     }
 
     /**
      * Get the guardium for this model.
      */
-    public function guardium()
+    /*public function guardium()
     {
         return $this->belongsTo('App\Models\Guardium','guardia_id');
-    }
+    }*/
 
     /**
      * Get the prioridad for this model.
      */
-    public function prioridad()
+    public function prioridads()
     {
         return $this->belongsTo('App\Models\Prioridad','prioridad_id');
     }
@@ -95,19 +95,11 @@ class Consulta extends Model
     }
 
     /**
-     * Get the prioridads for this model.
-     */
-    public function prioridads()
-    {
-        return $this->hasOne('App\Models\Prioridad','prioridad_id','id');
-    }
-
-    /**
      * Get the medicos for this model.
      */
     public function medicos()
     {
-        return $this->belongsTo('App\Models\Medico','medico_id','id');
+        return $this->belongsTo('App\Models\Medicos','medico_id','id');
     }
 
     /**

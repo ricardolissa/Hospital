@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medico;
+use App\Models\Medicos;
 use App\Models\Consulta;
 use App\Models\Paciente;
-use App\Models\Guardium;
+use App\Models\Guardia;
 use App\Models\Prioridad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConsultasFormRequest;
@@ -21,7 +21,7 @@ class ConsultasController extends Controller
      */
     public function index()
     {
-        $consultas = Consulta::with('paciente','medico','guardium','prioridad')->paginate(25);
+        $consultas = Consulta::with('paciente','medicos','guardias','prioridads')->paginate(25);
 
         return view('consultas.index', compact('consultas'));
     }
@@ -34,9 +34,9 @@ class ConsultasController extends Controller
     public function create()
     {
         $pacientes = Paciente::pluck('antecedentes_familiares','id')->all();
-$medicos = Medico::pluck('foto','id')->all();
-$guardia = Guardium::pluck('id','id')->all();
-$prioridads = Prioridad::pluck('nombre','id')->all();
+    $medicos = Medicos::pluck('id','id')->all();
+    $guardia = Guardia::pluck('id','id')->all();
+    $prioridads = Prioridad::pluck('nombre','id')->all();
         
         return view('consultas.create', compact('pacientes','medicos','guardia','prioridads'));
     }
@@ -50,7 +50,7 @@ $prioridads = Prioridad::pluck('nombre','id')->all();
      */
     public function store(ConsultasFormRequest $request)
     {
-        try {
+       // try {
             
             $data = $request->getData();
             
@@ -59,11 +59,11 @@ $prioridads = Prioridad::pluck('nombre','id')->all();
             return redirect()->route('consultas.consulta.index')
                              ->with('success_message', 'Consulta was successfully added!');
 
-        } catch (Exception $exception) {
+/*} catch (Exception $exception) {
 
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }
+        }*/
     }
 
     /**
@@ -92,7 +92,7 @@ $prioridads = Prioridad::pluck('nombre','id')->all();
         $consulta = Consulta::findOrFail($id);
         $pacientes = Paciente::pluck('antecedentes_familiares','id')->all();
 $medicos = Medico::pluck('foto','id')->all();
-$guardia = Guardium::pluck('id','id')->all();
+$guardia = Guardia::pluck('id','id')->all();
 $prioridads = Prioridad::pluck('nombre','id')->all();
 
         return view('consultas.edit', compact('consulta','pacientes','medicos','guardia','prioridads'));

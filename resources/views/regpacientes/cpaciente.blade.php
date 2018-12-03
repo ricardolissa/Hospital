@@ -7,7 +7,7 @@
         <div class="panel-heading clearfix">
             
             <span class="pull-left">
-                <h4 class="mt-5 mb-5">Create New Paciente</h4>
+                <h4 class="mt-5 mb-5">NEW PACIENTE</h4>
             </span>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
@@ -28,9 +28,13 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('pacientes.paciente.store') }}" accept-charset="UTF-8" id="create_paciente_form" name="create_paciente_form" class="form-horizontal">
+             <form method="POST" action="{{ route('regpacientes.regpaciente.store') }}" accept-charset="UTF-8" id="create_persona_form" name="create_persona_form" class="form-horizontal">
             {{ csrf_field() }}
-            @include ('pacientes.form', [
+            @include ('personas.form', [
+                                        'persona' => null,
+                                      ])
+
+            @include ('regpacientes.form', [
                                         'paciente' => null,
                                       ])
 
@@ -39,10 +43,14 @@
                         <input class="btn btn-primary" type="submit" value="Add">
                     </div>
                 </div>
+    
+            </div>
 
             </form>
-
-        </div>
+          
+        
+      
+    
     </div>
 
 @endsection

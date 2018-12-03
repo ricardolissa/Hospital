@@ -140,6 +140,8 @@ class MedicosController extends Controller
         }
     }
 
-
+    public function indexmed(){
+        return view('medicos.indexmed');
+    }
 
 }

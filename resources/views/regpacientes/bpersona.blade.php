@@ -1,28 +1,25 @@
-<div>
-    bpaciente
-</div>
+@extends('layouts.app')
+
+@section('content')
+
 <div class="panel panel-default">
     <div class="panel-heading clearfix">
         <div class="pull-left">
             <h4 class="mt-5 mb-5">
-                Personas
+                Paciente
             </h4>
         </div>
-        <div class="btn-group btn-group-sm pull-right" role="group">
-            <a class="btn btn-success" href="{{ route('personas.persona.create') }}" title="Create New Persona">
-                <span aria-hidden="true" class="glyphicon glyphicon-plus">
-                </span>
-            </a>
-        </div>
+       
     </div>
-
-	 @if ($errors->any())
-                <ul class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
+    @if ($errors->any())
+    <ul class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+        <li>
+            {{ $error }}
+        </li>
+        @endforeach
+    </ul>
+    @endif
     @if(count($personas) == 0)
     <div class="panel-body text-center">
         <h4>
@@ -48,10 +45,7 @@
                             Email
                         </th>
                         <th>
-                            Fecha Nacimiento
-                        </th>
-                        <th>
-                            Edad
+                            
                         </th>
                     </tr>
                 </thead>
@@ -71,16 +65,24 @@
                             {{ $persona->email }}
                         </td>
                         <td>
-                            {{ $persona->fecha_nacimiento }}
-                        </td>
-                        <td>
-                            {{ $persona->edad }}
+                             <a class="btn btn-info" href="{{ route('personas.persona.create') }}" title="Seleccionar">
+                				<span aria-hidden="true" class="glyphicon glyphicon-open">
+                				</span>
+           					 </a>
+                             <a class="btn btn-primary" href="{{ route('regpacientes.regpaciente.edit', $persona->id ) }}" title="Editar">
+                                <span aria-hidden="true" class="glyphicon glyphicon-pencil">
+                                </span>
+                             </a>
+                             <a href="{{ route('regpacientes.regpaciente.pdf') }}" class="btn btn-sm btn-primary">
+            Descargar productos en PDF
+        </a>
                         </td>
                     </tr>
                     @endforeach
-           		</tbody>
+                </tbody>
             </table>
         </div>
     </div>
     @endif
 </div>
+@endsection

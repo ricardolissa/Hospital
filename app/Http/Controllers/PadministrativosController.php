@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Persona;
-use App\Models\Padministrativo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PadministrativosFormRequest;
+use App\Models\Padministrativo;
+use App\Models\Persona;
 use Exception;
+use Illuminate\Http\Request;
 
 class PadministrativosController extends Controller
 {
@@ -139,6 +140,19 @@ class PadministrativosController extends Controller
         }
     }
 
+     public function indexpad(Request $request)
+    {
+        
+         $dni = $request->get('dni');
+       
+
+       $personas = Persona::orderBy('id','DESC')
+                ->dni($dni)
+                ->paginate(4);
+
+
+        return view('padministrativos.indexpad', compact('personas'));
+    }
 
 
 }

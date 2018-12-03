@@ -54,7 +54,7 @@
                     <tbody>
                     @foreach($pacientes as $paciente)
                         <tr>
-                            <td>{{ optional($paciente->persona)->created_at }}</td>
+                            <td>{{ optional($paciente->persona)->nombre }}</td>
                             <td>{{ optional($paciente->obrasocial)->numero_socio }}</td>
                             <td>{{ $paciente->antecedentes_familiares }}</td>
                             <td>{{ $paciente->antecedentes_patologico }}</td>

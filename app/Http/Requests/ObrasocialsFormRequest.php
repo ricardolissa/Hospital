@@ -14,7 +14,7 @@ class ObrasocialsFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,6 @@ class ObrasocialsFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'numero_socio' => 'string|min:1|nullable',
-            'plan' => 'string|min:1|nullable',
             'nombre' => 'string|min:1|nullable',
     
         ];
@@ -42,7 +40,7 @@ class ObrasocialsFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['numero_socio','plan','nombre']);
+        $data = $this->only(['nombre']);
 
         return $data;
     }
