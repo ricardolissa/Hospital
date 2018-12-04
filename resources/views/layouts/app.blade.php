@@ -79,7 +79,7 @@
             <span class="icon-bar">B</span>
             <span class="icon-bar">C</span>
           </button>
-          <a href="{!! url('/') !!}" class="navbar-brand">{{ config('app.name', 'Hospital') }}</a>
+          <a href="{!! url('/') !!}" class="navbar-brand">  <img src="images/35x35logo.png"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

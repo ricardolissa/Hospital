@@ -73,9 +73,7 @@
                                 <span aria-hidden="true" class="glyphicon glyphicon-pencil">
                                 </span>
                              </a>
-                             <a href="{{ route('regpacientes.regpaciente.pdf') }}" class="btn btn-sm btn-primary">
-            Descargar productos en PDF
-        </a>
+                            
                         </td>
                     </tr>
                     @endforeach
