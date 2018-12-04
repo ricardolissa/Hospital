@@ -11,11 +11,11 @@
             </div>
             <div class="btn-group btn-group-sm pull-right" role="group">
 
-                <a href="{{ route('obrasocials.obrasocial.index') }}" class="btn btn-primary" title="Show All Obrasocial">
+                <a href="{{ route('obrasocials.obrasocial.index') }}" class="btn btn-primary" title="Mostrar Obra Social">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
 
-                <a href="{{ route('obrasocials.obrasocial.create') }}" class="btn btn-success" title="Create New Obrasocial">
+                <a href="{{ route('obrasocials.obrasocial.create') }}" class="btn btn-success" title="Crear Obra Social">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </a>
 
