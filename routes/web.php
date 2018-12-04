@@ -49,7 +49,15 @@ Route::group(
 });
 
 
+Route::group(
+[
+    'prefix' => 'login',
+],
+    function (){
+    Route::get('/', 'LoginController@index')
+    ->name('login.login.blade');    
 
+});
 
 Route::group(
 [

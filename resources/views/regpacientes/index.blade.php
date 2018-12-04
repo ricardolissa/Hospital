@@ -55,8 +55,9 @@
                          
                         </td>
                         <td>
-                             <input class="btn btn-success" type="submit" value="Seleccionar" ></input>
+                        <input class="btn btn-success pull-right" type="submit" value="Seleccionar" ></input>     
                         </td>
+                        
                     </tr>
             
                 </tbody>
@@ -67,7 +68,7 @@
 <form>
 <div><label>Sintoma Actual</label></div>
 <br>
-<input class="form-control" name="padecimento_actual" type="text" id="pacdecimento_actual"  placeholder="Ingrese Sintoma Actual">
+<input class="form-control" name="padecimento_actual" type="text" id="padecimento_actual"  placeholder="Ingrese Sintoma Actual">
 
 
 <br>
