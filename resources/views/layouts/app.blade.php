@@ -88,8 +88,13 @@
                 <div class="container">
                     <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
                     </button>
+<<<<<<< HEAD
                     <a class="nav navbar-nav navbar-left" href="{!! url('/') !!}">
                        <img src="images/35x35logo.png"/></a>
+=======
+                    <a class="navbar-brand" href="{!! url('/') !!}">
+                        <img src="images/35x35logo.png"/>
+>>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                     </a>
                     <div class="collapse navbar-collapse" id="navbar">
                         <ul class="nav navbar-nav">
@@ -120,18 +125,34 @@
                                 </a>
                             </li>
                         </ul>
+<<<<<<< HEAD
                         <div class="nav navbar-nav" id="navbarSupportedContent">
                         @guest
                         <li class="active">
+=======
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        @guest
+                        <ul class="nav navbar-nav">
+                        
+                        <li class="nav-item">
+>>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                             <a class="nav-link" href="{{ route('login') }}">
                                 {{ __('Login') }}
                             </a>
                         </li>
+<<<<<<< HEAD
                         <li class="active">
+=======
+                        </ul>
+                        <ul class="nav navbar-nav">
+                        
+                        <li class="nav-item">
+>>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                             <a class="nav-link" href="{{ route('register') }}">
                                 {{ __('Register') }}
                             </a>
                         </li>
+<<<<<<< HEAD
                         @else
                        <div class="nav navbar-nav" id="navbarSupportedContent"> 
                         <li class="active">
@@ -142,16 +163,45 @@
                           </li>  
                            <li class="active"> 
                              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+=======
+                        </ul>
+                        @else
+                        <ul class="nav navbar-nav">
+                        
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button" v-pre="">
+                                {{ Auth::user()->name }}
+                                <span class="caret">
+                                </span>
+                            </a>
+                            
+
+
+
+
+
+
+
+                            <div aria-labelledby="navbarDropdown" class="nav navbar-nav">
+                                <a class="nav navbar-nav" href="{{ route('logout') }}" onclick="event.preventDefault();
+>>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                                 document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
                                 <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
                                     @csrf
                                 </form>
+<<<<<<< HEAD
                             
                             <!--/.nav-collapse -->
                         </li>
                     </div>
+=======
+                            </div>
+                            <!--/.nav-collapse -->
+                        </li>
+                        </ul>
+>>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                         @endguest
                     </div>
                     </div>

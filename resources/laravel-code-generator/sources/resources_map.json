@@ -34,5 +34,9 @@
     {
         "model-name": "Consulta",
         "resource-file": "consultas.json"
+    },
+    {
+        "model-name": "users",
+        "resource-file": "users.json"
     }
 ]

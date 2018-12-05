@@ -17,6 +17,7 @@
     <link href="signin.css" rel="stylesheet">
   </head>
 
+<<<<<<< HEAD
   
   <body>
    <div class= panel panel-default> 
@@ -33,6 +34,11 @@
       <br>
       <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
 
+=======
+  <body class="text-center">
+     <div class="col-sm-4"></div>
+     <div class="col-sm-4">
+>>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
     <form class="form-signin">
       <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
    
@@ -65,8 +71,15 @@
 
     </form>
   </div>
+<<<<<<< HEAD
 <div class= "col-sm-4"></div>
 </div>
 </body>
+=======
+  <div class="col-sm-4"></div>
+  </body>
+</div>
+
+>>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
 </html>
 @endsection
