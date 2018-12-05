@@ -25,13 +25,11 @@
             padding-top: 65px;
             padding-bottom: 20px;
         }
-
         /* Set padding to keep content from hitting the edges */
         .body-content {
             padding-left: 15px;
             padding-right: 15px;
         }
-
         /* Override the default bootstrap behavior where horizontal description lists 
            will truncate terms that are too long to fit in the left column.
            Also, add a 8pm to the bottom margin
@@ -40,7 +38,6 @@
             white-space: normal;
             margin-bottom: 8px;
         }
-
         /* Set width on the form input elements since they're 100% wide by default */
         input,
         select,
@@ -49,26 +46,21 @@
         .input-width-input {
             max-width: 380px;
         }
-
         .input-delete-container {
             width: 46px !important;
         }
-
         /* Vertically align the table cells inside body-panel */
         .panel-body .table > tr > td
         {
             vertical-align: middle;
         }
-
         .panel-body-with-table
         {
             padding: 0;
         }
-
         .mt-5 {
             margin-top: 5px !important;
         }
-
         .mb-5 {
             margin-bottom: 5px !important;
         }
@@ -88,13 +80,8 @@
                 <div class="container">
                     <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
                     </button>
-<<<<<<< HEAD
                     <a class="nav navbar-nav navbar-left" href="{!! url('/') !!}">
                        <img src="images/35x35logo.png"/></a>
-=======
-                    <a class="navbar-brand" href="{!! url('/') !!}">
-                        <img src="images/35x35logo.png"/>
->>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                     </a>
                     <div class="collapse navbar-collapse" id="navbar">
                         <ul class="nav navbar-nav">
@@ -125,34 +112,18 @@
                                 </a>
                             </li>
                         </ul>
-<<<<<<< HEAD
                         <div class="nav navbar-nav" id="navbarSupportedContent">
                         @guest
                         <li class="active">
-=======
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        @guest
-                        <ul class="nav navbar-nav">
-                        
-                        <li class="nav-item">
->>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                             <a class="nav-link" href="{{ route('login') }}">
                                 {{ __('Login') }}
                             </a>
                         </li>
-<<<<<<< HEAD
                         <li class="active">
-=======
-                        </ul>
-                        <ul class="nav navbar-nav">
-                        
-                        <li class="nav-item">
->>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                             <a class="nav-link" href="{{ route('register') }}">
                                 {{ __('Register') }}
                             </a>
                         </li>
-<<<<<<< HEAD
                         @else
                        <div class="nav navbar-nav" id="navbarSupportedContent"> 
                         <li class="active">
@@ -163,45 +134,16 @@
                           </li>  
                            <li class="active"> 
                              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-=======
-                        </ul>
-                        @else
-                        <ul class="nav navbar-nav">
-                        
-                        <li class="nav-item dropdown">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button" v-pre="">
-                                {{ Auth::user()->name }}
-                                <span class="caret">
-                                </span>
-                            </a>
-                            
-
-
-
-
-
-
-
-                            <div aria-labelledby="navbarDropdown" class="nav navbar-nav">
-                                <a class="nav navbar-nav" href="{{ route('logout') }}" onclick="event.preventDefault();
->>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                                 document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
                                 <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-<<<<<<< HEAD
                             
                             <!--/.nav-collapse -->
                         </li>
                     </div>
-=======
-                            </div>
-                            <!--/.nav-collapse -->
-                        </li>
-                        </ul>
->>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
                         @endguest
                     </div>
                     </div>
@@ -225,16 +167,13 @@
             --}}
             <script type="text/javascript">
                 $(function(){
-
              // sends the uploaded file file to the fielselect event
             $(document).on('change', ':file', function() {
                 var input = $(this);
                 var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-
                 input.trigger('fileselect', [label]);
             });
             </script>
         
-
     </body>
 </html>

@@ -387,8 +387,7 @@ Route::group(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-<<<<<<< HEAD
-=======
+
 
 Route::group(
 [
@@ -421,4 +420,4 @@ Route::group(
          ->where('id', '[0-9]+');
 
 });
->>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
+
