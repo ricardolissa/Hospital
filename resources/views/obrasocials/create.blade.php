@@ -7,11 +7,11 @@
         <div class="panel-heading clearfix">
             
             <span class="pull-left">
-                <h4 class="mt-5 mb-5">Create New Obrasocial</h4>
+                <h4 class="mt-5 mb-5">Crear Obra Social</h4>
             </span>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('obrasocials.obrasocial.index') }}" class="btn btn-primary" title="Show All Obrasocial">
+                <a href="{{ route('obrasocials.obrasocial.index') }}" class="btn btn-primary" title="Mostrar Obra Social">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
             </div>
