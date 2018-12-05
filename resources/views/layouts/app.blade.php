@@ -122,17 +122,25 @@
                         </ul>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         @guest
+                        <ul class="nav navbar-nav">
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
                                 {{ __('Login') }}
                             </a>
                         </li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">
                                 {{ __('Register') }}
                             </a>
                         </li>
+                        </ul>
                         @else
+                        <ul class="nav navbar-nav">
+                        
                         <li class="nav-item dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button" v-pre="">
                                 {{ Auth::user()->name }}
@@ -158,6 +166,7 @@
                             </div>
                             <!--/.nav-collapse -->
                         </li>
+                        </ul>
                         @endguest
                     </div>
                     </div>

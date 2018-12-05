@@ -16,7 +16,7 @@ class AlterPersonasTable extends Migration
         Schema::table('personas', function (Blueprint $table) {
           $table->integer('telefono_id')->nullable();
 
-           $table->foreign('telefono_id')->references('id')->on('telefonos');
+           $table->foreign('telefono_id')->references('id')->on('telefonos')->onDelete('cascade');
        });
         
     }
