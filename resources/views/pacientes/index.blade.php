@@ -24,7 +24,7 @@
 
             <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('pacientes.paciente.create') }}" class="btn btn-success" title="Create New Paciente">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
                 </a>
             </div>
 
@@ -46,7 +46,6 @@
                             <th>Antecedentes Familiares</th>
                             <th>Antecedentes Patologico</th>
                             <th>Antecedentes Nopatologico</th>
-                            <th>Padecimiento Actual</th>
 
                             <th></th>
                         </tr>
@@ -54,12 +53,11 @@
                     <tbody>
                     @foreach($pacientes as $paciente)
                         <tr>
-                            <td>{{ optional($paciente->persona)->nombre }}</td>
-                            <td>{{ optional($paciente->obrasocial)->numero_socio }}</td>
+                            <td>{{ optional($paciente->persona)->dni }}</td>
+                            <td>{{ optional($paciente->obrasocial)->nombre }}</td>
                             <td>{{ $paciente->antecedentes_familiares }}</td>
                             <td>{{ $paciente->antecedentes_patologico }}</td>
                             <td>{{ $paciente->antecedentes_nopatologico }}</td>
-                            <td>{{ $paciente->padecimiento_actual }}</td>
 
                             <td>
 
@@ -69,14 +67,14 @@
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
                                         <a href="{{ route('pacientes.paciente.show', $paciente->id ) }}" class="btn btn-info" title="Show Paciente">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
                                         </a>
                                         <a href="{{ route('pacientes.paciente.edit', $paciente->id ) }}" class="btn btn-primary" title="Edit Paciente">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete Paciente" onclick="return confirm(&quot;Delete Paciente?&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
                                         </button>
                                     </div>
 

@@ -23,16 +23,16 @@
             </div>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('consultas.consulta.create') }}" class="btn btn-success" title="Create New Consulta">
+                <a href="{{ route('consultas.consulta.create') }}" class="btn btn-success" title="Create New Consultas">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </a>
             </div>
 
         </div>
         
-        @if(count($consultas) == 0)
+        @if(count($consultasObjects) == 0)
             <div class="panel-body text-center">
-                <h4>No Consultas Available!</h4>
+                <h4>No Consultas Available.</h4>
             </div>
         @else
         <div class="panel-body panel-body-with-table">
@@ -51,39 +51,43 @@
                             <th>Medico</th>
                             <th>Guardia</th>
                             <th>Prioridad</th>
+                            <th>Padecimiento Actual</th>
+                            <th>Atendido</th>
 
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($consultas as $consulta)
+                    @foreach($consultasObjects as $consultas)
                         <tr>
-                            <td>{{ $consulta->diagnostico }}</td>
-                            <td>{{ $consulta->receta }}</td>
-                            <td>{{ $consulta->fecha }}</td>
-                            <td>{{ $consulta->arribo }}</td>
-                            <td>{{ $consulta->egreso }}</td>
-                            <td>{{ $consulta->tiempo_consulta }}</td>
-                            <td>{{ optional($consulta->paciente)->antecedentes_familiares }}</td>
-                            <td>{{ optional($consulta->medico)->foto }}</td>
-                            <td>{{ optional($consulta->guardium)->id }}</td>
-                            <td>{{ optional($consulta->prioridad)->nombre }}</td>
+                            <td>{{ $consultas->diagnostico }}</td>
+                            <td>{{ $consultas->receta }}</td>
+                            <td>{{ $consultas->fecha }}</td>
+                            <td>{{ $consultas->arribo }}</td>
+                            <td>{{ $consultas->egreso }}</td>
+                            <td>{{ $consultas->tiempo_consulta }}</td>
+                            <td>{{ optional($consultas->paciente->persona)->apellido}}</td>
+                            <td>{{ optional($consultas->medico)->id }}</td>
+                            <td>{{ optional($consultas->guardia)->id }}</td>
+                            <td>{{ optional($consultas->prioridad)->nombre }}</td>
+                            <td>{{ $consultas->padecimiento_actual }}</td>
+                            <td>{{ $consultas->atendido }}</td>
 
                             <td>
 
-                                <form method="POST" action="{!! route('consultas.consulta.destroy', $consulta->id) !!}" accept-charset="UTF-8">
+                                <form method="POST" action="{!! route('consultas.consulta.destroy', $consultas->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
-                                        <a href="{{ route('consultas.consulta.show', $consulta->id ) }}" class="btn btn-info" title="Show Consulta">
+                                        <a href="{{ route('consultas.consulta.show', $consultas->id ) }}" class="btn btn-info" title="Show Consultas">
                                             <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
                                         </a>
-                                        <a href="{{ route('consultas.consulta.edit', $consulta->id ) }}" class="btn btn-primary" title="Edit Consulta">
+                                        <a href="{{ route('consultas.consulta.edit', $consultas->id ) }}" class="btn btn-primary" title="Edit Consultas">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger" title="Delete Consulta" onclick="return confirm(&quot;Delete Consulta?&quot;)">
+                                        <button type="submit" class="btn btn-danger" title="Delete Consultas" onclick="return confirm(&quot;Click Ok to delete Consultas.&quot;)">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -100,7 +104,7 @@
         </div>
 
         <div class="panel-footer">
-            {!! $consultas->render() !!}
+            {!! $consultasObjects->render() !!}
         </div>
         
         @endif

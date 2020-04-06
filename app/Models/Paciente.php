@@ -32,8 +32,7 @@ class Paciente extends Model
                   'obrasocial_id',
                   'antecedentes_familiares',
                   'antecedentes_patologico',
-                  'antecedentes_nopatologico',
-                  'padecimiento_actual'
+                  'antecedentes_nopatologico'
               ];
 
     /**
@@ -87,7 +86,7 @@ class Paciente extends Model
      */
     public function personas()
     {
-        return $this->belongsTo('App\Models\Obrasocial','persona_id','id');
+        return $this->belongsTo('App\Models\Persona','persona_id','id');
     }
 
 

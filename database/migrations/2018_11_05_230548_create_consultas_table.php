@@ -21,7 +21,7 @@ class CreateConsultasTable extends Migration
             $table->date('fecha')->nullable();
             $table->dateTime('arribo')->nullable();
             $table->dateTime('egreso')->nullable();
-            $table->time('tiempo_consulta')->nullable();
+            $table->dateTime('tiempo_consulta')->nullable();
             $table->integer('paciente_id')->unsigned()->nullable()->index();
             $table->integer('medico_id')->unsigned()->nullable()->index();
             $table->integer('guardia_id')->unsigned()->nullable()->index();

@@ -24,7 +24,7 @@
 
             <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('users.user.create') }}" class="btn btn-success" title="Create New User">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
                 </a>
             </div>
 
@@ -44,6 +44,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Password</th>
+                            <th>Role</th>
 
                             <th></th>
                         </tr>
@@ -54,6 +55,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->password }}</td>
+                            <td>{{ optional($user->role)->name }}</td>
 
                             <td>
 
@@ -63,14 +65,14 @@
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
                                         <a href="{{ route('users.user.show', $user->id ) }}" class="btn btn-info" title="Show User">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
                                         </a>
                                         <a href="{{ route('users.user.edit', $user->id ) }}" class="btn btn-primary" title="Edit User">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete User" onclick="return confirm(&quot;Delete User?&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
                                         </button>
                                     </div>
 

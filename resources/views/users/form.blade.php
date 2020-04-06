@@ -23,3 +23,19 @@
     </div>
 </div>
 
+<div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
+    <label for="role_id" class="col-md-2 control-label">Role</label>
+    <div class="col-md-10">
+        <select class="form-control" id="role_id" name="role_id">
+                <option value="" style="display: none;" {{ old('role_id', optional($user)->role_id ?: '') == '' ? 'selected' : '' }} disabled selected>Select role</option>
+            @foreach ($roles as $key => $role)
+                <option value="{{ $key }}" {{ old('role_id', optional($user)->role_id) == $key ? 'selected' : '' }}>
+                    {{ $role }}
+                </option>
+            @endforeach
+        </select>
+        
+        {!! $errors->first('role_id', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+

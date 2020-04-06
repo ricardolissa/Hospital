@@ -1,49 +1,51 @@
-<div class="form-group {{ $errors->has('obrasocial_id') ? 'has-error' : '' }}">
-    <label for="obrasocial_id" class="col-md-2 control-label">Obrasocial</label>
+<div class="form-group {{ $errors->has('paciente_id') ? 'has-error' : '' }}">
+    <label for="paciente_id" class="col-md-2 control-label">Paciente :</label>
+    <label for="paciente_id" class="col-md-2 control-label">{{ $pacientes->persona->dni }}</label>
     <div class="col-md-10">
-        <select class="form-control" id="obrasocial_id" name="obrasocial_id">
-        	    <option value="" style="display: none;" {{ old('obrasocial_id', optional($paciente)->obrasocial_id ?: '') == '' ? 'selected' : '' }} disabled selected>Select obrasocial</option>
-        	@foreach ($obrasocials as $key => $obrasocial)
-			    <option value="{{ $key }}" {{ old('obrasocial_id', optional($paciente)->obrasocial_id) == $key ? 'selected' : '' }}>
-			    	{{ $obrasocial }}
-			    </option>
-			@endforeach
-        </select>
-        
-        {!! $errors->first('obrasocial_id', '<p class="help-block">:message</p>') !!}
+        <input class="form-control" name="paciente_id" type="text" id="paciente_id" value="{{  $pacientes->id }}" minlength="1" readonly="readonly"  style="visibility:hidden">
+        {!! $errors->first('paciente_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+     
+    
 
-
-<div class="form-group {{ $errors->has('antecedentes_familiares') ? 'has-error' : '' }}">
-    <label for="antecedentes_familiares" class="col-md-2 control-label">Antecedentes Familiares</label>
-    <div class="col-md-10">
-        <input class="form-control" name="antecedentes_familiares" type="text" id="antecedentes_familiares" value="{{ old('antecedentes_familiares', optional($paciente)->antecedentes_familiares) }}" minlength="1" placeholder="Enter antecedentes familiares here...">
-        {!! $errors->first('antecedentes_familiares', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('antecedentes_patologico') ? 'has-error' : '' }}">
-    <label for="antecedentes_patologico" class="col-md-2 control-label">Antecedentes Patologico</label>
-    <div class="col-md-10">
-        <input class="form-control" name="antecedentes_patologico" type="text" id="antecedentes_patologico" value="{{ old('antecedentes_patologico', optional($paciente)->antecedentes_patologico) }}" minlength="1" placeholder="Enter antecedentes patologico here...">
-        {!! $errors->first('antecedentes_patologico', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('antecedentes_nopatologico') ? 'has-error' : '' }}">
-    <label for="antecedentes_nopatologico" class="col-md-2 control-label">Antecedentes Nopatologico</label>
-    <div class="col-md-10">
-        <input class="form-control" name="antecedentes_nopatologico" type="text" id="antecedentes_nopatologico" value="{{ old('antecedentes_nopatologico', optional($paciente)->antecedentes_nopatologico) }}" minlength="1" placeholder="Enter antecedentes nopatologico here...">
-        {!! $errors->first('antecedentes_nopatologico', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-
-<div class="form-group {{ $errors->has('padecimiento_actual') ? 'has-error' : '' }}">
+<div class="form-group {{ $errors->has('pacienteadecimiento_actual') ? 'has-error' : '' }}">
     <label for="padecimiento_actual" class="col-md-2 control-label">Padecimiento Actual</label>
     <div class="col-md-10">
-        <input class="form-control" name="padecimiento_actual" type="text" id="padecimiento_actual" value="{{ old('padecimiento_actual', optional($paciente)->padecimiento_actual) }}" minlength="1" placeholder="Enter padecimiento actual here...">
+        <input class="form-control" name="padecimiento_actual" type="text" id="padecimiento_actual" value="{{ old('padecimiento_actual', optional($consulta)->padecimiento_actual) }}" minlength="1" placeholder="Enter padecimiento actual here...">
         {!! $errors->first('padecimiento_actual', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
+
+<div class="form-group {{ $errors->has('prioridad_id') ? 'has-error' : '' }}">
+    <label for="prioridad_id" class="col-md-2 control-label">Prioridad</label>
+    <div class="col-md-10">
+        <select class="form-control" id="prioridad_id" name="prioridad_id">
+                <option value="" style="display: none;" {{ old('prioridad_id', optional($consulta)->prioridad_id ?: '') == '' ? 'selected' : '' }} disabled selected>Select prioridad</option>
+            @foreach ($prioridads as $key => $prioridad)
+                <option value="{{ $key }}" {{ old('prioridad_id', optional($consulta)->prioridad_id) == $key ? 'selected' : '' }}>
+                    {{ $prioridad }}
+                </option>
+            @endforeach
+        </select>
+        
+        {!! $errors->first('prioridad_id', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="arribo" class="col-md-2 control-label">Arribo</label>
+    <div class="col-md-10">
+        <input class="form-control" name="arribo" type="text" id="arribo" value="{{  $now }}" minlength="1" readonly="readonly">
+        {!! $errors->first('arribo', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="arribo" class="col-md-2 control-label">Fecha</label>
+    <div class="col-md-10">
+        <input class="form-control" name="fecha" type="text" id="fecha" value="{{  $fecha }}" minlength="1" readonly="readonly" style="visibility:hidden">
+        {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>

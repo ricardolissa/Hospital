@@ -7,17 +7,15 @@
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
-                <h4 class="mt-5 mb-5">{{ !empty($title) ? $title : 'Paciente' }}</h4>
+                <h4 class="mt-5 mb-5">{{ !empty($title) ? $title : 'Consulta' }}</h4>
             </div>
             <div class="btn-group btn-group-sm pull-right" role="group">
 
-                <a href="{{ route('regpacientes.regpaciente.index') }}" class="btn btn-primary" title="Show All Persona">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                <a href="{{ route('consultas.consulta.consultamedico') }}" class="btn btn-primary" title="Show All Consulta">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">Consultas</span>
                 </a>
 
-                <a href="{{ route('regpacientes.regpaciente.cpaciente') }}" class="btn btn-success" title="Create New Persona">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </a>
+                
 
             </div>
         </div>
@@ -32,15 +30,13 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('regpacientes.regpaciente.update', $persona->id) }}" id="edit_persona_form" name="edit_persona_form" accept-charset="UTF-8" class="form-horizontal">
+            <form method="POST" action="{{ route('consultas.consulta.consultamedicoupdate', $consulta->id) }}" id="edit_consulta_form" name="edit_consulta_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('personas.form', [
-                                        'persona' => $persona,
+            @include ('consultas.formM', [
+                                        'consulta' => $consulta,
                                       ])
-            @include ('regpacientes.form', [
-                                        'paciente' => null,
-                                      ])
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input class="btn btn-primary" type="submit" value="Update">

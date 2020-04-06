@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::get('pdf','ReportController@generar');
 
+
 //prueba de controlador
 Route::group(
 [
@@ -26,8 +27,9 @@ Route::group(
     Route::get('/', 'RegPacientesController@index')
          ->name('regpacientes.regpaciente.index');
          
-    Route::get('/paciente', 'RegPacientesController@cpaciente')
-         ->name('regpacientes.regpaciente.cpaciente');
+    Route::get('/triage/{paciente}', 'RegPacientesController@triage')
+         ->name('regpacientes.regpaciente.triage')
+         ->where('id', '[0-9]+');
     
     Route::post('/', 'RegPacientesController@store')
          ->name('regpacientes.regpaciente.store');
@@ -48,16 +50,6 @@ Route::group(
         
 });
 
-
-Route::group(
-[
-    'prefix' => 'login',
-],
-    function (){
-    Route::get('/', 'LoginController@index')
-    ->name('login.login.blade');    
-
-});
 
 Route::group(
 [
@@ -166,6 +158,12 @@ Route::group(
     Route::get('/create','PacientesController@create')
          ->name('pacientes.paciente.create');
 
+    Route::get('/create2','PacientesController@create2')
+         ->name('pacientes.paciente.create2');
+
+    Route::post('/store2','PacientesController@store2')
+         ->name('pacientes.paciente.store2');
+
     Route::get('/show/{paciente}','PacientesController@show')
          ->name('pacientes.paciente.show')
          ->where('id', '[0-9]+');
@@ -217,7 +215,7 @@ Route::group(
          ->name('padministrativos.padministrativo.destroy')
          ->where('id', '[0-9]+');
 
-    Route::get('/', 'PadministrativosController@indexpad')
+    Route::get('/indexpad', 'PadministrativosController@indexpad')
          ->name('padministrativos.padministrativo.indexpad');
 
 });
@@ -318,6 +316,9 @@ Route::group(
          ->name('guardias.guardia.destroy')
          ->where('id', '[0-9]+');
 
+    Route::get('/asignarguardia', 'GuardiasController@asignarguardia')
+         ->name('guardias.guardia.asignarguardia');
+
 });
 
 Route::group(
@@ -358,7 +359,7 @@ Route::group(
 ], function () {
 
     Route::get('/', 'ConsultasController@index')
-         ->name('consultas.consulta.index');
+         ->name('consultas.consulta.index'); 
 
     Route::get('/create','ConsultasController@create')
          ->name('consultas.consulta.create');
@@ -382,11 +383,20 @@ Route::group(
          ->name('consultas.consulta.destroy')
          ->where('id', '[0-9]+');
 
+    Route::get('/consultamedico', 'ConsultasController@ConsultaMedico')
+         ->name('consultas.consulta.consultamedico');
+
+    Route::get('/consultamedico/{consulta}/consultamedicoedit','ConsultasController@ConsultaMedicoEdit')
+         ->name('consultas.consulta.consultamedicoedit')
+         ->where('id', '[0-9]+');
+
+       Route::put('consultamedico/{consulta}', 'ConsultasController@ConsultaMedicoUpdate')
+         ->name('consultas.consulta.consultamedicoupdate')
+         ->where('id', '[0-9]+');
+
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(
@@ -421,3 +431,69 @@ Route::group(
 
 });
 
+Route::group(
+[
+    'prefix' => 'roles',
+], function () {
+
+    Route::get('/', 'RolesController@index')
+         ->name('roles.role.index');
+
+    Route::get('/create','RolesController@create')
+         ->name('roles.role.create');
+
+    Route::get('/show/{role}','RolesController@show')
+         ->name('roles.role.show')
+         ->where('id', '[0-9]+');
+
+    Route::get('/{role}/edit','RolesController@edit')
+         ->name('roles.role.edit')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'RolesController@store')
+         ->name('roles.role.store');
+               
+    Route::put('role/{role}', 'RolesController@update')
+         ->name('roles.role.update')
+         ->where('id', '[0-9]+');
+
+    Route::delete('/role/{role}','RolesController@destroy')
+         ->name('roles.role.destroy')
+         ->where('id', '[0-9]+');
+
+});
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/login', function (){
+        return view('auth.login');});
+
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/vistadm', 'VistadmController@index')->name('index');
+
+Route::group(
+[
+    'prefix' => 'vistadms',
+], function () {
+
+    Route::get('/', 'VistadmController@index')
+         ->name('vistadms.vistadm.index');
+
+    Route::get('/index2', 'VistadmController@index2')
+         ->name('vistadms.vistadm.index2');
+
+    Route::post('/', 'VistadmController@store')
+         ->name('vistadms.vistadm.store');
+
+    Route::post('/storepaciente', 'VistadmController@storepaciente')
+         ->name('vistadms.vistadm.storepaciente');
+
+      Route::post('/mensaje', 'VistadmController@mensaje')
+         ->name('vistadms.vistadm.mensaje');  
+
+});

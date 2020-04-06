@@ -51,24 +51,69 @@ class Persona extends Model
     protected $casts = [];
     
 
-//Scope
-   
- /*   public function scopeApellido($query, $apellido)
+// Query Scope
+
+
+    public function scopeId($query, $persona_id)
    
     {
 
-    if($apellido)
-        return $query->where('apellido','LIKE',"%$apellido%");
+    if($persona_id)
+
+       return $query->where('persona_id', $persona_id);
+      
     }
-*/
+
     public function scopeDni($query, $dni)
    
     {
 
     if($dni)
-
+        
+      
        return $query->where('dni', $dni);
-      // return $query->where('dni','LIKE',"%$dni%");
+      
     }
+
+    public function scopeNombre($query, $nombre)
+   
+    {
+
+    if($nombre)
+
+       return $query->where('nombre', $nombre);
+     
+    }
+
+    public function scopeApellido($query, $apellido)
+   
+    {
+
+    if($apellido)
+
+       return $query->where('apellido', $apellido);
+      
+    }
+
+     public function scopeEmail($query, $email)
+   
+    {
+
+    if($email)
+
+       return $query->where('email', $email);
+      
+    }
+
+   
+ public function scopeEdad($query, $edad)
+   {
+    if($edad)
+
+       return $query->where('edad', $edad);
+      
+    }
+
+
 
 }

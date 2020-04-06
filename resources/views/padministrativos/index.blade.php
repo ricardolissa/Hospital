@@ -24,7 +24,7 @@
 
             <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('padministrativos.padministrativo.create') }}" class="btn btn-success" title="Create New Padministrativo">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
                 </a>
             </div>
 
@@ -51,7 +51,7 @@
                     <tbody>
                     @foreach($padministrativos as $padministrativo)
                         <tr>
-                            <td>{{ optional($padministrativo->persona)->created_at }}</td>
+                            <td>{{ optional($padministrativo->persona)->nombre }}</td>
                             <td>{{ $padministrativo->foto }}</td>
                             <td>{{ $padministrativo->legajo }}</td>
 
@@ -63,14 +63,14 @@
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
                                         <a href="{{ route('padministrativos.padministrativo.show', $padministrativo->id ) }}" class="btn btn-info" title="Show Padministrativo">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
                                         </a>
                                         <a href="{{ route('padministrativos.padministrativo.edit', $padministrativo->id ) }}" class="btn btn-primary" title="Edit Padministrativo">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete Padministrativo" onclick="return confirm(&quot;Delete Padministrativo?&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
                                         </button>
                                     </div>
 

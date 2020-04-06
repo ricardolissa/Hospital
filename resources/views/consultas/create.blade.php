@@ -7,11 +7,11 @@
         <div class="panel-heading clearfix">
             
             <span class="pull-left">
-                <h4 class="mt-5 mb-5">Create New Consulta</h4>
+                <h4 class="mt-5 mb-5">Create New Consultas</h4>
             </span>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('consultas.consulta.index') }}" class="btn btn-primary" title="Show All Consulta">
+                <a href="{{ route('consultas.consulta.index') }}" class="btn btn-primary" title="Show All Consultas">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
             </div>
@@ -28,10 +28,10 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('consultas.consulta.store') }}" accept-charset="UTF-8" id="create_consulta_form" name="create_consulta_form" class="form-horizontal">
+            <form method="POST" action="{{ route('consultas.consulta.store') }}" accept-charset="UTF-8" id="create_consultas_form" name="create_consultas_form" class="form-horizontal">
             {{ csrf_field() }}
             @include ('consultas.form', [
-                                        'consulta' => null,
+                                        'consultas' => null,
                                       ])
 
                 <div class="form-group">

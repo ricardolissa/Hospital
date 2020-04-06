@@ -2,64 +2,113 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+
+
+class User extends Model implements Authenticatable
 {
-    use Notifiable;
+    
+use AuthenticableTrait;
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
     /**
-     * The attributes that are mass assignable.
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
-    ];
+      'name',
+      'email',
+      'password',
+      'role_id'
+  ];
+
     /**
-     * The attributes that should be hidden for arrays.
-     * 
+     * The attributes that should be mutated to dates.
+     *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    public function roles()
-{
-    return $this
-        ->belongsToMany('App\Role')
-        ->withTimestamps();
-}
-
-public function authorizeRoles($roles)
-{
-    if ($this->hasAnyRole($roles)) {
-        return true;
+    protected $dates = [];
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
+    
+    /**
+     * Get the role for this model.
+     */
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role','role_id');
     }
-    abort(401, 'Esta acción no está autorizada.');
-}
-public function hasAnyRole($roles)
-{
-    if (is_array($roles)) {
-        foreach ($roles as $role) {
-            if ($this->hasRole($role)) {
-                return true;
-            }
-        }
-    } else {
-        if ($this->hasRole($roles)) {
+
+    /**
+     * Get the roles for this model.
+     */
+    public function roles()
+    {
+        return $this->belongsTo('App\Models\Role','role_id','id');
+    }
+
+    public function authorizeRoles($roles)
+
+    {
+        if ($this->hasAnyRole($roles)) {
             return true;
         }
+        abort(401, 'Esta acción no está autorizada.');
+        
     }
-    return false;
-}
-public function hasRole($role)
+
+    public function hasAnyRole($roles)
+    
+    {
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                if ($this->hasRole($role)) {
+                    return true;
+                }
+            }
+        } else {
+            if ($this->hasRole($roles)) {
+                return true;
+            }
+
+
+        }
+        return false;
+    }
+
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function setPasswordAttribute($password)
 {
-    if ($this->roles()->where('name', $role)->first()) {
-        return true;
-    }
-    return false;
+    $this->attributes['password'] = bcrypt($password);
 }
+
+
 }

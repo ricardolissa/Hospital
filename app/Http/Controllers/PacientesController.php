@@ -31,11 +31,21 @@ class PacientesController extends Controller
      */
     public function create()
     {
-        $personas = Persona::pluck('nombre','id')->all();
+        $personas = Persona::pluck('dni','id')->all();
         $obrasocials = Obrasocial::pluck('nombre','id')->all();
         
         return view('pacientes.create', compact('personas','obrasocials'));
     }
+
+    public function create2()
+    {
+        $personas = Persona::pluck('dni','id')->all();
+        
+        $obrasocials = Obrasocial::pluck('nombre','id')->all();
+        
+        return view('vistadm.admnewpaciente',compact('personas', 'obrasocials'));
+    }
+    
 
     /**
      * Store a new paciente in the storage.
@@ -62,6 +72,23 @@ class PacientesController extends Controller
         }
     }
 
+ public function store2(PacientesFormRequest $request)
+    {
+        try {
+            
+            $data = $request->getData();
+            
+            Paciente::create($data);
+
+            return redirect()->route('home')
+                             ->with('success_message', 'Paciente was successfully added!');
+
+        } catch (Exception $exception) {
+
+            return back()->withInput()
+                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+        }
+    }
     /**
      * Display the specified paciente.
      *
@@ -86,7 +113,7 @@ class PacientesController extends Controller
     public function edit($id)
     {
         $paciente = Paciente::findOrFail($id);
-        $personas = Persona::pluck('nombre','id')->all();
+        $personas = Persona::pluck('dni','id')->all();
 $obrasocials = Obrasocial::pluck('nombre','id')->all();
 
         return view('pacientes.edit', compact('paciente','personas','obrasocials'));
@@ -133,12 +160,12 @@ $obrasocials = Obrasocial::pluck('nombre','id')->all();
             $paciente->delete();
 
             return redirect()->route('pacientes.paciente.index')
-                             ->with('success_message', 'Paciente was successfully deleted!');
+                             ->with('success_message', 'El Paciente ha sido borrado');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Un error no permitio borrar al paciente']);
         }
     }
 

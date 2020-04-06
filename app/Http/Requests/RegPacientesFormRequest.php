@@ -25,17 +25,17 @@ class RegPacientesFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-       
-            'nombre' => 'string|min:1|nullable',
-            'apellido' => 'string|min:1|nullable',
-            'dni' => 'min:1|required|numeric|unique:personas,dni',
-            'email' => 'required|unique:personas,email',
-            'fecha_nacimiento' => 'string|min:1|nullable',
-            'edad' => 'min:1|nullable|numeric',
-            'obrasocial_id' => 'nullable',
-            'antecedentes_familiares' => 'string|min:1|nullable',
-            'antecedentes_patologico' => 'string|min:1|nullable',
-            'antecedentes_nopatologico' => 'string|min:1|nullable',
+            
+            'diagnostico' => 'string|min:1|nullable',
+            'receta' => 'string|min:1|nullable',
+            'fecha' => 'string|min:1|nullable',
+            'arribo' => 'string|min:1|nullable',
+            'egreso' => 'string|min:1|nullable',
+            'tiempo_consulta' => 'string|min:1|nullable',
+            'paciente_id' => 'nullable',
+            'medico_id' => 'nullable',
+            'guardia_id' => 'nullable',
+            'prioridad_id' => 'nullable',
             'padecimiento_actual' => 'string|min:1|nullable',
     
         ];
@@ -52,8 +52,7 @@ class RegPacientesFormRequest extends FormRequest
      */
      public function getData()
     {
-        $data = $this->only(['nombre','apellido','dni','email','fecha_nacimiento','edad', 'obrasocial_id',
-                'antecedentes_familiares','antecedentes_patologico','antecedentes_nopatologico','padecimiento_actual']);
+         $data = $this->only(['diagnostico','receta','fecha','arribo','egreso','tiempo_consulta','paciente_id','medico_id','guardia_id','prioridad_id','padecimiento_actual']);
 
         return $data;
     }

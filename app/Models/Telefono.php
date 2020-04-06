@@ -49,7 +49,7 @@ class Telefono extends Model
     /**
      * Get the persona for this model.
      */
-    public function persona()
+    public function personas()
     {
         return $this->belongsTo('App\Models\Persona','persona_id');
     }

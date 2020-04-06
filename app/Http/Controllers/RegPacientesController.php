@@ -7,59 +7,82 @@ use App\Http\Requests\RegPacientesFormRequest;
 use App\Models\Obrasocial;
 use App\Models\Paciente;
 use App\Models\Persona;
+use App\Models\Prioridad;
+use App\Models\Consulta;
 use Exception;
 use Illuminate\Http\Request;
+use DB;
 
 class RegPacientesController extends Controller
 {
 
-    public function index(){
+      // no deja entrar a la pagina si no esta logueado.
+    /* public function __construct()
+    {
+        $this->middleware('auth');
+    }*/
 
-        return view('regpacientes.index');
-    }
+
+
+
+
+    public function index(Request $request){
+
+         
+//poner carteles y demas cosas !!!
+    $pacientes=DB::table('pacientes')
+    ->join('personas','personas.id', '=', 'pacientes.persona_id')
+    ->join('obrasocials','obrasocials.id', '=', 'pacientes.obrasocial_id')
+    ->select('personas.nombre' , 'personas.apellido', 'personas.dni', 'obrasocials.nombre as obraNombre', 'pacientes.id')
+    ->where('personas.dni', $request->get('dni'))
+    ->get();
+  
  
-    public function bpersona(Request $request)
-    {
-        
 
-       
-       $dni = $request->get('dni');
-       
-
-       $personas = Persona::orderBy('id','DESC')
-                ->dni($dni)
-                ->paginate(4);
-
-        //hacer que tire error cuando el input de busqueda esta vacio.
-
-
-        return view('regpacientes.bpersona', compact('personas'));
+        return view('regpacientes.index', compact('pacientes'));
     }
 
-    public function cpaciente()
-    {
-        $personas = Persona::pluck('nombre','id')->all();
-        $obrasocials = Obrasocial::pluck('nombre','id')->all();
+    public function triage($id)
 
-        return view('regpacientes.cpaciente', compact('personas', 'obrasocials'));
+    {
+    
+    //$pacientesl = Paciente::findOrFail($id);
+    $prioridads = Prioridad::pluck('nombre','id')->all();
+    
+//Hacer la busqueda de la persona con el id del paciente, y traer los datos
+  /*  $pacientes=DB::table('pacientes')
+    ->join('personas','personas.id', '=', 'pacientes.persona_id')
+    ->select('pacientes.id')
+    ->where('pacientes.id', $id )
+    ->get();
+*/ $pacientes = Paciente::where('id', '=', $id)->get()->first();
+
+//    dd($personas);
+   $consulta=Consulta::pluck('paciente_id','id')->all(); 
+//obtener hora actual y dar formato 
+   $now=date('Y-m-d H:i:s');
+   $fecha=date('Y-m-d');
+       
+
+
+        return view('regpacientes.triage', compact('pacientes','prioridads','consulta','now', 'fecha'));
     }
 
    public function store(RegPacientesFormRequest $request){
+        
+        try {
+        $data = $this->getData($request);
+    
+        $cosulta= Consulta::create($data);
 
-        $data = $request->getData();
-            
-        $persona =Persona::create($data);
-// En el caso de una persona que ya se encuentra creada realizar un if para verificar la situacion -
-        $paciente = new Paciente();
-        $paciente->fill($data);
-        $paciente->persona_id = $persona->id; // o $paciente->persona()->associate($persona);
-        $paciente->save();
+                return redirect()->route('regpacientes.regpaciente.index')
+                             ->with('success_message', 'Consulta was successfully updated!');
 
+         } catch (Exception $exception) {
 
-            return redirect()->route('regpacientes.regpaciente.index')
-                             ->with('success_message', 'Persona was successfully added!');
-                       
-
+            return back()->withInput()
+                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+        }        
     }
    
 public function edit($id){
@@ -93,13 +116,28 @@ public function update($id, Request $request)
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }        
     }
-/*
-    public function agregarlista($id){
+  protected function getData(Request $request)
+    {
+        $rules = [
+              'diagnostico' => 'string|min:1|nullable',
+            'receta' => 'string|min:1|nullable',
+            'fecha' => 'string|min:1|nullable',
+            'arribo' => 'string|min:1|nullable',
+            'egreso' => 'string|min:1|nullable',
+            'tiempo_consulta' => 'string|min:1|nullable',
+            'paciente_id' => 'nullable',
+            'medico_id' => 'nullable',
+            'guardia_id' => 'nullable',
+            'prioridad_id' => 'nullable',
+            'padecimiento_actual' => 'string|min:1|nullable',
 
-        $persona->id;
-        $this->listadeespera[] = $persona;
+        ];
+        
+        $data = $request->validate($rules);
+
+
+        return $data;
     }
-*/
 
     public function pdf(){
 

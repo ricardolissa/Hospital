@@ -7,15 +7,15 @@
         <div class="panel-heading clearfix">
 
             <div class="pull-left">
-                <h4 class="mt-5 mb-5">{{ !empty($title) ? $title : 'Consulta' }}</h4>
+                <h4 class="mt-5 mb-5">{{ !empty($title) ? $title : 'Consultas' }}</h4>
             </div>
             <div class="btn-group btn-group-sm pull-right" role="group">
 
-                <a href="{{ route('consultas.consulta.index') }}" class="btn btn-primary" title="Show All Consulta">
+                <a href="{{ route('consultas.consulta.index') }}" class="btn btn-primary" title="Show All Consultas">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
 
-                <a href="{{ route('consultas.consulta.create') }}" class="btn btn-success" title="Create New Consulta">
+                <a href="{{ route('consultas.consulta.create') }}" class="btn btn-success" title="Create New Consultas">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </a>
 
@@ -32,11 +32,11 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('consultas.consulta.update', $consulta->id) }}" id="edit_consulta_form" name="edit_consulta_form" accept-charset="UTF-8" class="form-horizontal">
+            <form method="POST" action="{{ route('consultas.consulta.update', $consultas->id) }}" id="edit_consultas_form" name="edit_consultas_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
             @include ('consultas.form', [
-                                        'consulta' => $consulta,
+                                        'consultas' => $consultas,
                                       ])
 
                 <div class="form-group">

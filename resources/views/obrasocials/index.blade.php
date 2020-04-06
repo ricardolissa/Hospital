@@ -24,7 +24,7 @@
 
             <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('obrasocials.obrasocial.create') }}" class="btn btn-success" title="Create New Obrasocial">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
                 </a>
             </div>
 
@@ -41,8 +41,7 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>Numero Socio</th>
-                            <th>Plan</th>
+                          
                             <th>Nombre</th>
 
                             <th></th>
@@ -51,8 +50,7 @@
                     <tbody>
                     @foreach($obrasocials as $obrasocial)
                         <tr>
-                            <td>{{ $obrasocial->numero_socio }}</td>
-                            <td>{{ $obrasocial->plan }}</td>
+                           
                             <td>{{ $obrasocial->nombre }}</td>
 
                             <td>
@@ -63,14 +61,14 @@
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
                                         <a href="{{ route('obrasocials.obrasocial.show', $obrasocial->id ) }}" class="btn btn-info" title="Show Obrasocial">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
                                         </a>
                                         <a href="{{ route('obrasocials.obrasocial.edit', $obrasocial->id ) }}" class="btn btn-primary" title="Edit Obrasocial">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                                         </a>
 
                                         <button type="submit" class="btn btn-danger" title="Delete Obrasocial" onclick="return confirm(&quot;Delete Obrasocial?&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
                                         </button>
                                     </div>
 

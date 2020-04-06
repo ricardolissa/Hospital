@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guardia;
+use App\Models\Medico;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GuardiasFormRequest;
 use Exception;
@@ -139,5 +140,29 @@ class GuardiasController extends Controller
     }
 
 
+    public function asignarguardia()
+    {
+        $medicos=Medico::All();
 
+        return  view('guardias.asignarguardia',compact('medicos')); 
+        //continuar cargar medicos, seleccionarlos y hacer todo el guardado automatico. 13/03/2020
+    }
+
+    public function asignarguardiastore(GuardiasFormRequest $request)
+    {
+        try {
+            
+            $data = $request->getData();
+            
+            Guardia::create($data);
+
+            return redirect()->route('guardias.guardia.index')
+                             ->with('success_message', 'Guardia was successfully added!');
+
+        } catch (Exception $exception) {
+
+            return back()->withInput()
+                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+        }
+    }
 }

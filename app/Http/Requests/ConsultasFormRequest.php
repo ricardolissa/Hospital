@@ -14,7 +14,7 @@ class ConsultasFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true;//cambiar cuando este terminado para utilizar usuario!!!!
     }
 
     /**
@@ -35,6 +35,7 @@ class ConsultasFormRequest extends FormRequest
             'medico_id' => 'nullable',
             'guardia_id' => 'nullable',
             'prioridad_id' => 'nullable',
+            'padecimiento_actual' => 'string|min:1|nullable',
     
         ];
 
@@ -49,7 +50,7 @@ class ConsultasFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['diagnostico','receta','fecha','arribo','egreso','tiempo_consulta','paciente_id','medico_id','guardia_id','prioridad_id']);
+        $data = $this->only(['diagnostico','receta','fecha','arribo','egreso','tiempo_consulta','paciente_id','medico_id','guardia_id','prioridad_id','padecimiento_actual']);
 
         return $data;
     }

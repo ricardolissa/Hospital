@@ -55,11 +55,3 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('padecimiento_actual') ? 'has-error' : '' }}">
-    <label for="padecimiento_actual" class="col-md-2 control-label">Padecimiento Actual</label>
-    <div class="col-md-10">
-        <input class="form-control" name="padecimiento_actual" type="text" id="padecimiento_actual" value="{{ old('padecimiento_actual', optional($paciente)->padecimiento_actual) }}" minlength="1" placeholder="Enter padecimiento actual here...">
-        {!! $errors->first('padecimiento_actual', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
-

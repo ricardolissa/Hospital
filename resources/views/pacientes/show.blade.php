@@ -40,7 +40,7 @@
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>Persona</dt>
-            <dd>{{ optional($paciente->persona)->nombre }}</dd>
+            <dd>{{ optional($paciente->persona)->created_at }}</dd>
             <dt>Obrasocial</dt>
             <dd>{{ optional($paciente->obrasocial)->numero_socio }}</dd>
             <dt>Antecedentes Familiares</dt>
@@ -49,8 +49,6 @@
             <dd>{{ $paciente->antecedentes_patologico }}</dd>
             <dt>Antecedentes Nopatologico</dt>
             <dd>{{ $paciente->antecedentes_nopatologico }}</dd>
-            <dt>Padecimiento Actual</dt>
-            <dd>{{ $paciente->padecimiento_actual }}</dd>
 
         </dl>
 

@@ -14,7 +14,7 @@ class PacientesFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true;//actualizar
     }
 
     /**
@@ -30,7 +30,6 @@ class PacientesFormRequest extends FormRequest
             'antecedentes_familiares' => 'string|min:1|nullable',
             'antecedentes_patologico' => 'string|min:1|nullable',
             'antecedentes_nopatologico' => 'string|min:1|nullable',
-            'padecimiento_actual' => 'string|min:1|nullable',
     
         ];
 
@@ -45,7 +44,7 @@ class PacientesFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['persona_id','obrasocial_id','antecedentes_familiares','antecedentes_patologico','antecedentes_nopatologico','padecimiento_actual']);
+        $data = $this->only(['persona_id','obrasocial_id','antecedentes_familiares','antecedentes_patologico','antecedentes_nopatologico']);
 
         return $data;
     }

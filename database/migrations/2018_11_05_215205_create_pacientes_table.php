@@ -16,7 +16,7 @@ class CreatePacientesTable extends Migration
         {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('persona_id')->unsigned()->nullable()->index();
+            $table->integer('persona_id')->unsigned()->nullable()->index()->unique();
             $table->integer('obrasocial_id')->unsigned()->nullable()->index();
             $table->string('antecedentes_familiares')->nullable();
             $table->string('antecedentes_patologico')->nullable();

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
+
 
     <div class="panel panel-default">
 
@@ -12,26 +12,12 @@
             </span>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('obrasocials.obrasocial.index') }}" class="btn btn-primary" title="Mostrar Obra Social">
+                <a href="{{ route('obrasocials.obrasocial.index') }}" class="btn btn-primary" title="Home">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
             </div>
 
-=======
-<div class="panel panel-default">
-    <div class="panel-heading clearfix">
-        <span class="pull-left">
-            <h4 class="mt-5 mb-5">
-                Crear Obra Social
-            </h4>
-        </span>
-        <div class="btn-group btn-group-sm pull-right" role="group">
-            <a class="btn btn-primary" href="{{ route('obrasocials.obrasocial.index') }}" title="Mostrar Obra Social">
-                <span aria-hidden="true" class="glyphicon glyphicon-th-list">
-                </span>
-            </a>
->>>>>>> c1e63acd06165b040e636d3f977bde57f2c926da
-        </div>
+
     </div>
     <div class="panel-body">
         @if ($errors->any())

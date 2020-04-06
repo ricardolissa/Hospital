@@ -6,6 +6,7 @@ use App\Models\Persona;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Exception;
+use Auth;
 
 class PersonasController extends Controller
 {
@@ -49,6 +50,13 @@ class PersonasController extends Controller
             
             Persona::create($data);
 
+
+            //redirigir si esta logeado 
+            /*if(Auth::guard('admin')->login($user)){
+
+                return redirect('/regpacientes');
+
+            } */
             return redirect()->route('personas.persona.index')
                              ->with('success_message', 'Persona was successfully added!');
 

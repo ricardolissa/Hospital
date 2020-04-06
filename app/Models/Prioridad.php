@@ -50,7 +50,7 @@ class Prioridad extends Model
      */
     public function consultas()
     {
-        return $this->hasMany('App\Models\Consulta');
+        return $this->belongsTo('App\Models\Consulta','consulta_id','id');
     }
 
 

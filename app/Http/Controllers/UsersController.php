@@ -3,12 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
+use App\Models\Role;
+use App\Http\Requests\UsersFormRequest;
 use App\Http\Controllers\Controller;
 use Exception;
 
+
 class UsersController extends Controller
 {
+
+    // no deja entrar a la pagina si no esta logueado.
+    /* public function __construct()
+    {
+        $this->middleware('auth');
+    }*/
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Display a listing of the users.
@@ -17,7 +36,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(25);
+    
+        $users = User::with('role')->paginate(25);
 
         return view('users.index', compact('users'));
     }
@@ -29,9 +49,10 @@ class UsersController extends Controller
      */
     public function create()
     {
+      
+        $roles = Role::pluck('name','id')->all();
         
-        
-        return view('users.create');
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -41,24 +62,23 @@ class UsersController extends Controller
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(UsersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             User::create($data);
 
             return redirect()->route('users.user.index')
-                             ->with('success_message', 'User was successfully added!');
+                             ->with('success_message', 'Se a creado el Usuario!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Un error ocurrio, no se pudo crear el Usuario']);
         }
     }
-
     /**
      * Display the specified user.
      *
@@ -66,9 +86,10 @@ class UsersController extends Controller
      *
      * @return Illuminate\View\View
      */
+  
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('role')->findOrFail($id);
 
         return view('users.show', compact('user'));
     }
@@ -83,9 +104,9 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        
+        $roles = Role::pluck('name','id')->all();
 
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('user','roles'));
     }
 
     /**
@@ -96,22 +117,22 @@ class UsersController extends Controller
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request)
+    public function update($id, UsersFormRequest $request)
     {
         try {
             
-            $data = $this->getData($request);
+            $data = $request->getData();
             
             $user = User::findOrFail($id);
             $user->update($data);
 
             return redirect()->route('users.user.index')
-                             ->with('success_message', 'User was successfully updated!');
+                             ->with('success_message', 'El Usuario a sido actualizado!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'No se pudo actualizar el usuario']);
         }        
     }
 
@@ -129,35 +150,15 @@ class UsersController extends Controller
             $user->delete();
 
             return redirect()->route('users.user.index')
-                             ->with('success_message', 'User was successfully deleted!');
+                             ->with('success_message', 'El Usuario ha sido borrado');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'El Usuario no se pudo borrar']);
         }
     }
 
     
-    /**
-     * Get the request's data from the request.
-     *
-     * @param Illuminate\Http\Request\Request $request 
-     * @return array
-     */
-    protected function getData(Request $request)
-    {
-        $rules = [
-            'name' => 'string|min:1|max:255|nullable',
-            'email' => 'nullable',
-            'password' => 'nullable',
-     
-        ];
-        
-        $data = $request->validate($rules);
-
-
-        return $data;
-    }
-
+   
 }

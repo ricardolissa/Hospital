@@ -14,7 +14,7 @@ class UsersFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,6 +28,7 @@ class UsersFormRequest extends FormRequest
             'name' => 'string|min:1|max:255|nullable',
             'email' => 'nullable',
             'password' => 'nullable',
+            'role_id' => 'nullable',
     
         ];
 
@@ -42,7 +43,7 @@ class UsersFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['name','email','password']);
+        $data = $this->only(['name','email','password','role_id']);
 
         return $data;
     }

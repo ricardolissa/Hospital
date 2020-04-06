@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Consulta extends Model
 {
@@ -37,7 +38,9 @@ class Consulta extends Model
                   'paciente_id',
                   'medico_id',
                   'guardia_id',
-                  'prioridad_id'
+                  'prioridad_id',
+                  'padecimiento_actual',
+                  'atendido'
               ];
 
     /**
@@ -45,7 +48,14 @@ class Consulta extends Model
      *
      * @var array
      */
-    protected $dates = [];
+    protected $dates = [
+
+        'tiempo_consulta',
+        'arribo',
+        'egreso',
+
+
+    ];
     
     /**
      * The attributes that should be cast to native types.
@@ -65,23 +75,23 @@ class Consulta extends Model
     /**
      * Get the medico for this model.
      */
-   /* public function medico()
+    public function medico()
     {
-        return $this->belongsTo('App\Models\Medicos','medico_id');
+        return $this->belongsTo('App\Models\Medico','medico_id');
     }
 
     /**
-     * Get the guardium for this model.
+     * Get the guardia for this model.
      */
-    /*public function guardium()
+    public function guardia()
     {
-        return $this->belongsTo('App\Models\Guardium','guardia_id');
-    }*/
+        return $this->belongsTo('App\Models\Guardia','guardia_id');
+    }
 
     /**
      * Get the prioridad for this model.
      */
-    public function prioridads()
+    public function prioridad()
     {
         return $this->belongsTo('App\Models\Prioridad','prioridad_id');
     }
@@ -95,11 +105,19 @@ class Consulta extends Model
     }
 
     /**
+     * Get the prioridads for this model.
+     */
+    public function prioridads()
+    {
+        return $this->hasOne('App\Models\Prioridad','prioridad_id','id');
+    }
+
+    /**
      * Get the medicos for this model.
      */
     public function medicos()
     {
-        return $this->belongsTo('App\Models\Medicos','medico_id','id');
+        return $this->belongsTo('App\Models\Medico','medico_id','id');
     }
 
     /**

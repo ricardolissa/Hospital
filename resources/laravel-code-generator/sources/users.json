@@ -137,9 +137,65 @@
             "foreign-constraint": null,
             "on-store": null,
             "on-update": null
+        },
+        {
+            "name": "role_id",
+            "labels": "Role",
+            "html-type": "select",
+            "css-class": "",
+            "options": {},
+            "html-value": null,
+            "validation": "",
+            "is-on-index": true,
+            "is-on-show": true,
+            "is-on-form": true,
+            "data-type": "int",
+            "data-type-params": [],
+            "data-value": null,
+            "is-index": true,
+            "is-unique": false,
+            "is-primary": false,
+            "comment": null,
+            "is-nullable": true,
+            "is-header": false,
+            "is-unsigned": true,
+            "is-auto-increment": false,
+            "is-inline-options": false,
+            "is-date": false,
+            "date-format": "",
+            "cast-as": "",
+            "placeholder": "Select role",
+            "delimiter": "; ",
+            "range": [],
+            "foreign-relation": {
+                "name": "role",
+                "type": "belongsTo",
+                "params": [
+                    "App\\Models\\Role",
+                    "role_id"
+                ],
+                "field": "id"
+            },
+            "foreign-constraint": null,
+            "on-store": null,
+            "on-update": null
         }
     ],
-    "relations": [],
+    "relations": [
+        {
+            "name": "roles",
+            "type": "belongsTo",
+            "params": [
+                "App\\Models\\Role",
+                "role_id",
+                "id"
+            ],
+            "field": "role"
+
+        }
+      
+
+    ],
     "indexes": [],
     "auto-manage-created-and-updated-at": true,
     "table-name": null,

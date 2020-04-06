@@ -85,7 +85,7 @@ class PadministrativosController extends Controller
     public function edit($id)
     {
         $padministrativo = Padministrativo::findOrFail($id);
-        $personas = Persona::pluck('created_at','id')->all();
+        $personas = Persona::pluck('nombre','id')->all();
 
         return view('padministrativos.edit', compact('padministrativo','personas'));
     }

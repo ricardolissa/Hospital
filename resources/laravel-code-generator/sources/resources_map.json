@@ -38,5 +38,17 @@
     {
         "model-name": "users",
         "resource-file": "users.json"
+    },
+    {
+        "model-name": "roles",
+        "resource-file": "roles.json"
+    },
+    {
+        "model-name": "User",
+        "resource-file": "users.json"
+    },
+    {
+        "model-name": "Role",
+        "resource-file": "roles.json"
     }
 ]

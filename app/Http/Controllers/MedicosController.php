@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medicos;
+use App\Models\Medico;
 use App\Models\Persona;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MedicosFormRequest;
@@ -18,7 +18,7 @@ class MedicosController extends Controller
      */
     public function index()
     {
-        $medicosObjects = Medicos::with('persona')->paginate(25);
+        $medicosObjects = Medico::with('persona')->paginate(25);
 
         return view('medicos.index', compact('medicosObjects'));
     }
@@ -49,10 +49,10 @@ class MedicosController extends Controller
             
             $data = $request->getData();
             
-            Medicos::create($data);
+            Medico::create($data);
 
             return redirect()->route('medicos.medicos.index')
-                             ->with('success_message', 'Medicos was successfully added!');
+                             ->with('success_message', 'Medico was successfully added!');
 
         } catch (Exception $exception) {
 
@@ -70,7 +70,7 @@ class MedicosController extends Controller
      */
     public function show($id)
     {
-        $medicos = Medicos::with('persona')->findOrFail($id);
+        $medicos = Medico::with('persona')->findOrFail($id);
 
         return view('medicos.show', compact('medicos'));
     }
@@ -84,7 +84,7 @@ class MedicosController extends Controller
      */
     public function edit($id)
     {
-        $medicos = Medicos::findOrFail($id);
+        $medicos = Medico::findOrFail($id);
         $personas = Persona::pluck('nombre','id')->all();
 
         return view('medicos.edit', compact('medicos','personas'));
@@ -104,11 +104,11 @@ class MedicosController extends Controller
             
             $data = $request->getData();
             
-            $medicos = Medicos::findOrFail($id);
+            $medicos = Medico::findOrFail($id);
             $medicos->update($data);
 
             return redirect()->route('medicos.medicos.index')
-                             ->with('success_message', 'Medicos was successfully updated!');
+                             ->with('success_message', 'Medico was successfully updated!');
 
         } catch (Exception $exception) {
 
@@ -127,11 +127,11 @@ class MedicosController extends Controller
     public function destroy($id)
     {
         try {
-            $medicos = Medicos::findOrFail($id);
+            $medicos = Medico::findOrFail($id);
             $medicos->delete();
 
             return redirect()->route('medicos.medicos.index')
-                             ->with('success_message', 'Medicos was successfully deleted!');
+                             ->with('success_message', 'Medico was successfully deleted!');
 
         } catch (Exception $exception) {
 

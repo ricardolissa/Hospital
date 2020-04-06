@@ -39,10 +39,7 @@
 
     <div class="panel-body">
         <dl class="dl-horizontal">
-            <dt>Numero Socio</dt>
-            <dd>{{ $obrasocial->numero_socio }}</dd>
-            <dt>Plan</dt>
-            <dd>{{ $obrasocial->plan }}</dd>
+            
             <dt>Nombre</dt>
             <dd>{{ $obrasocial->nombre }}</dd>
 

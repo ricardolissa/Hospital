@@ -7,11 +7,11 @@
         <div class="panel-heading clearfix">
             
             <span class="pull-left">
-                <h4 class="mt-5 mb-5">NEW PACIENTE</h4>
+                <h4 class="mt-5 mb-5">Create New Role</h4>
             </span>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('regpacientes.regpaciente.index') }}" class="btn btn-primary" title="Show All Paciente">
+                <a href="{{ route('roles.role.index') }}" class="btn btn-primary" title="Show All Role">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
             </div>
@@ -28,14 +28,10 @@
                 </ul>
             @endif
 
-             <form method="POST" action="{{ route('regpacientes.regpaciente.store') }}" accept-charset="UTF-8" id="create_persona_form" name="create_persona_form" class="form-horizontal">
+            <form method="POST" action="{{ route('roles.role.store') }}" accept-charset="UTF-8" id="create_role_form" name="create_role_form" class="form-horizontal">
             {{ csrf_field() }}
-            @include ('personas.form', [
-                                        'persona' => null,
-                                      ])
-
-            @include ('regpacientes.form', [
-                                        'paciente' => null,
+            @include ('roles.form', [
+                                        'role' => null,
                                       ])
 
                 <div class="form-group">
@@ -43,14 +39,10 @@
                         <input class="btn btn-primary" type="submit" value="Add">
                     </div>
                 </div>
-    
-            </div>
 
             </form>
-          
-        
-      
-    
+
+        </div>
     </div>
 
 @endsection

@@ -45,6 +45,8 @@
             <dd>{{ $user->email }}</dd>
             <dt>Password</dt>
             <dd>{{ $user->password }}</dd>
+            <dt>Role</dt>
+            <dd>{{ optional($user->role)->id }}</dd>
 
         </dl>
 

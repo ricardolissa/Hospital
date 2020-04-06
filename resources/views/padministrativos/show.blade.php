@@ -40,7 +40,7 @@
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>Persona</dt>
-            <dd>{{ optional($padministrativo->persona)->created_at }}</dd>
+            <dd>{{ optional($padministrativo->persona)->nombre }}</dd>
             <dt>Foto</dt>
             <dd>{{ $padministrativo->foto }}</dd>
             <dt>Legajo</dt>

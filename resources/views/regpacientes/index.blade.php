@@ -1,88 +1,171 @@
 @extends('layouts.app')
 
 @section('content')
-<br>
-<div align="center">
-    <h1>
-        Guardia
-    </h1>
-</div>
-<br>
 
-<form accept-charset="UTF-8" action="{{ route('regpacientes.regpaciente.bpersona') }}" method="POST">
-    {{ csrf_field() }}
 
-    <div>
-        <label>
-            Dni
-        </label>
-    <br>    
-        <input class="form-control" id="dni" minlength="1" name="dni" placeholder="Numero de Dni" type="text"></input>
-       
-        
-    
-    </div> 
-    <br>
-<input class="btn btn-primary" type="submit" value="Buscar"></input>
-</form>
+ @if(Session::has('success_message'))
+        <div class="alert alert-success">
+            <span class="glyphicon glyphicon-ok"></span>
+            {!! session('success_message') !!}
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+        </div>
+    @endif
+
+
+
+
+
+
+
+
+
+
 <br>
-<div class="panel-body panel-body-with-table" >
-        <div class="table-responsive" >
-            <table class="table table-striped ">
-                <thead >
-                    <tr>
-                        <th>
-                            Nombre
-                        </th>
-                        <th>
-                            Apellido
-                        </th>
-                        <th>
-                            Dni
-                        </th>
-                     </tr>  
-                </thead>
-                <tbody>
-                    
-                    <tr>
-                        <td>
-                         
-                        </td>
-                        <td>
-                         
-                        </td>
-                        <td>
-                         
-                        </td>
-                        <td>
-                        <input class="btn btn-success pull-right" type="submit" value="Seleccionar" ></input>     
-                        </td>
+    <div align="center">
+        <h1>
+            Guardia
+        </h1>
+    </div>
+<br>
+<br>
+<br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>
+                        Busqueda de Paciente
+                    </h1>
+                        <div class="pull-right">
+                            <form accept-charset="UTF-8" action="{{ route('regpacientes.regpaciente.index') }}" class="form-inline pull-right" method="GET">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <div>
+                                            <input class="form-control" id="dni" minlength="1" name="dni" type="text" value="Ingrese el DNI">
+                                            </input>
+                                            </div>
+                                            <div class="form-group">
+                                                 <div class="col-md-10">
+                                                <button class="btn btn-default" type="submit">
+                                                    
+                                                      <span class="btn btn-primary" aria-hidden="true">Buscar</span>
+                                                            
+                                                </button>
+                                            </div>
+                                            </div>
+                                                  
+                                        </div>
+                                    </div>
+                                    
+                                    </div>
+                            </form>
+
+
+
+                           
+                        </div>
                         
-                    </tr>
-            
-                </tbody>
-            </table>
-</div>
-</div>
-<br>
-<form>
-<div><label>Sintoma Actual</label></div>
-<br>
-<input class="form-control" name="padecimento_actual" type="text" id="padecimento_actual"  placeholder="Ingrese Sintoma Actual">
-
 
 <br>
+   
+</br>
 
-<div><label> Prioridad</label></div>
-<br>
-<select class="form-control" id="prioridad_id" name="prioridad_id">
-                <option value=""  disabled selected>Seleccione Prioridad</option>
-            
-        </select>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-striped">
+            <tbody>
+                <tr>
+                    <td>
+                        Nombre
+                    </td>
+                    <td>
+                        Apellido
+                    </td>
+                    <td>
+                        Dni
+                    </td>
+                    <td>
+                        Obra Social
+                    </td>
+                    <td></td>
+                </tr>
+                @foreach($pacientes as $paciente)
+                <tr>
+                    <td>
+                        {{ $paciente->nombre }}
+                    </td>
+                    <td>
+                        {{ $paciente->apellido }}
+                    </td>
+                    <td>
+                        {{ $paciente->dni }}
+                    </td>
+                    <td>
+                        {{ $paciente->obraNombre }}
+                    </td>
+                 
+                <td>
+                        {{ $paciente->id }}
+                    
+                            
+
+
+                    </td>
+                    <td>
+                        
+                           
+                                   
+
+                    </td>
+
+                    <td>
+                         <form method="POST" action="{!! route('pacientes.paciente.destroy', $paciente->id) !!}" accept-charset="UTF-8">
+                                <input name="_method" value="DELETE" type="hidden">
+                                {{ csrf_field() }}
+
+                                    <div class="btn-group btn-group-xs pull-right" role="group">
+                                        <a href="{{ route('pacientes.paciente.show', $paciente->id ) }}" class="btn btn-info" title="Show Paciente">
+                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
+                                        </a>
+                                        <a href="{{ route('pacientes.paciente.edit', $paciente->id ) }}" class="btn btn-primary" title="Edit Paciente">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
+                                        </a>
+                                        <a href="{{ route('regpacientes.regpaciente.triage', $paciente->id ) }}" class="btn btn-primary" title="Seleccionar">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Select</span>
+                                        </a>
+
+                                        <button type="submit" class="btn btn-danger" title="Delete Paciente" onclick="return confirm(&quot;Delete Paciente?&quot;)">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
+                                        </button>
+                                    </div>
+
+                                </form>
+                    </td>
+
+                </tr>
+            </tbody>
+            @endforeach
+        </table>
+    </div>
 </div>
-<br>
-</form>
-     <div align="center">  
-       <input class="btn btn-primary" type="submit" value="Registrar"></input>
+
+<div class="row">
+    <div class="col-md-12">
+
+ <div class="form-group">
+                                <div class="col-md-10">
+                                             Registrar Paciente
+                                            <a class="btn btn-primary" href="{{route('pacientes.paciente.create') }}" value="Seleccionar">
+                                            Crear</a>
+
+
+                                </div>
+                            </div>
 </div>
- @endsection  
+</div>
+
+@endsection

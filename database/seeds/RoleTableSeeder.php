@@ -1,6 +1,7 @@
 <?php
 
 use App\Role;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class RoleTableSeeder extends Seeder
@@ -12,7 +13,7 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $role = new Role();
+        /*$role = new Role();
         $role->name = 'admin';
         $role->descripcion = 'Administrator';
         $role->save();
@@ -20,6 +21,6 @@ class RoleTableSeeder extends Seeder
         $role = new Role();
         $role->name = 'user';
         $role->descripcion = 'User';
-        $role->save();
+        $role->save();*/
     }
 }
