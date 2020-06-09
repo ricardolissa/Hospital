@@ -42,3 +42,24 @@
     </div>
 </div>
 
+<div class="form-group">
+    <label for="especialidad" class="col-md-2 control-label">Especialidad</label>
+    <div class="col-md-10">
+      
+       <select multiple="multiple" name="especialidad[]" id="especialidad">
+
+        
+          
+           <option value="" style="display: none;" {{ old('especialidads', optional($medicos)->especialidads ?: '') == '' ? 'selected' : '' }} disabled selected>Select persona</option>
+            @foreach ($especialidads as $key => $especialidad)
+
+                <option value="{{ $key }}" {{ old('especialidads', optional($medicos)->especialidads) == $key ? 'selected' : '' }}>
+                    {{ $especialidad }}
+                </option>
+               
+            @endforeach
+           
+        
+    </select>
+    </div>
+</div>

@@ -45,7 +45,7 @@
                             <th>Foto</th>
                             <th>Legajo</th>
                             <th>Matricula</th>
-
+                            <th>Especialidad</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -56,6 +56,9 @@
                             <td>{{ $medicos->foto }}</td>
                             <td>{{ $medicos->legajo }}</td>
                             <td>{{ $medicos->matricula }}</td>
+
+                            <td>{{ $medicos->especialidad_id }}</td>
+
 
                             <td>
 

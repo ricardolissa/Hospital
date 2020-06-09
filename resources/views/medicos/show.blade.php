@@ -47,6 +47,8 @@
             <dd>{{ $medicos->legajo }}</dd>
             <dt>Matricula</dt>
             <dd>{{ $medicos->matricula }}</dd>
+            <dt>Especialidad</dt>
+            <dd>{{ $medicos->especialidad_id }}</dd>
 
         </dl>
 

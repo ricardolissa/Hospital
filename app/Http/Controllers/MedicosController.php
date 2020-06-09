@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medico;
 use App\Models\Persona;
+use App\Models\Especialidad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MedicosFormRequest;
 use Exception;
@@ -32,8 +33,12 @@ class MedicosController extends Controller
     {
         
          $personas = Persona::pluck('nombre','id')->all();
+         $especialidads= Especialidad::pluck('nombre','id')->all();
+         //dd($especialidad);
+
+
         
-        return view('medicos.create', compact('personas'));
+        return view('medicos.create', compact('personas','especialidads'));
     }
 
     /**
@@ -45,20 +50,24 @@ class MedicosController extends Controller
      */
     public function store(MedicosFormRequest $request)
     {
-        try {
+       // try {
             
+          //  dd($request->especialidad);
             $data = $request->getData();
+          //  dd($data);
+            //$medicos->especialidads->sync($request->especialidad);
             
-            Medico::create($data);
+            $medicos=Medico::create($data);
+
+           $medicos->especialidads->sync($request->especialidad);
 
             return redirect()->route('medicos.medicos.index')
                              ->with('success_message', 'Medico was successfully added!');
-
-        } catch (Exception $exception) {
+/*        } catch (Exception $exception) {
 
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }
+        }*/
     }
 
     /**
@@ -141,7 +150,11 @@ class MedicosController extends Controller
     }
 
     public function indexmed(){
-        return view('medicos.indexmed');
+        
+        $medicosObjects = Medico::with('persona')->paginate(25);
+        $id=1;
+        $especialidad = Especialidad::findOrFail($id);
+        return view('medicos.indexmed', compact('medicosObjects',$especialidad));
     }
 
 }

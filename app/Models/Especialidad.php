@@ -51,6 +51,7 @@ class Especialidad extends Model
     public function medicos()
     {
         return $this->belongsToMany('App\Models\Medico','medico_id','id');
+       
     }
 
 

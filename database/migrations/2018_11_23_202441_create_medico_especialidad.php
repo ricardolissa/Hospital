@@ -18,7 +18,7 @@ class CreateMedicoEspecialidad extends Migration
             $table->integer('medico_id')->unsigned();
             $table->integer('especialidad_id')->unsigned();
             
-            
+            //
             $table->foreign('medico_id')->references('id')->on('medicos')->onDelete('cascade');
             $table->foreign('especialidad_id')->references('id')->on('especialidads')->onDelete('cascade');
             $table->timestamps();

@@ -47,7 +47,7 @@
     </div>
 <div class="row">
     <div class="col-md-4">
-      Medicos Seleccionados
+      Medicos Seleccionados 
     </div>
 </div>
 

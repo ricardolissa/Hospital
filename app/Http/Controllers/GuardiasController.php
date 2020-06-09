@@ -152,6 +152,8 @@ class GuardiasController extends Controller
     {
         try {
             
+            $guardia->medicos(id);
+            
             $data = $request->getData();
             
             Guardia::create($data);
