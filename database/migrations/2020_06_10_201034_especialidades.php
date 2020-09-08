@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreatePrioridadsTable extends Migration
+class Especialidades extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +13,13 @@ class CreatePrioridadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('prioridads', function(Blueprint $table)
+         Schema::create('especialidades', function(Blueprint $table)
         {
             $table->increments('id');
             $table->timestamps();
             $table->string('nombre')->nullable();
 
-        });
+        });//
     }
 
     /**
@@ -28,6 +29,6 @@ class CreatePrioridadsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('prioridads');
+            Schema::drop('especialidades');//
     }
 }

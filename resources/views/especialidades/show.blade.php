@@ -11,19 +11,19 @@
 
         <div class="pull-right">
 
-            <form method="POST" action="{!! route('especialidads.especialidad.destroy', $especialidad->id) !!}" accept-charset="UTF-8">
+            <form method="POST" action="{!! route('especialidades.especialidad.destroy', $especialidad->id) !!}" accept-charset="UTF-8">
             <input name="_method" value="DELETE" type="hidden">
             {{ csrf_field() }}
                 <div class="btn-group btn-group-sm" role="group">
-                    <a href="{{ route('especialidads.especialidad.index') }}" class="btn btn-primary" title="Show All Especialidad">
+                    <a href="{{ route('especialidades.especialidad.index') }}" class="btn btn-primary" title="Show All Especialidad">
                         <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                     </a>
 
-                    <a href="{{ route('especialidads.especialidad.create') }}" class="btn btn-success" title="Create New Especialidad">
+                    <a href="{{ route('especialidades.especialidad.create') }}" class="btn btn-success" title="Create New Especialidad">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                     
-                    <a href="{{ route('especialidads.especialidad.edit', $especialidad->id ) }}" class="btn btn-primary" title="Edit Especialidad">
+                    <a href="{{ route('especialidades.especialidad.edit', $especialidad->id ) }}" class="btn btn-primary" title="Edit Especialidad">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
 

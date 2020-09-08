@@ -13,7 +13,7 @@ class Obrasocial extends Model
      *
      * @var string
      */
-    protected $table = 'obrasocials';
+    protected $table = 'obrasociales';
 
     /**
     * The database primary key value.

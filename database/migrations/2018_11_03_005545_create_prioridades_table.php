@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateObrasocialsTable extends Migration
+class CreatePrioridadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,11 @@ class CreateObrasocialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('obrasocials', function(Blueprint $table)
+        Schema::create('prioridades', function(Blueprint $table)
         {
             $table->increments('id');
             $table->timestamps();
-            $table->string('nombre')->unique();
-            $table->integer('numero_socio')->unique();
-            $table->integer('plan')->nullable();
-
+            $table->string('nombre')->nullable();
 
         });
     }
@@ -31,6 +28,6 @@ class CreateObrasocialsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('obrasocials');
+        Schema::drop('prioridades');
     }
 }

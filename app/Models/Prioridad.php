@@ -13,7 +13,7 @@ class Prioridad extends Model
      *
      * @var string
      */
-    protected $table = 'prioridads';
+    protected $table = 'prioridades';
 
     /**
     * The database primary key value.
@@ -50,7 +50,7 @@ class Prioridad extends Model
      */
     public function consultas()
     {
-        return $this->belongsTo('App\Models\Consulta','consulta_id','id');
+        return $this->hasMany('App\Models\Consulta');
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Especialidad;
 
 class Medico extends Model
 {
@@ -61,7 +62,7 @@ class Medico extends Model
      */
     public function guardias()
     {
-        return $this->belongsToMany('App\Models\Guardia','guardia_id','id');
+        return $this->belongsToMany(Guardia::class,'guardia_medico');
     }
 
     /**
@@ -75,9 +76,9 @@ class Medico extends Model
     /**
      * Get the especialidads for this model.
      */
-    public function especialidads()
+    public function especialidades()
     {
-        return $this->belongsToMany('App\Models\Especialidad','especialidad_id','id');
+        return $this->belongsToMany(Especialidad::class,'especialidad_medico');//,'medico_especialidads');
     }
 
 

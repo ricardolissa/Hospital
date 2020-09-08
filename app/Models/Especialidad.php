@@ -13,7 +13,7 @@ class Especialidad extends Model
      *
      * @var string
      */
-    protected $table = 'especialidads';
+    protected $table = 'especialidades';
 
     /**
     * The database primary key value.
@@ -50,7 +50,7 @@ class Especialidad extends Model
      */
     public function medicos()
     {
-        return $this->belongsToMany('App\Models\Medico','medico_id','id');
+        return $this->belongsToMany(Medico::class,'especialidad_medico');
        
     }
 

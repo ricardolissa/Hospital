@@ -11,11 +11,11 @@
             </div>
             <div class="btn-group btn-group-sm pull-right" role="group">
 
-                <a href="{{ route('especialidads.especialidad.index') }}" class="btn btn-primary" title="Show All Especialidad">
+                <a href="{{ route('especialidades.especialidad.index') }}" class="btn btn-primary" title="Show All Especialidad">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true">Show</span>
                 </a>
 
-                <a href="{{ route('especialidads.especialidad.create') }}" class="btn btn-success" title="Create New Especialidad">
+                <a href="{{ route('especialidades.especialidad.create') }}" class="btn btn-success" title="Create New Especialidad">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
                 </a>
 
@@ -32,10 +32,10 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('especialidads.especialidad.update', $especialidad->id) }}" id="edit_especialidad_form" name="edit_especialidad_form" accept-charset="UTF-8" class="form-horizontal">
+            <form method="POST" action="{{ route('especialidades.especialidad.update', $especialidad->id) }}" id="edit_especialidad_form" name="edit_especialidad_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('especialidads.form', [
+            @include ('especialidades.form', [
                                         'especialidad' => $especialidad,
                                       ])
 

@@ -20,6 +20,7 @@ class CreateMedicosTable extends Migration
             $table->string('foto')->nullable();
             $table->integer('legajo')->unique();
             $table->integer('matricula')->unique();
+            $table->foreign('persona_id')->references('id')->on('personas');
 
         });
     }

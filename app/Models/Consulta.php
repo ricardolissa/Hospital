@@ -96,37 +96,7 @@ class Consulta extends Model
         return $this->belongsTo('App\Models\Prioridad','prioridad_id');
     }
 
-    /**
-     * Get the pacientes for this model.
-     */
-    public function pacientes()
-    {
-        return $this->belongsTo('App\Models\Paciente','paciente_id','id');
-    }
-
-    /**
-     * Get the prioridads for this model.
-     */
-    public function prioridads()
-    {
-        return $this->hasOne('App\Models\Prioridad','prioridad_id','id');
-    }
-
-    /**
-     * Get the medicos for this model.
-     */
-    public function medicos()
-    {
-        return $this->belongsTo('App\Models\Medico','medico_id','id');
-    }
-
-    /**
-     * Get the guardias for this model.
-     */
-    public function guardias()
-    {
-        return $this->belongsTo('App\Models\Guardia','guardia_id','id');
-    }
+   
 
 
 

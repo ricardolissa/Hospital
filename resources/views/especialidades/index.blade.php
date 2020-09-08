@@ -23,14 +23,14 @@
             </div>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('especialidads.especialidad.create') }}" class="btn btn-success" title="Create New Especialidad">
+                <a href="{{ route('especialidades.especialidad.create') }}" class="btn btn-success" title="Create New Especialidad">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
                 </a>
             </div>
 
         </div>
         
-        @if(count($especialidads) == 0)
+        @if(count($especialidades) == 0)
             <div class="panel-body text-center">
                 <h4>No Especialidads Available!</h4>
             </div>
@@ -47,21 +47,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($especialidads as $especialidad)
+                    @foreach($especialidades as $especialidad)
                         <tr>
                             <td>{{ $especialidad->nombre }}</td>
 
                             <td>
 
-                                <form method="POST" action="{!! route('especialidads.especialidad.destroy', $especialidad->id) !!}" accept-charset="UTF-8">
+                                <form method="POST" action="{!! route('especialidades.especialidad.destroy', $especialidad->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
 
                                     <div class="btn-group btn-group-xs pull-right" role="group">
-                                        <a href="{{ route('especialidads.especialidad.show', $especialidad->id ) }}" class="btn btn-info" title="Show Especialidad">
+                                        <a href="{{ route('especialidades.especialidad.show', $especialidad->id ) }}" class="btn btn-info" title="Show Especialidad">
                                             <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
                                         </a>
-                                        <a href="{{ route('especialidads.especialidad.edit', $especialidad->id ) }}" class="btn btn-primary" title="Edit Especialidad">
+                                        <a href="{{ route('especialidades.especialidad.edit', $especialidad->id ) }}" class="btn btn-primary" title="Edit Especialidad">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
                                         </a>
 
@@ -82,7 +82,7 @@
         </div>
 
         <div class="panel-footer">
-            {!! $especialidads->render() !!}
+            {!! $especialidades->render() !!}
         </div>
         
         @endif

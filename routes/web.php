@@ -256,32 +256,32 @@ Route::group(
 
 Route::group(
 [
-    'prefix' => 'especialidads',
+    'prefix' => 'especialidades',
 ], function () {
 
-    Route::get('/', 'EspecialidadsController@index')
-         ->name('especialidads.especialidad.index');
+    Route::get('/','EspecialidadesController@index')
+         ->name('especialidades.especialidad.index');
 
-    Route::get('/create','EspecialidadsController@create')
-         ->name('especialidads.especialidad.create');
+    Route::get('/create','EspecialidadesController@create')
+         ->name('especialidades.especialidad.create');
 
-    Route::get('/show/{especialidad}','EspecialidadsController@show')
-         ->name('especialidads.especialidad.show')
+    Route::get('/show/{especialidad}','EspecialidadesController@show')
+         ->name('especialidades.especialidad.show')
          ->where('id', '[0-9]+');
 
-    Route::get('/{especialidad}/edit','EspecialidadsController@edit')
-         ->name('especialidads.especialidad.edit')
+    Route::get('/{especialidad}/edit','EspecialidadesController@edit')
+         ->name('especialidades.especialidad.edit')
          ->where('id', '[0-9]+');
 
-    Route::post('/', 'EspecialidadsController@store')
-         ->name('especialidads.especialidad.store');
+    Route::post('/', 'EspecialidadesController@store')
+         ->name('especialidades.especialidad.store');
                
-    Route::put('especialidad/{especialidad}', 'EspecialidadsController@update')
-         ->name('especialidads.especialidad.update')
+    Route::put('especialidad/{especialidad}', 'EspecialidadesController@update')
+         ->name('especialidades.especialidad.update')
          ->where('id', '[0-9]+');
 
-    Route::delete('/especialidad/{especialidad}','EspecialidadsController@destroy')
-         ->name('especialidads.especialidad.destroy')
+    Route::delete('/especialidad/{especialidad}','EspecialidadesController@destroy')
+         ->name('especialidades.especialidad.destroy')
          ->where('id', '[0-9]+');
 
 });

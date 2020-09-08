@@ -73,22 +73,5 @@ class Paciente extends Model
         return $this->hasMany('App\Models\Consulta');
     }
 
-    /**
-     * Get the obrasocials for this model.
-     */
-    public function obrasocials()
-    {
-        return $this->belongsTo('App\Models\Obrasocial','obrasocial_id','id');
-    }
-
-    /**
-     * Get the personas for this model.
-     */
-    public function personas()
-    {
-        return $this->belongsTo('App\Models\Persona','persona_id','id');
-    }
-
-
-
+   
 }

@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMedicoGuardiaTable extends Migration
-{
+class GuardiaMedico extends Migration
+
+   {
     /**
      * Run the migrations.
      *
@@ -13,7 +14,7 @@ class CreateMedicoGuardiaTable extends Migration
      */
     public function up()
     {
-        Schema::create('medico_guardias', function (Blueprint $table) {
+        Schema::create('guardia_medico', function (Blueprint $table) {
              $table->bigIncrements('id');
              $table->integer('medico_id')->unsigned();
              $table->integer('guardia_id')->unsigned();
@@ -31,6 +32,7 @@ class CreateMedicoGuardiaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medico_guardias');
+        Schema::dropIfExists('guardia_medico');
     }
 }
+

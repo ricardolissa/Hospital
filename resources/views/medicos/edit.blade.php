@@ -35,7 +35,7 @@
             <form method="POST" action="{{ route('medicos.medicos.update', $medicos->id) }}" id="edit_medicos_form" name="edit_medicos_form" accept-charset="UTF-8" class="form-horizontal">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('medicos.form', [
+            @include ('medicos.formedit', [
                                         'medicos' => $medicos,
                                       ])
 

@@ -43,7 +43,7 @@ class MedicosFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['persona_id','foto','legajo','matricula']);
+        $data = $this->only(['persona_id','foto','legajo','matricula','especialidades']);
 
         return $data;
     }

@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Especialidad;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EspecialidadsFormRequest;
+use App\Http\Requests\EspecialidadesFormRequest;
 use Exception;
 
-class EspecialidadsController extends Controller
+class EspecialidadesController extends Controller
 {
 
     /**
-     * Display a listing of the especialidads.
+     * Display a listing of the especialidades.
      *
      * @return Illuminate\View\View
      */
     public function index()
     {
-        $especialidads = Especialidad::paginate(25);
+        $especialidades = Especialidad::paginate(25);
 
-        return view('especialidads.index', compact('especialidads'));
+        return view('especialidades.index', compact('especialidades'));
     }
 
     /**
@@ -31,17 +31,17 @@ class EspecialidadsController extends Controller
     {
         
         
-        return view('especialidads.create');
+        return view('especialidades.create');
     }
 
     /**
      * Store a new especialidad in the storage.
      *
-     * @param App\Http\Requests\EspecialidadsFormRequest $request
+     * @param App\Http\Requests\EspecialidadesFormRequest $request
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(EspecialidadsFormRequest $request)
+    public function store(EspecialidadesFormRequest $request)
     {
         try {
             
@@ -49,7 +49,7 @@ class EspecialidadsController extends Controller
             
             Especialidad::create($data);
 
-            return redirect()->route('especialidads.especialidad.index')
+            return redirect()->route('especialidades.especialidad.index')
                              ->with('success_message', 'Especialidad was successfully added!');
 
         } catch (Exception $exception) {
@@ -70,7 +70,7 @@ class EspecialidadsController extends Controller
     {
         $especialidad = Especialidad::findOrFail($id);
 
-        return view('especialidads.show', compact('especialidad'));
+        return view('especialidades.show', compact('especialidad'));
     }
 
     /**
@@ -85,7 +85,7 @@ class EspecialidadsController extends Controller
         $especialidad = Especialidad::findOrFail($id);
         
 
-        return view('especialidads.edit', compact('especialidad'));
+        return view('especialidades.edit', compact('especialidad'));
     }
 
     /**
@@ -96,7 +96,7 @@ class EspecialidadsController extends Controller
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function update($id, EspecialidadsFormRequest $request)
+    public function update($id, EspecialidadesFormRequest $request)
     {
         try {
             
@@ -105,7 +105,7 @@ class EspecialidadsController extends Controller
             $especialidad = Especialidad::findOrFail($id);
             $especialidad->update($data);
 
-            return redirect()->route('especialidads.especialidad.index')
+            return redirect()->route('especialidades.especialidad.index')
                              ->with('success_message', 'Especialidad was successfully updated!');
 
         } catch (Exception $exception) {
@@ -128,7 +128,7 @@ class EspecialidadsController extends Controller
             $especialidad = Especialidad::findOrFail($id);
             $especialidad->delete();
 
-            return redirect()->route('especialidads.especialidad.index')
+            return redirect()->route('especialidades.especialidad.index')
                              ->with('success_message', 'Especialidad was successfully deleted!');
 
         } catch (Exception $exception) {

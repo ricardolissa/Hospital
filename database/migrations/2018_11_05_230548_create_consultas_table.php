@@ -26,6 +26,10 @@ class CreateConsultasTable extends Migration
             $table->integer('medico_id')->unsigned()->nullable()->index();
             $table->integer('guardia_id')->unsigned()->nullable()->index();
             $table->integer('prioridad_id')->unsigned()->nullable()->index();
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            $table->foreign('medico_id')->references('id')->on('medicos');
+            $table->foreign('prioridad_id')->references('id')->on('prioridades');
+        
 
         });
     }

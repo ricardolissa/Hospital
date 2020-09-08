@@ -19,6 +19,7 @@ class CreatePadministrativosTable extends Migration
             $table->integer('persona_id')->unsigned()->nullable()->index();
             $table->string('foto')->nullable();
             $table->integer('legajo')->unique();
+            $table->foreign('persona_id')->references('id')->on('personas');
 
         });
     }

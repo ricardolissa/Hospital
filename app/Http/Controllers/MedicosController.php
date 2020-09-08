@@ -33,12 +33,12 @@ class MedicosController extends Controller
     {
         
          $personas = Persona::pluck('nombre','id')->all();
-         $especialidads= Especialidad::pluck('nombre','id')->all();
+         $especialidades= Especialidad::pluck('nombre','id')->all();
          //dd($especialidad);
 
 
         
-        return view('medicos.create', compact('personas','especialidads'));
+        return view('medicos.create', compact('personas','especialidades'));
     }
 
     /**
@@ -52,14 +52,14 @@ class MedicosController extends Controller
     {
        // try {
             
-          //  dd($request->especialidad);
+            //dd($request->especialidad);
             $data = $request->getData();
-          //  dd($data);
+          // dd($data);
             //$medicos->especialidads->sync($request->especialidad);
             
             $medicos=Medico::create($data);
-
-           $medicos->especialidads->sync($request->especialidad);
+      //     $medicos->especialidades()->attach(especialidad[]); posta!?????
+          // $medicos->especialidads->sync($request->especialidad);
 
             return redirect()->route('medicos.medicos.index')
                              ->with('success_message', 'Medico was successfully added!');
@@ -95,8 +95,9 @@ class MedicosController extends Controller
     {
         $medicos = Medico::findOrFail($id);
         $personas = Persona::pluck('nombre','id')->all();
+        $especialidades= Especialidad::pluck('nombre','id')->all();
 
-        return view('medicos.edit', compact('medicos','personas'));
+        return view('medicos.edit', compact('medicos','personas','especialidades'));
     }
 
     /**
@@ -109,22 +110,29 @@ class MedicosController extends Controller
      */
     public function update($id, MedicosFormRequest $request)
     {
-        try {
+       // try {
             
             $data = $request->getData();
+           
             
             $medicos = Medico::findOrFail($id);
+            
             $medicos->update($data);
+        
+        //dd($data['especialidades']);
+            
+         //   $medicos->especialidades()->sync($data['especialidades']);
+            $medicos->especialidades()->sync($data['especialidades'],false);
 
             return redirect()->route('medicos.medicos.index')
                              ->with('success_message', 'Medico was successfully updated!');
 
-        } catch (Exception $exception) {
+      /*  } catch (Exception $exception) {
 
             return back()->withInput()
                          ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
         }        
-    }
+    */}
 
     /**
      * Remove the specified medicos from the storage.

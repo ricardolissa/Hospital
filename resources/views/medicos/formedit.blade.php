@@ -43,28 +43,30 @@
 </div>
 
 <div class="form-group">
-    <label for="especialidad" class="col-md-2 control-label">Especialidad</label>
+    <label for="mespecialidad" class="col-md-2 control-label">Especialidad</label>
     <div class="col-md-10">
+      @foreach ($medicos->especialidades as $especialidad)
       
-       <select multiple="multiple" name="especialidades[]" id="especialidad">
+      {{$especialidad->nombre  }} no muestra nada
+      
+      @endforeach
 
-        
-          
-           <option value="" style="display: none;">Select especialidad</option>
-            @foreach ($especialidades as $key=> $especialidad)
+         
+    </div>
+</div>
 
-                <option value="{{ $key }}"
-                @if  (( $medicos->especialidad))  
-                    
-                @endif >
-                    
-                    {{ $especialidad }}
-                </option>
-               
 
-            @endforeach
-           
-        
-    </select>
+
+<div class="form-group">
+    <label for="especialidad" class="col-md-2 control-label">Seleccionar Especialidad</label>
+    <div class="col-md-10">
+
+          <select class="chosen-select" multiple="multiple" name="especialidades[]" id="especialidades">
+    @foreach($especialidades as $especialidad)
+        <option value="{{$especialidad}}">
+         {{$especialidad}}
+        </option>
+    @endforeach
+</select>
     </div>
 </div>

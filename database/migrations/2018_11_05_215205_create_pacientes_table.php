@@ -22,6 +22,9 @@ class CreatePacientesTable extends Migration
             $table->string('antecedentes_patologico')->nullable();
             $table->string('antecedentes_nopatologico')->nullable();
             $table->string('padecimiento_actual')->nullable();
+             $table->foreign('persona_id')->references('id')->on('personas');
+             $table->foreign('obrasocial_id')->references('id')->on('obrasociales');
+
 
         });
     }

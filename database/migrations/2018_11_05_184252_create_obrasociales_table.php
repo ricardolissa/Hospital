@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEspecialidadsTable extends Migration
+class CreateObrasocialesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,14 @@ class CreateEspecialidadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('especialidads', function(Blueprint $table)
+        Schema::create('obrasociales', function(Blueprint $table)
         {
             $table->increments('id');
             $table->timestamps();
-            $table->string('nombre')->nullable();
+            $table->string('nombre')->unique();
+     
+            $table->integer('plan')->nullable();
+
 
         });
     }
@@ -28,6 +31,6 @@ class CreateEspecialidadsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('especialidads');
+        Schema::drop('obrasociales');
     }
 }

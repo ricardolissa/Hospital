@@ -33,7 +33,8 @@ class Persona extends Model
                   'dni',
                   'email',
                   'fecha_nacimiento',
-                  'edad'
+                  'edad',
+              
               ];
 
     /**

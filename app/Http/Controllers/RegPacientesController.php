@@ -32,8 +32,8 @@ class RegPacientesController extends Controller
 //poner carteles y demas cosas !!!
     $pacientes=DB::table('pacientes')
     ->join('personas','personas.id', '=', 'pacientes.persona_id')
-    ->join('obrasocials','obrasocials.id', '=', 'pacientes.obrasocial_id')
-    ->select('personas.nombre' , 'personas.apellido', 'personas.dni', 'obrasocials.nombre as obraNombre', 'pacientes.id')
+    ->join('obrasociales','obrasociales.id', '=', 'pacientes.obrasocial_id')
+    ->select('personas.nombre' , 'personas.apellido', 'personas.dni', 'obrasociales.nombre as obraNombre', 'pacientes.id')
     ->where('personas.dni', $request->get('dni'))
     ->get();
   

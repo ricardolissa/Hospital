@@ -18,6 +18,7 @@ class CreateTelefonosTable extends Migration
             $table->timestamps();
             $table->integer('numero')->nullable();
             $table->integer('persona_id')->unsigned()->nullable()->index();
+            $table->foreign('persona_id')->references('id')->on('personas');
 
         });
     }

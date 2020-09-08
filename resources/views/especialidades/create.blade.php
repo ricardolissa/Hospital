@@ -11,7 +11,7 @@
             </span>
 
             <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('especialidads.especialidad.index') }}" class="btn btn-primary" title="Show All Especialidad">
+                <a href="{{ route('especialidades.especialidad.index') }}" class="btn btn-primary" title="Show All Especialidad">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
             </div>
@@ -28,9 +28,9 @@
                 </ul>
             @endif
 
-            <form method="POST" action="{{ route('especialidads.especialidad.store') }}" accept-charset="UTF-8" id="create_especialidad_form" name="create_especialidad_form" class="form-horizontal">
+            <form method="POST" action="{{ route('especialidades.especialidad.store') }}" accept-charset="UTF-8" id="create_especialidad_form" name="create_especialidad_form" class="form-horizontal">
             {{ csrf_field() }}
-            @include ('especialidads.form', [
+            @include ('especialidades.form', [
                                         'especialidad' => null,
                                       ])
 

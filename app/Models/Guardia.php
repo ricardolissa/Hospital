@@ -50,7 +50,7 @@ class Guardia extends Model
      */
     public function medicos()
     {
-        return $this->belongsToMany('App\Models\Medico','medico_id','id');
+        return $this->belongsToMany(Medico::class,'guardia_medico');
     }
 
     /**
