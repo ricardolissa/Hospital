@@ -58,12 +58,12 @@ $prioridads = Prioridad::pluck('nombre','id')->all();
             Consulta::create($data);
 
             return redirect()->route('consultas.consulta.index')
-                             ->with('success_message', 'Consulta was successfully added!');
+                             ->with('success_message', 'Consulta fue creada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
@@ -117,12 +117,12 @@ $prioridads = Prioridad::pluck('nombre','id')->all();
             $consulta->update($data);
 
             return redirect()->route('consultas.consulta.index')
-                             ->with('success_message', 'Consulta was successfully updated!');
+                             ->with('success_message', 'Consulta fue actualizada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
 
@@ -140,12 +140,12 @@ $prioridads = Prioridad::pluck('nombre','id')->all();
             $consulta->delete();
 
             return redirect()->route('consultas.consulta.index')
-                             ->with('success_message', 'Consulta was successfully deleted!');
+                             ->with('success_message', 'Consulta fue borrada con exito!!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 

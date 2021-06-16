@@ -81,6 +81,14 @@ class Medico extends Model
         return $this->belongsToMany(Especialidad::class,'especialidad_medico');//,'medico_especialidads');
     }
 
+ public function scopeId($query, $medico_id)
+   
+    {
 
+    if($medico_id)
+
+       return $query->where('medico_id', $medico_id);
+      
+    }
 
 }

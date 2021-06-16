@@ -1,58 +1,93 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="panel panel-default">
-    <div class="panel-heading clearfix">
-
-        <span class="pull-left">
-            <h4 class="mt-5 mb-5">{{ isset($title) ? $title : 'Medicos' }}</h4>
-        </span>
-
-        <div class="pull-right">
-
-            <form method="POST" action="{!! route('medicos.medicos.destroy', $medicos->id) !!}" accept-charset="UTF-8">
-            <input name="_method" value="DELETE" type="hidden">
-            {{ csrf_field() }}
-                <div class="btn-group btn-group-sm" role="group">
-                    <a href="{{ route('medicos.medicos.index') }}" class="btn btn-primary" title="Show All Medicos">
-                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                    </a>
-
-                    <a href="{{ route('medicos.medicos.create') }}" class="btn btn-success" title="Create New Medicos">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </a>
-                    
-                    <a href="{{ route('medicos.medicos.edit', $medicos->id ) }}" class="btn btn-primary" title="Edit Medicos">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </a>
-
-                    <button type="submit" class="btn btn-danger" title="Delete Medicos" onclick="return confirm(&quot;Delete Medicos??&quot;)">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">
+                <strong>
+                    MEDICO
+                </strong>
+            </h1>
+            <hr>
+                <div class="profile-card-6">
+                    <img class="img img-responsive" src="/images/{{$medicos->foto  }}">
+                        <div class="profile-name">
+                            {{ ($medicos->persona->apellido)}}
+                            <br>
+                                {{  ($medicos->persona->nombre) }}
+                            </br>
+                        </div>
+                        <div class="profile-position">
+                            @foreach ($medicos->especialidades as $especialidad)
+      
+                                     {{$especialidad->nombre}}
+                            <br>
+                                @endforeach
+                            </br>
+                        </div>
+                        <div class="profile-overview">
+                            <div class="profile-overview">
+                                <div class="row text-center">
+                                </div>
+                                <div class="col-xs-4">
+                                    <h3>
+                                        {{ $medicos->matricula }}
+                                    </h3>
+                                    <p>
+                                        Matricula
+                                    </p>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h3>
+                                        {{ $medicos->legajo }}
+                                    </h3>
+                                    <p>
+                                        Legajo
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </img>
                 </div>
-            </form>
-
+            </hr>
         </div>
-
-    </div>
-
-    <div class="panel-body">
-        <dl class="dl-horizontal">
-            <dt>Nombre</dt>
-            <dd>{{ optional($medicos->persona)->nombre }}</dd>
-            <dt>Foto</dt>
-            <dd>{{ $medicos->foto }}</dd>
-            <dt>Legajo</dt>
-            <dd>{{ $medicos->legajo }}</dd>
-            <dt>Matricula</dt>
-            <dd>{{ $medicos->matricula }}</dd>
-            <dt>Especialidad</dt>
-            <dd>{{ $medicos->especialidad_id }}</dd>
-
-        </dl>
-
     </div>
 </div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div align="center">
+            
+                <form accept-charset="UTF-8" action="{!! route('medicos.medicos.destroy', $medicos->id) !!}" method="POST">
+                    <input name="_method" type="hidden" value="DELETE">
+                        {{ csrf_field() }}
+                        <div class="btn-group btn-group-xs" role="group">
+                            <a class="btn btn-primary" href="{{ route('medicos.medicos.index') }}" title="Mostrar todos los Medicos">
+                                <span aria-hidden="true" class="glyphicon glyphicon-th-list">
+                                    Mostrar
+                                </span>
+                            </a>
+                            <a class="btn btn-success" href="{{ route('medicos.medicos.create') }}" title="Crear Nuevo Medico">
+                                <span aria-hidden="true" class="glyphicon glyphicon-plus">
+                                    Crear
+                                </span>
+                            </a>
+                            <a class="btn btn-primary" href="{{ route('medicos.medicos.edit', $medicos->id ) }}" title="Editar Medico">
+                                <span aria-hidden="true" class="glyphicon glyphicon-pencil">
+                                    Editar
+                                </span>
+                            </a>
+                            <button class="btn btn-danger" onclick='return confirm("Delete Medicos??")' title="Borrar Medico" type="submit">
+                                <span aria-hidden="true" class="glyphicon glyphicon-trash">
+                                    Borrar
+                                </span>
+                            </button>
+                        </div>
+                    </input>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

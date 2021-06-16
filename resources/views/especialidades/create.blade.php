@@ -1,50 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="panel panel-default">
-
-        <div class="panel-heading clearfix">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
             
-            <span class="pull-left">
-                <h4 class="mt-5 mb-5">Create New Especialidad</h4>
-            </span>
-
-            <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('especialidades.especialidad.index') }}" class="btn btn-primary" title="Show All Especialidad">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                </a>
-            </div>
-
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div align="center" class="pull-left">
+                        <h1 class="mt-5 mb-5">
+                            {{ !empty($title) ? $title : 'Nueva Especialidad' }}
+                        </h1>
+                    </div>
         </div>
-
-        <div class="panel-body">
+        <div class="col-md-12">
         
-            @if ($errors->any())
-                <ul class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-            <form method="POST" action="{{ route('especialidades.especialidad.store') }}" accept-charset="UTF-8" id="create_especialidad_form" name="create_especialidad_form" class="form-horizontal">
-            {{ csrf_field() }}
+                    <div class="btn-group btn-group-xs pull-right" role="group">
+                        <a class="btn btn-primary" href="{{ route('especialidades.especialidad.index') }}" title="Mostrar todas las Especialidades">
+                            <span aria-hidden="true" class="glyphicon glyphicon-th-list">
+                                Mostrar
+                            </span>
+                        </a>
+                    </div>
+        </div>
+            
+            <br>
+                
+               <div class="panel-body">
+                        @if ($errors->any())
+                        <ul class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                            <li>
+                                {{ $error }}
+                            </li>
+                            @endforeach
+                        </ul>
+                        @endif
+                        <form accept-charset="UTF-8" action="{{ route('especialidades.especialidad.store') }}" class="form-horizontal" id="create_especialidad_form" method="POST" name="create_especialidad_form">
+                            {{ csrf_field() }}
             @include ('especialidades.form', [
                                         'especialidad' => null,
                                       ])
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Add">
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input class="btn btn-success" type="submit" value="Crear" title="Crear Especialidad">
+                                    </input>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-
-            </form>
-
+                
+            </div>
+            </br>
         </div>
     </div>
-
+</div>
 @endsection
-
-

@@ -47,3 +47,17 @@
     </div>
 </div>
 
+<div class="form-group {{ $errors->has('telefono1') ? 'has-error' : '' }}">
+    <label for="telefono1" class="col-md-2 control-label">Telefono</label>
+    <div class="col-md-10">
+        <input class="form-control" name="telefono1" type="text" id="telefono1" value="{{ old('telefono1', optional($persona)->telefono1) }}" minlength="1" placeholder="Enter telefono1 here...">
+        {!! $errors->first('telefono1', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group {{ $errors->has('telefono2') ? 'has-error' : '' }}">
+    <label for="telefono2" class="col-md-2 control-label">Telefono</label>
+    <div class="col-md-10">
+        <input class="form-control" name="telefono2" type="text" id="telefono2" value="{{ old('telefono2', optional($persona)->telefono2) }}" minlength="1" placeholder="Enter telefono2 here...">
+        {!! $errors->first('telefono2', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>

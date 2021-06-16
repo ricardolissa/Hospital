@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class PadministrativosFormRequest extends FormRequest
 {
     /**
@@ -26,23 +25,23 @@ class PadministrativosFormRequest extends FormRequest
     {
         $rules = [
             'persona_id' => 'nullable',
-            'foto' => 'string|min:1|nullable',
-            'legajo' => 'string|min:1|nullable',
-    
+            'foto'       => 'file|min:1|nullable',
+            'legajo'     => 'string|min:1|nullable',
+
         ];
 
         return $rules;
     }
-    
+
     /**
      * Get the request's data from the request.
      *
-     * 
+     *
      * @return array
      */
     public function getData()
     {
-        $data = $this->only(['persona_id','foto','legajo']);
+        $data = $this->only(['persona_id', 'foto', 'legajo']);
 
         return $data;
     }

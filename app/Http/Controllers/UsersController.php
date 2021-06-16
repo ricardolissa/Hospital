@@ -76,7 +76,7 @@ class UsersController extends Controller
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Un error ocurrio, no se pudo crear el Usuario']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
     /**
@@ -132,7 +132,7 @@ class UsersController extends Controller
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'No se pudo actualizar el usuario']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
 
@@ -155,7 +155,7 @@ class UsersController extends Controller
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'El Usuario no se pudo borrar']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 

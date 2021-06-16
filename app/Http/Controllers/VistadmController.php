@@ -33,12 +33,12 @@ return view('vistadm.mensaje');
             Persona::create($data);
 
             return redirect()->route('pacientes.paciente.create2')
-                             ->with('success_message', 'Persona was successfully added!');
+                             ->with('success_message', 'Persona fue creado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
@@ -51,12 +51,12 @@ return view('vistadm.mensaje');
             Paciente::create($data);
 
             return redirect()->route('vistadm.mensaje')
-                             ->with('success_message', 'Paciente was successfully added!');
+                             ->with('success_message', 'Paciente fue creado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 

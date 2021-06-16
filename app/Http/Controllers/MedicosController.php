@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medico;
-use App\Models\Persona;
-use App\Models\Especialidad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MedicosFormRequest;
+use App\Models\Especialidad;
+use App\Models\Medico;
+use App\Models\Persona;
+use DB;
 use Exception;
+use Illuminate\Http\Request;
 
 class MedicosController extends Controller
 {
@@ -29,16 +31,26 @@ class MedicosController extends Controller
      *
      * @return Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        
-         $personas = Persona::pluck('nombre','id')->all();
-         $especialidades= Especialidad::pluck('nombre','id')->all();
-         //dd($especialidad);
 
+        // $personas = Persona::pluck('nombre','id')->all();
 
-        
-        return view('medicos.create', compact('personas','especialidades'));
+        //dd($especialidad);
+        $personas = DB::table('personas')
+            ->select('personas.id', 'personas.nombre', 'personas.apellido', 'personas.dni')
+            ->where('personas.dni', $request->get('dni'))
+            ->get();
+
+        // $especialidades= Especialidad::pluck('id')->all();
+        //este trae el nombre// $especialidades= Especialidad::pluck('nombre')->all();
+//Ver esto  
+        $especialidades = DB::table('especialidades')
+        //->select('especialidades.nombre','especialidades.id')
+            ->get();
+        //dd($especialidades);
+
+        return view('medicos.create', compact('personas', 'especialidades'));
     }
 
     /**
@@ -50,24 +62,46 @@ class MedicosController extends Controller
      */
     public function store(MedicosFormRequest $request)
     {
-       // try {
-            
-            //dd($request->especialidad);
+        try {
+
             $data = $request->getData();
-          // dd($data);
-            //$medicos->especialidads->sync($request->especialidad);
-            
-            $medicos=Medico::create($data);
-      //     $medicos->especialidades()->attach(especialidad[]); posta!?????
-          // $medicos->especialidads->sync($request->especialidad);
+
+            $data = $request->all();
+            if ($archivo = $request->file('foto')) {
+
+                $nombre = $archivo->getClientOriginalName();
+                $archivo->move('images', $nombre);
+                $data['foto'] = $nombre;
+            }
+
+            $medicos = DB::table('medicos')
+                ->select('medicos.id')
+                ->get();
+
+            /************* funciona ********/
+            if ($medicos->isEmpty()) {
+
+                $data['legajo'] = 4000;
+            } else {
+
+                $ultimo = $medicos->last();
+                $x      = $ultimo->id + 4000;
+
+                $data['legajo'] = $x;
+
+            }
+
+            $medicos = Medico::create($data);
+
+            $medicos->especialidades()->sync($data['especialidades']);
 
             return redirect()->route('medicos.medicos.index')
-                             ->with('success_message', 'Medico was successfully added!');
-/*        } catch (Exception $exception) {
+                ->with('success_message', 'Medico fue creado con exito!!');
+        } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }*/
+                ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
+        }
     }
 
     /**
@@ -93,11 +127,12 @@ class MedicosController extends Controller
      */
     public function edit($id)
     {
-        $medicos = Medico::findOrFail($id);
-        $personas = Persona::pluck('nombre','id')->all();
-        $especialidades= Especialidad::pluck('nombre','id')->all();
 
-        return view('medicos.edit', compact('medicos','personas','especialidades'));
+        $medicos        = Medico::findOrFail($id);
+        $personas       = Persona::pluck('nombre', 'id')->all();
+        $especialidades = Especialidad::pluck('id')->all();
+
+        return view('medicos.edit', compact('medicos', 'personas', 'especialidades'));
     }
 
     /**
@@ -110,29 +145,32 @@ class MedicosController extends Controller
      */
     public function update($id, MedicosFormRequest $request)
     {
-       // try {
-            
+        try {
+
             $data = $request->getData();
-           
-            
+
+            $data = $request->all();
+            if ($archivo = $request->file('foto')) {
+
+                $nombre = $archivo->getClientOriginalName();
+                $archivo->move('images', $nombre);
+                $data['foto'] = $nombre;
+            }
             $medicos = Medico::findOrFail($id);
-            
             $medicos->update($data);
-        
-        //dd($data['especialidades']);
-            
-         //   $medicos->especialidades()->sync($data['especialidades']);
-            $medicos->especialidades()->sync($data['especialidades'],false);
+
+            $medicos->especialidades()->sync($data['especialidades']);
+            // $medicos->especialidades()->sync($data['especialidades'],false);
 
             return redirect()->route('medicos.medicos.index')
-                             ->with('success_message', 'Medico was successfully updated!');
+                ->with('success_message', 'Medico fue actualizado con exito!');
 
-      /*  } catch (Exception $exception) {
+        } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }        
-    */}
+                ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
+        }
+    }
 
     /**
      * Remove the specified medicos from the storage.
@@ -148,21 +186,22 @@ class MedicosController extends Controller
             $medicos->delete();
 
             return redirect()->route('medicos.medicos.index')
-                             ->with('success_message', 'Medico was successfully deleted!');
+                ->with('success_message', 'Medico fue borrado con exito!!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
-    public function indexmed(){
-        
+    public function indexmed()
+    {
+
         $medicosObjects = Medico::with('persona')->paginate(25);
-        $id=1;
-        $especialidad = Especialidad::findOrFail($id);
-        return view('medicos.indexmed', compact('medicosObjects',$especialidad));
+        $id             = 1;
+        $especialidad   = Especialidad::findOrFail($id);
+        return view('medicos.indexmed', compact('medicosObjects', $especialidad));
     }
 
 }

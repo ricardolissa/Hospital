@@ -22,6 +22,9 @@ class CreatePersonasTable extends Migration
             $table->string('email')->nullable();
             $table->date('fecha_nacimiento');
             $table->integer('edad')->nullable();
+           //se agregan campos multivaluados para eliminar la entidad telefono
+            $table->integer('telefono1')->nullable();
+            $table->integer('telefono2')->nullable();
 
         });
     }

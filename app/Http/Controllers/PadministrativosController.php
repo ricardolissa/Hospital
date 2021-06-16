@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PadministrativosFormRequest;
 use App\Models\Padministrativo;
 use App\Models\Persona;
+use DB;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -29,10 +30,15 @@ class PadministrativosController extends Controller
      *
      * @return Illuminate\View\View
      */
-    public function create()
+
+    public function create(Request $request)
     {
-        $personas = Persona::pluck('nombre','id')->all();
-        
+        $personas = DB::table('personas')
+            ->select('personas.id', 'personas.nombre', 'personas.apellido', 'personas.dni')
+            ->where('personas.dni', $request->get('dni'))
+            ->get();
+
+   
         return view('padministrativos.create', compact('personas'));
     }
 
@@ -46,19 +52,58 @@ class PadministrativosController extends Controller
     public function store(PadministrativosFormRequest $request)
     {
         try {
-            
+            // dd($request->all());
+
             $data = $request->getData();
             
+            //Padministrativo::create($data);
+
+            //manipulacion de imagen
+            
+            $data = $request->all();
+            if ($archivo = $request->file('foto')) {
+
+                $nombre = $archivo->getClientOriginalName();
+                $archivo->move('images', $nombre);
+                $data['foto'] = $nombre;
+            }
+  
+           $padministrativos = DB::table('padministrativos')
+            ->select('padministrativos.id')
+                 
+            ->get();
+            
+ //->orderBy('id', 'desc'), ->oldest() 
+
+            /************* funciona ********/
+            if( $padministrativos->isEmpty()){
+                
+                $data['legajo'] = 1000;
+            }else {                
+           
+
+           $ultimo=$padministrativos->last();
+           $x= $ultimo->id+1000;
+           
+           $data['legajo'] = $x;
+                      
+           }
+                  
+
             Padministrativo::create($data);
 
-            return redirect()->route('padministrativos.padministrativo.index')
-                             ->with('success_message', 'Padministrativo was successfully added!');
+          
 
-        } catch (Exception $exception) {
+
+            return redirect()->route('padministrativos.padministrativo.index')
+                ->with('success_message', 'Administrativo fue creado con exito!!');
+
+       } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
+
     }
 
     /**
@@ -85,9 +130,9 @@ class PadministrativosController extends Controller
     public function edit($id)
     {
         $padministrativo = Padministrativo::findOrFail($id);
-        $personas = Persona::pluck('nombre','id')->all();
+        $personas        = Persona::pluck('nombre', 'id')->all();
 
-        return view('padministrativos.edit', compact('padministrativo','personas'));
+        return view('padministrativos.edit', compact('padministrativo', 'personas'));
     }
 
     /**
@@ -101,20 +146,30 @@ class PadministrativosController extends Controller
     public function update($id, PadministrativosFormRequest $request)
     {
         try {
-            
+
             $data = $request->getData();
             
+          
+            
+            $data = $request->all();
+            if ($archivo = $request->file('foto')) {
+
+                $nombre = $archivo->getClientOriginalName();
+                $archivo->move('images', $nombre);
+                $data['foto'] = $nombre;
+            }
+
             $padministrativo = Padministrativo::findOrFail($id);
             $padministrativo->update($data);
 
             return redirect()->route('padministrativos.padministrativo.index')
-                             ->with('success_message', 'Padministrativo was successfully updated!');
+                ->with('success_message', 'Administrativo fue actualizado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }        
+                ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
+        }
     }
 
     /**
@@ -131,28 +186,39 @@ class PadministrativosController extends Controller
             $padministrativo->delete();
 
             return redirect()->route('padministrativos.padministrativo.index')
-                             ->with('success_message', 'Padministrativo was successfully deleted!');
+                ->with('success_message', 'Administrativo fue borrado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
-     public function indexpad(Request $request)
+    public function indexpad(Request $request)
     {
-        
-         $dni = $request->get('dni');
-       
 
-       $personas = Persona::orderBy('id','DESC')
-                ->dni($dni)
-                ->paginate(4);
+        $dni = $request->get('dni');
 
+        $personas = Persona::orderBy('id', 'DESC')
+            ->dni($dni)
+            ->paginate(4);
 
         return view('padministrativos.indexpad', compact('personas'));
     }
 
+    protected function getData(Request $request)
+    {
+        $rules = [
+            'persona_id' => 'string|min:1|nullable',
+            'foto'       => 'string|min:1|nullable',
+            'legajo'     => 'string|min:1|nullable',
+
+        ];
+
+        $data = $request->validate($rules);
+
+        return $data;
+    }
 
 }

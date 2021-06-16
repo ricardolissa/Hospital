@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class MedicosFormRequest extends FormRequest
 {
     /**
@@ -25,25 +24,25 @@ class MedicosFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'persona_id' => 'nullable',
-            'foto' => 'string|min:1|nullable',
-            'legajo' => 'string|min:1|nullable',
-            'matricula' => 'string|min:1|nullable',
-    
+            'persona_id'     => 'nullable',
+            'foto'           => 'file|min:1|nullable',
+            'legajo'         => 'string|min:1|nullable',
+            'matricula'      => 'string|min:1|nullable',
+            'especialidades' => 'nullable',
         ];
 
         return $rules;
     }
-    
+
     /**
      * Get the request's data from the request.
      *
-     * 
+     *
      * @return array
      */
     public function getData()
     {
-        $data = $this->only(['persona_id','foto','legajo','matricula','especialidades']);
+        $data = $this->only(['persona_id', 'foto', 'legajo', 'matricula', 'especialidades']);
 
         return $data;
     }

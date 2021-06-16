@@ -31,6 +31,8 @@ class PersonasFormRequest extends FormRequest
             'email' => 'nullable',
             'fecha_nacimiento' => 'string|min:1|nullable',
             'edad' => 'string|min:1|nullable',
+            'telefono1' => 'string|min:1|nullable',
+            'telefono2' => 'string|min:1|nullable',
     
         ];
 
@@ -45,7 +47,7 @@ class PersonasFormRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only(['nombre','apellido','dni','email','fecha_nacimiento','edad']);
+        $data = $this->only(['nombre','apellido','dni','email','fecha_nacimiento','edad','telefono1', 'telefono2']);
 
         return $data;
     }

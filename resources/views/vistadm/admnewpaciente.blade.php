@@ -7,15 +7,10 @@
         <div class="panel-heading clearfix">
             
             <span class="pull-left">
-                <h4 class="mt-5 mb-5">XXXX Ingrese datos del Paciente</h4>
+                <h4 class="mt-5 mb-5">Ingrese datos del Paciente</h4>
             </span>
 
-            <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('pacientes.paciente.index') }}" class="btn btn-primary" title="Show All Paciente">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                </a>
-            </div>
-
+           
         </div>
 
         <div class="panel-body">
@@ -36,7 +31,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Add">
+                        <input class="btn btn-primary" type="submit" value="Registrar Paciente">
                     </div>
                 </div>
 

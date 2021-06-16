@@ -26,6 +26,7 @@ class GuardiasFormRequest extends FormRequest
     {
         $rules = [
             'fecha' => 'string|min:1|nullable',
+           
     
         ];
 

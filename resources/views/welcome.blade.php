@@ -5,7 +5,7 @@
             <meta content="IE=edge" http-equiv="X-UA-Compatible">
                 <meta content="width=device-width, initial-scale=1" name="viewport">
                     <title>
-                        Laravel
+                        Sistema de Guardia
                     </title>
                     <!-- Fonts -->
                     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -71,7 +71,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    <img src="images/hospital.jpg">
+                    <img src="images/hospital.jpg" width=500>
                     </img>
                 </div>
                 <div class="links">

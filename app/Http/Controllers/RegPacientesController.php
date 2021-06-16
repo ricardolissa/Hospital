@@ -9,9 +9,12 @@ use App\Models\Paciente;
 use App\Models\Persona;
 use App\Models\Prioridad;
 use App\Models\Consulta;
+use App\Models\Guardia;
+
 use Exception;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Arr;
 
 class RegPacientesController extends Controller
 {
@@ -70,20 +73,43 @@ class RegPacientesController extends Controller
 
    public function store(RegPacientesFormRequest $request){
         
-        try {
-        $data = $this->getData($request);
-    
-        $cosulta= Consulta::create($data);
+     //   try {
+        
+
+            $fecha= $request->fecha;
+            
+            $guardia = DB::table('guardias')
+            ->select('guardias.id')
+            ->where('guardias.fecha', '=', $fecha)
+            ->get()
+            ->first();
+        
+               
+           
+
+
+            $data = $this->getData($request);
+             
+            $consulta= Consulta::create($data);
+
+           $consulta->guardia_id = $guardia->id;
+            $consulta->save();
+           
+
+
+
+
+
 
                 return redirect()->route('regpacientes.regpaciente.index')
-                             ->with('success_message', 'Consulta was successfully updated!');
+                             ->with('success_message', 'Consulta fue actualizada con exito!!');
 
-         } catch (Exception $exception) {
+        }/* catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }        
-    }
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
+       }        
+    }*/
    
 public function edit($id){
 
@@ -108,12 +134,12 @@ public function update($id, Request $request)
             $paciente->update($data);
             
             return redirect()->route('regpacientes.regpaciente.index')
-                             ->with('success_message', 'Persona was successfully updated!');
+                             ->with('success_message', 'Paciente fue actualizada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
   protected function getData(Request $request)

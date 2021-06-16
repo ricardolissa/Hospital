@@ -63,12 +63,12 @@ class PacientesController extends Controller
             Paciente::create($data);
 
             return redirect()->route('pacientes.paciente.index')
-                             ->with('success_message', 'Paciente was successfully added!');
+                             ->with('success_message', 'Paciente fue creado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
@@ -81,12 +81,12 @@ class PacientesController extends Controller
             Paciente::create($data);
 
             return redirect()->route('home')
-                             ->with('success_message', 'Paciente was successfully added!');
+                             ->with('success_message', 'Paciente fue creado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
     /**
@@ -137,12 +137,12 @@ $obrasocials = Obrasocial::pluck('nombre','id')->all();
             $paciente->update($data);
 
             return redirect()->route('pacientes.paciente.index')
-                             ->with('success_message', 'Paciente was successfully updated!');
+                             ->with('success_message', 'Paciente fue actualizado con exito!!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
 
@@ -160,7 +160,7 @@ $obrasocials = Obrasocial::pluck('nombre','id')->all();
             $paciente->delete();
 
             return redirect()->route('pacientes.paciente.index')
-                             ->with('success_message', 'El Paciente ha sido borrado');
+                             ->with('success_message', 'Paciente fue borrado con exito');
 
         } catch (Exception $exception) {
 

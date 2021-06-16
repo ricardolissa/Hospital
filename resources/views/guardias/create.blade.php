@@ -1,50 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div align="center" class="pull-left">
+                        <h1 class="mt-5 mb-5">
+                            {{ !empty($title) ? $title : 'Crear Guardia' }}
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="btn-group btn-group-xs pull-right" role="group">
+                        <a class="btn btn-primary" href="{{ route('guardias.guardia.index') }}" title="Mostrar todas las Guardias">
+                            <span aria-hidden="true" class="glyphicon glyphicon-th-list">
+                                Mostrar
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                    <div class="panel-body">
+                        @if ($errors->any())
+                        <ul class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                            <li>
+                                {{ $error }}
+                            </li>
+                            @endforeach
+                        </ul>
+                        @endif
+                        <form accept-charset="UTF-8" action="{{ route('guardias.guardia.store') }}" class="form-horizontal" id="create_guardia_form" method="POST" name="create_guardia_form">
+                            {{ csrf_field() }}
 
-    <div class="panel panel-default">
-
-        <div class="panel-heading clearfix">
-            
-            <span class="pull-left">
-                <h4 class="mt-5 mb-5">Create New Guardia</h4>
-            </span>
-
-            <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('guardias.guardia.index') }}" class="btn btn-primary" title="Show All Guardia">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="panel-body">
-        
-            @if ($errors->any())
-                <ul class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-            <form method="POST" action="{{ route('guardias.guardia.store') }}" accept-charset="UTF-8" id="create_guardia_form" name="create_guardia_form" class="form-horizontal">
-            {{ csrf_field() }}
+  
             @include ('guardias.form', [
                                         'guardia' => null,
                                       ])
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Add">
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input class="btn btn-success" title="Crear Guardia" type="submit" value="Crear">
+                                    </input>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-
-            </form>
-
+                </br>
+            </div>
         </div>
     </div>
-
+</div>
 @endsection
-
-

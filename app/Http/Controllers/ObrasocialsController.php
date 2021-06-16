@@ -50,12 +50,12 @@ class ObrasocialsController extends Controller
             Obrasocial::create($data);
 
             return redirect()->route('obrasocials.obrasocial.index')
-                             ->with('success_message', 'Obrasocial was successfully added!');
+                             ->with('success_message', 'Obra Social fue creada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
@@ -106,12 +106,12 @@ class ObrasocialsController extends Controller
             $obrasocial->update($data);
 
             return redirect()->route('obrasocials.obrasocial.index')
-                             ->with('success_message', 'Obrasocial was successfully updated!');
+                             ->with('success_message', 'Obra Social fue actualizada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
 
@@ -129,12 +129,12 @@ class ObrasocialsController extends Controller
             $obrasocial->delete();
 
             return redirect()->route('obrasocials.obrasocial.index')
-                             ->with('success_message', 'Obrasocial was successfully deleted!');
+                             ->with('success_message', 'Obra Social fue borrada con exito!!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Guardia;
 use App\Models\Medico;
+use App\Models\Especialidad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GuardiasFormRequest;
 use Exception;
+use Illuminate\Http\Request;
+use DB;
 
 class GuardiasController extends Controller
 {
@@ -20,6 +23,7 @@ class GuardiasController extends Controller
     {
         $guardias = Guardia::paginate(25);
 
+
         return view('guardias.index', compact('guardias'));
     }
 
@@ -30,9 +34,11 @@ class GuardiasController extends Controller
      */
     public function create()
     {
+        $medicos=Medico::All();
+        $especialidades=Especialidad::All();
+
         
-        
-        return view('guardias.create');
+        return view('guardias.create', compact('medicos','especialidades'));
     }
 
     /**
@@ -42,23 +48,33 @@ class GuardiasController extends Controller
      *
      * @return Illuminate\Http\RedirectResponse | Illuminate\Routing\Redirector
      */
-    public function store(GuardiasFormRequest $request)
+    public function store(Request $request)
     {
-        try {
+       try {
+          
+
+
+              
+            $fecha = ['fecha' => $request->fecha];
+       
+            $data = $request->medicoAsignado;   
+
+        
+            $guardia = Guardia::create($fecha);
             
-            $data = $request->getData();
-            
-            Guardia::create($data);
+            $guardia->medicos()->sync($data);
+
 
             return redirect()->route('guardias.guardia.index')
-                             ->with('success_message', 'Guardia was successfully added!');
+                             ->with('success_message', 'Guardia fue creada con exito!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Este es Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
+
 
     /**
      * Display the specified guardia.
@@ -107,12 +123,12 @@ class GuardiasController extends Controller
             $guardia->update($data);
 
             return redirect()->route('guardias.guardia.index')
-                             ->with('success_message', 'Guardia was successfully updated!');
+                             ->with('success_message', 'Guardia fue actualizada con exito!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
 
@@ -130,41 +146,41 @@ class GuardiasController extends Controller
             $guardia->delete();
 
             return redirect()->route('guardias.guardia.index')
-                             ->with('success_message', 'Guardia was successfully deleted!');
+                             ->with('success_message', 'Guardia fue borrada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
 
-    public function asignarguardia()
-    {
-        $medicos=Medico::All();
+   
 
-        return  view('guardias.asignarguardia',compact('medicos')); 
-        //continuar cargar medicos, seleccionarlos y hacer todo el guardado automatico. 13/03/2020
+    public function asignarGuardia(Request $request)
+    {
+        $especialidades=Especialidad::All();
+
+       $idEspecialidad= $request->get('especialidades');
+
+      
+            //Consulta en tabla pivot
+            $medicos = Medico::join("especialidad_medico","especialidad_medico.medico_id","=", "medicos.id" )
+            ->join ("especialidades", "especialidades.id", "=", "especialidad_medico.especialidad_id")
+            ->where("especialidad_medico.especialidad_id", "=", $idEspecialidad)
+            ->select("*")
+            ->get();
+
+
+       
+        return  view('guardias.asignarGuardia',compact('medicos','especialidades'));
+    
+
+
+       
+        
     }
 
-    public function asignarguardiastore(GuardiasFormRequest $request)
-    {
-        try {
-            
-            $guardia->medicos(id);
-            
-            $data = $request->getData();
-            
-            Guardia::create($data);
-
-            return redirect()->route('guardias.guardia.index')
-                             ->with('success_message', 'Guardia was successfully added!');
-
-        } catch (Exception $exception) {
-
-            return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
-        }
-    }
+    
 }

@@ -3,91 +3,98 @@
 @section('content')
 
     @if(Session::has('success_message'))
-        <div class="alert alert-success">
-            <span class="glyphicon glyphicon-ok"></span>
-            {!! session('success_message') !!}
-
-            <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-
+<div class="alert alert-success">
+    <span class="glyphicon glyphicon-ok">
+    </span>
+    {!! session('success_message') !!}
+    <button aria-label="close" class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">
+            ×
+        </span>
+    </button>
+</div>
+@endif
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div align="center" class="pull-left">
+                        <h1 class="mt-5 mb-5">
+                            Obras Social
+                        </h1>
+                    </div>
+                    <div class="btn-group btn-group-xs pull-right" role="group">
+                        <a class="btn btn-success" href="{{ route('obrasocials.obrasocial.create') }}" title="Crear Nueva Obra Social">
+                            <span aria-hidden="true" class="glyphicon glyphicon-plus">
+                                Crear
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                    @if(count($obrasocials) == 0)
+                    <div class="panel-body text-center">
+                        <h4>
+                            No Obras Social Disponible!
+                        </h4>
+                    </div>
+                    @else
+                    <div class="panel-body panel-body-with-table">
+                        <div class="table-responsive">
+                            <table class="table table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($obrasocials as $obrasocial)
+                                    <tr>
+                                        <td>
+                                            {{ $obrasocial->nombre }}
+                                        </td>
+                                        <td>
+                                            <form accept-charset="UTF-8" action="{!! route('obrasocials.obrasocial.destroy', $obrasocial->id) !!}" method="POST">
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                    {{ csrf_field() }}
+                                                    <div class="btn-group btn-group-xs pull-right" role="group">
+                                                        <a class="btn btn-info" href="{{ route('obrasocials.obrasocial.show', $obrasocial->id ) }}" title="Mostrar Obra Social">
+                                                            <span aria-hidden="true" class="glyphicon glyphicon-open">
+                                                                Mostrar
+                                                            </span>
+                                                        </a>
+                                                        <a class="btn btn-primary" href="{{ route('obrasocials.obrasocial.edit', $obrasocial->id ) }}" title="Editar Obra Social">
+                                                            <span aria-hidden="true" class="glyphicon glyphicon-pencil">
+                                                                Editar
+                                                            </span>
+                                                        </a>
+                                                        <button class="btn btn-danger" onclick='return confirm("Delete Obrasocial?")' title="Borrar Obra Social" type="submit">
+                                                            <span aria-hidden="true" class="glyphicon glyphicon-trash">
+                                                                Borrar
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </input>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        {!! $obrasocials->render() !!}
+                    </div>
+                    @endif
+                </br>
+            </div></div></div></div>
+            @endsection
         </div>
-    @endif
-
-    <div class="panel panel-default">
-
-        <div class="panel-heading clearfix">
-
-            <div class="pull-left">
-                <h4 class="mt-5 mb-5">Obrasocials</h4>
-            </div>
-
-            <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('obrasocials.obrasocial.create') }}" class="btn btn-success" title="Create New Obrasocial">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true">Create</span>
-                </a>
-            </div>
-
-        </div>
-        
-        @if(count($obrasocials) == 0)
-            <div class="panel-body text-center">
-                <h4>No Obrasocials Available!</h4>
-            </div>
-        @else
-        <div class="panel-body panel-body-with-table">
-            <div class="table-responsive">
-
-                <table class="table table-striped ">
-                    <thead>
-                        <tr>
-                          
-                            <th>Nombre</th>
-
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($obrasocials as $obrasocial)
-                        <tr>
-                           
-                            <td>{{ $obrasocial->nombre }}</td>
-
-                            <td>
-
-                                <form method="POST" action="{!! route('obrasocials.obrasocial.destroy', $obrasocial->id) !!}" accept-charset="UTF-8">
-                                <input name="_method" value="DELETE" type="hidden">
-                                {{ csrf_field() }}
-
-                                    <div class="btn-group btn-group-xs pull-right" role="group">
-                                        <a href="{{ route('obrasocials.obrasocial.show', $obrasocial->id ) }}" class="btn btn-info" title="Show Obrasocial">
-                                            <span class="glyphicon glyphicon-open" aria-hidden="true">Show</span>
-                                        </a>
-                                        <a href="{{ route('obrasocials.obrasocial.edit', $obrasocial->id ) }}" class="btn btn-primary" title="Edit Obrasocial">
-                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true">Edit</span>
-                                        </a>
-
-                                        <button type="submit" class="btn btn-danger" title="Delete Obrasocial" onclick="return confirm(&quot;Delete Obrasocial?&quot;)">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
-                                        </button>
-                                    </div>
-
-                                </form>
-                                
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-
-        <div class="panel-footer">
-            {!! $obrasocials->render() !!}
-        </div>
-        
-        @endif
-    
     </div>
-@endsection
+</div>

@@ -50,12 +50,12 @@ class EspecialidadesController extends Controller
             Especialidad::create($data);
 
             return redirect()->route('especialidades.especialidad.index')
-                             ->with('success_message', 'Especialidad was successfully added!');
+                             ->with('success_message', 'Especialidad fue creada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
@@ -106,12 +106,12 @@ class EspecialidadesController extends Controller
             $especialidad->update($data);
 
             return redirect()->route('especialidades.especialidad.index')
-                             ->with('success_message', 'Especialidad was successfully updated!');
+                             ->with('success_message', 'Especialidad fue actualizada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
 
@@ -129,12 +129,12 @@ class EspecialidadesController extends Controller
             $especialidad->delete();
 
             return redirect()->route('especialidades.especialidad.index')
-                             ->with('success_message', 'Especialidad was successfully deleted!');
+                             ->with('success_message', 'Especialidad fue borrada con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 

@@ -1,6 +1,13 @@
 <div class="form-group {{ $errors->has('paciente_id') ? 'has-error' : '' }}">
-    <label for="paciente_id" class="col-md-2 control-label">Paciente :</label>
-    <label for="paciente_id" class="col-md-2 control-label">{{ $pacientes->persona->dni }}</label>
+    
+    <label for="paciente_id" class="col-md-1 control-label">Nombre:</label>
+    <label for="paciente_apellido" class="col-md-1 control-label">{{ $pacientes->persona->apellido }}</label>
+    <label for="paciente_nombre" >{{ $pacientes->persona->nombre }}</label>
+    
+   <br><br>
+    <label class="col-md-2 control-label">DNI:</label>
+    <label for="paciente_dni" >{{ $pacientes->persona->dni }}</label>
+
     <div class="col-md-10">
         <input class="form-control" name="paciente_id" type="text" id="paciente_id" value="{{  $pacientes->id }}" minlength="1" readonly="readonly"  style="visibility:hidden">
         {!! $errors->first('paciente_id', '<p class="help-block">:message</p>') !!}
@@ -43,7 +50,6 @@
 </div>
 
 <div class="form-group">
-    <label for="arribo" class="col-md-2 control-label">Fecha</label>
     <div class="col-md-10">
         <input class="form-control" name="fecha" type="text" id="fecha" value="{{  $fecha }}" minlength="1" readonly="readonly" style="visibility:hidden">
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}

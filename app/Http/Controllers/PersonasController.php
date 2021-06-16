@@ -58,12 +58,12 @@ class PersonasController extends Controller
 
             } */
             return redirect()->route('personas.persona.index')
-                             ->with('success_message', 'Persona was successfully added!');
+                             ->with('success_message', 'Persona fue creado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.!']);
         }
     }
 
@@ -114,12 +114,12 @@ class PersonasController extends Controller
             $persona->update($data);
 
             return redirect()->route('personas.persona.index')
-                             ->with('success_message', 'Persona was successfully updated!');
+                             ->with('success_message', 'Persona fue actualizado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }        
     }
 
@@ -137,12 +137,12 @@ class PersonasController extends Controller
             $persona->delete();
 
             return redirect()->route('personas.persona.index')
-                             ->with('success_message', 'Persona was successfully deleted!');
+                             ->with('success_message', 'Persona fue borrado con exito!!');
 
         } catch (Exception $exception) {
 
             return back()->withInput()
-                         ->withErrors(['unexpected_error' => 'Unexpected error occurred while trying to process your request!']);
+                         ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
     }
 
@@ -162,7 +162,9 @@ class PersonasController extends Controller
             'email' => 'nullable',
             'fecha_nacimiento' => 'string|min:1|nullable',
             'edad' => 'string|min:1|nullable',
-     
+                'telefono1' => 'string|min:1|nullable',
+                    'telefono2' => 'string|min:1|nullable',
+        
         ];
         
         $data = $request->validate($rules);

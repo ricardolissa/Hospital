@@ -83,37 +83,7 @@ Route::group(
 
 });
 
-Route::group(
-[
-    'prefix' => 'telefonos',
-], function () {
 
-    Route::get('/', 'TelefonosController@index')
-         ->name('telefonos.telefono.index');
-
-    Route::get('/create','TelefonosController@create')
-         ->name('telefonos.telefono.create');
-
-    Route::get('/show/{telefono}','TelefonosController@show')
-         ->name('telefonos.telefono.show')
-         ->where('id', '[0-9]+');
-
-    Route::get('/{telefono}/edit','TelefonosController@edit')
-         ->name('telefonos.telefono.edit')
-         ->where('id', '[0-9]+');
-
-    Route::post('/', 'TelefonosController@store')
-         ->name('telefonos.telefono.store');
-               
-    Route::put('telefono/{telefono}', 'TelefonosController@update')
-         ->name('telefonos.telefono.update')
-         ->where('id', '[0-9]+');
-
-    Route::delete('/telefono/{telefono}','TelefonosController@destroy')
-         ->name('telefonos.telefono.destroy')
-         ->where('id', '[0-9]+');
-
-});
 
 Route::group(
 [
@@ -316,8 +286,13 @@ Route::group(
          ->name('guardias.guardia.destroy')
          ->where('id', '[0-9]+');
 
-    Route::get('/asignarguardia', 'GuardiasController@asignarguardia')
-         ->name('guardias.guardia.asignarguardia');
+    Route::get('/asignarGuardia', 'GuardiasController@asignarGuardia')
+         ->name('guardias.guardia.asignarGuardia');
+         
+
+   
+ 
+
 
 });
 
@@ -393,6 +368,10 @@ Route::group(
        Route::put('consultamedico/{consulta}', 'ConsultasController@ConsultaMedicoUpdate')
          ->name('consultas.consulta.consultamedicoupdate')
          ->where('id', '[0-9]+');
+
+          Route::get('/tiempodeconsulta', 'ConsultasController@calculoEstimadoConsulta')
+         ->name('consultas.consulta.tiempodeconsulta'); 
+
 
 });
 
