@@ -1,6 +1,14 @@
 @extends('layouts.espera')
 
 @section('content')
+
+<script type="text/javascript">
+    //document.write('it is '+Date() + '<br /> ');
+ setTimeout(function () { 
+      location.reload();
+    },8000);
+</script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -13,7 +21,7 @@
                     </div>
                     <div class="panel-body panel-body-with-table">
                         <div class="table-responsive">
-                            @if(count($consultasObjects) == 0)
+                            @if(count($consultasNoAtendidas) == 0)
                             <div class="panel-body text-center">
                                 <h4>
                                     No se encuentran pacientes!
@@ -29,13 +37,11 @@
                                         <th>
                                             Tiempo de espera
                                         </th>
-                                        <th>
-                                            Hora estimada de atencion
-                                        </th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($consultasObjects as $consultas  )
+                                    @foreach($consultasNoAtendidas as $consultas  )
                                     <tr>
                                         <td>
                                            <div class="p-3 mb-2 bg-primary text-white" align="center">
@@ -46,22 +52,10 @@
                                         </td>
                                         
                                         <td>
-
-                                            <div class="p-3 mb-2 bg-warning text-dark" align="center">
-                                            <h1 class="display-5">
-                                            {{ $tiempo_espera }}
-                                        </h1>
-                                        </div>
-                                            
-                                        </td>
-
-                                        <td>
                                            <div class="p-3 mb-2 bg-success text-white"align="center">
                                             <h1 class="display-5">
-                                             @foreach($collection as $$collection  )
-                                                {{ $horaEstimadas[1] }}, {{ $collection }} 
-                                            @endforeach
-                                            
+                                          
+                                          {{ $consultas->horaE }}
                                             
                                             </h1></div>
 
@@ -79,5 +73,11 @@
             </div>
         </div>
     </div>
+<div align="center">
+    <script type="text/javascript" >
+    document.write('Hoy es '+Date() + '<br /> ');
+</script></div>
+
 </div>
 @endsection
+

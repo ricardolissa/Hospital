@@ -21,7 +21,7 @@
                 <div class="panel-heading clearfix">
                     <div class="pull-left" align="center">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Consultas' }}
+                            {{ !empty($title) ? $title : 'Consultas en espera' }}
                         </h1>
                     </div>
                 </div>
@@ -79,12 +79,6 @@
                                             <a class="btn btn-primary" href="{{ route('consultas.consulta.consultamedicoedit', $consulta->id ) }}" title="Edit Consulta">
                                                 <span aria-hidden="true" class="glyphicon glyphicon-pencil">
                                                     Seleccionar
-                                                </span>
-                                            </a>
-                                            .
-                                            <a class="btn btn-danger" href="" title="No atendido Consulta">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-pencil">
-                                                    No atendido
                                                 </span>
                                             </a>
                                         </div>
