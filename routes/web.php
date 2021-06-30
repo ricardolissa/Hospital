@@ -47,6 +47,21 @@ Route::group(
 
     Route::get('/pdf', 'RegPacientesController@pdf')
          ->name('regpacientes.regpaciente.pdf');
+
+//nuevos
+    Route::get('/createPersona', 'RegPacientesController@createPersona')
+         ->name('regpacientes.regpaciente.createPersona');
+
+    Route::get('/createPaciente/{paciente}', 'RegPacientesController@createPaciente')
+         ->name('regpacientes.regpaciente.createPaciente')
+         ->where('id', '[0-9]+');
+
+    Route::post('/', 'RegPacientesController@storePersona')
+         ->name('regpacientes.regpaciente.storePersona');
+
+    Route::post('/', 'RegPacientesController@storePaciente')
+         ->name('regpacientes.regpaciente.storePaciente');
+
         
 });
 

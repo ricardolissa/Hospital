@@ -110,7 +110,7 @@
             <div class="row">
                 <div class="form-group">
                     <div class="col-md-10">
-                        <a class="btn btn-danger" href="{{route('pacientes.paciente.create') }}" value="Seleccionar">
+                        <a class="btn btn-danger" href="{{route('regpacientes.regpaciente.createPersona') }}" value="Seleccionar">
                             Registrar Paciente
                         </a>
                     </div>

@@ -163,7 +163,7 @@ class PersonasController extends Controller
             'fecha_nacimiento' => 'string|min:1|nullable',
             'edad' => 'string|min:1|nullable',
                 'telefono1' => 'string|min:1|nullable',
-                    'telefono2' => 'string|min:1|nullable',
+                   
         
         ];
         
