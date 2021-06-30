@@ -136,13 +136,13 @@ class RegPacientesController extends Controller
             'prioridad_id'        => 'nullable',
             'padecimiento_actual' => 'string|min:1|nullable',
 
-            'nombre' => 'string|min:1|nullable',
-            'apellido' => 'string|min:1|nullable',
-            'dni' => 'string|min:1|nullable',
-            'email' => 'nullable',
-            'fecha_nacimiento' => 'string|min:1|nullable',
-            'edad' => 'string|min:1|nullable',
-                'telefono1' => 'string|min:1|nullable',
+            'nombre'              => 'string|min:1|nullable',
+            'apellido'            => 'string|min:1|nullable',
+            'dni'                 => 'string|min:1|nullable',
+            'email'               => 'nullable',
+            'fecha_nacimiento'    => 'string|min:1|nullable',
+            'edad'                => 'string|min:1|nullable',
+            'telefono1'           => 'string|min:1|nullable',
 
         ];
 
@@ -163,72 +163,72 @@ class RegPacientesController extends Controller
     public function createPersona()
     {
 
-       // $personas    = Persona::all();
-       // $obrasocials = Obrasocial::all();
+        // $personas    = Persona::all();
+        // $obrasocials = Obrasocial::all();
 
         return view('regpacientes.createPersona');
     }
 
+    public function storePersona(Request $request)
+    {
+     //   try {
 
+            $data = $this->getData($request);
+//dd($request->dni);
+  //          dd($data,'$data->dni');
+            Persona::create($data);
 
-public function storePersona(Request $request)
-{
-//try {
-
-$data = $this->getData($request);
-//dd($request);
-Persona::create($data);
-
+/********* 29/06 hay que pasar el id de la persona a la direccion
+    createPaciente/{id}
+    *************************************************/
 //redirigir si esta logeado
-/*if(Auth::guard('admin')->login($user)){
+            /*if(Auth::guard('admin')->login($user)){
 
-return redirect('/regpacientes');
+            return redirect('/regpacientes');
 
-}*/
-return redirect()->route('regpacientes.regpaciente.index')
- ->with('success_message', 'Persona fue actualizada con exito!!');
+            }*/
+            return redirect()->route('regpacientes.regpaciente.index')//,compact($pesona_id))
+                ->with('success_message', 'Persona fue actualizada con exito!!');
 
-/*} catch (Exception $exception) {
+  /*      } catch (Exception $exception) {
 
-return back()->withInput()
-->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.!']);
-}*/
-}
+            return back()->withInput()
+                ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.!']);
+        }
+   */ }
 
- public function createPaciente($id)
+    public function createPaciente($id)
     {
 
-       $personas    = Persona::findOrFail($id);
-      
-        $obrasocials = Obrasocial::pluck('nombre','id')->all();
+        $personas = Persona::findOrFail($id);
 
-        return view('regpacientes.createPaciente',compact('obrasocials','personas'));
+        $obrasocials = Obrasocial::pluck('nombre', 'id')->all();
+
+        return view('regpacientes.createPaciente', compact('obrasocials', 'personas'));
     }
 
-
-
-public function storePaciente(Request $request)
-{
+    public function storePaciente(Request $request)
+    {
 //try {
 
-$data = $this->getData($request);
+        $data = $this->getData($request);
 //dd($request);
-Paciente::create($data);
+        Paciente::create($data);
 
 //redirigir si esta logeado
-/*if(Auth::guard('admin')->login($user)){
+        /*if(Auth::guard('admin')->login($user)){
 
-return redirect('/regpacientes');
+        return redirect('/regpacientes');
 
-}*/
-return redirect()->route('regpacientes.regpaciente.index')
- ->with('success_message', 'Persona fue actualizada con exito!!');
+        }*/
+        return redirect()->route('regpacientes.regpaciente.index')
+            ->with('success_message', 'Persona fue actualizada con exito!!');
 
 /*} catch (Exception $exception) {
 
 return back()->withInput()
 ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.!']);
 }*/
-}
+    }
 
 }
