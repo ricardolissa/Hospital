@@ -143,6 +143,12 @@ class RegPacientesController extends Controller
             'fecha_nacimiento'    => 'string|min:1|nullable',
             'edad'                => 'string|min:1|nullable',
             'telefono1'           => 'string|min:1|nullable',
+            'persona_id' => 'nullable',
+            'obrasocial_id' => 'nullable',
+            'antecedentes_familiares' => 'string|min:1|nullable',
+            'antecedentes_patologico' => 'string|min:1|nullable',
+            'antecedentes_nopatologico' => 'string|min:1|nullable',
+    
 
         ];
 
@@ -176,7 +182,8 @@ class RegPacientesController extends Controller
             $data = $this->getData($request);
 //dd($request->dni);
   //          dd($data,'$data->dni');
-            Persona::create($data);
+            $persona = Persona::create($data);
+$id = $persona->id;
 
 /********* 29/06 hay que pasar el id de la persona a la direccion
     createPaciente/{id}
@@ -187,7 +194,7 @@ class RegPacientesController extends Controller
             return redirect('/regpacientes');
 
             }*/
-            return redirect()->route('regpacientes.regpaciente.index')//,compact($pesona_id))
+            return redirect()->route('regpacientes.regpaciente.createPaciente',compact('id'))
                 ->with('success_message', 'Persona fue actualizada con exito!!');
 
   /*      } catch (Exception $exception) {
@@ -200,11 +207,11 @@ class RegPacientesController extends Controller
     public function createPaciente($id)
     {
 
-        $personas = Persona::findOrFail($id);
+        $persona = Persona::findOrFail($id);
 
         $obrasocials = Obrasocial::pluck('nombre', 'id')->all();
 
-        return view('regpacientes.createPaciente', compact('obrasocials', 'personas'));
+        return view('regpacientes.createPaciente', compact('obrasocials', 'persona'));
     }
 
     public function storePaciente(Request $request)
@@ -212,8 +219,8 @@ class RegPacientesController extends Controller
 //try {
 
         $data = $this->getData($request);
-//dd($request);
-        Paciente::create($data);
+//dd($data);
+        $paciente = Paciente::create($data);
 
 //redirigir si esta logeado
         /*if(Auth::guard('admin')->login($user)){
@@ -222,7 +229,7 @@ class RegPacientesController extends Controller
 
         }*/
         return redirect()->route('regpacientes.regpaciente.index')
-            ->with('success_message', 'Persona fue actualizada con exito!!');
+            ->with('success_message', 'Paciente fue actualizada con exito!!');
 
 /*} catch (Exception $exception) {
 

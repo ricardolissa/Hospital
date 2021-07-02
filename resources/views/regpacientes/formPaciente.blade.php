@@ -1,8 +1,8 @@
 <div class="form-group {{ $errors->has('persona_id') ? 'has-error' : '' }}">
     <label for="persona_id" class="col-md-2 control-label">Persona</label>
     <div class="col-md-10">
-     
-        persona 
+     <input class="form-control" name="persona_id" type="text" id="persona_id" value="{{ $persona->id }}" minlength="1" >
+       
     </div>
 </div>
 

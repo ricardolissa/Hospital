@@ -51,15 +51,19 @@ Route::group(
         Route::get('/createPersona', 'RegPacientesController@createPersona')
             ->name('regpacientes.regpaciente.createPersona');
 
-        Route::post('/', 'RegPacientesController@storePersona')
+        Route::post('/storePersona', 'RegPacientesController@storePersona')
             ->name('regpacientes.regpaciente.storePersona');
 
-        Route::get('/createPaciente/{paciente}', 'RegPacientesController@createPaciente')
+        Route::get('/{id}/createPaciente', 'RegPacientesController@createPaciente')
             ->name('regpacientes.regpaciente.createPaciente')
             ->where('id', '[0-9]+');
 
-        Route::post('/{$persona_id}', 'RegPacientesController@storePaciente')
+ 
+
+
+        Route::post('/storePaciente', 'RegPacientesController@storePaciente')
             ->name('regpacientes.regpaciente.storePaciente');
+
 
     });
 
