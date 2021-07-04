@@ -12,7 +12,6 @@
                         </h1>
                     </div>
                 </div>
-                
                 <br>
                     <div class="panel-body">
                         @if ($errors->any())

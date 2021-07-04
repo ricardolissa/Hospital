@@ -26,6 +26,13 @@ class RegPacientesController extends Controller
     {
 
 //poner carteles y demas cosas !!!
+
+try {
+
+       
+
+
+
         $pacientes = DB::table('pacientes')
             ->join('personas', 'personas.id', '=', 'pacientes.persona_id')
             ->join('obrasociales', 'obrasociales.id', '=', 'pacientes.obrasocial_id')
@@ -33,7 +40,24 @@ class RegPacientesController extends Controller
             ->where('personas.dni', $request->get('dni'))
             ->get();
 
-        return view('regpacientes.index', compact('pacientes'));
+
+                        
+    
+
+
+           
+
+
+
+                return view('regpacientes.index', compact('pacientes'));
+
+
+    } 
+     catch (Exception $exception) {
+
+    return back()->withInput()
+    ->withErrors(['unexpected_error' => 'Por favor introduzca un numero de 8 digitos.']);
+    }
     }
 
     public function triage($id)
