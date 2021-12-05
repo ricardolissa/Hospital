@@ -24,11 +24,11 @@ class MedicosFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'persona_id'     => 'nullable',
+            'persona_id'     => 'required',
             'foto'           => 'file|min:1|nullable',
             'legajo'         => 'string|min:1|nullable',
             'matricula'      => 'string|min:1|nullable',
-            'especialidades' => 'nullable',
+            'especialidades' => 'required',
         ];
 
         return $rules;

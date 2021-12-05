@@ -12,7 +12,7 @@ class MedicosSeeder extends Seeder
      */
     public function run()
     {
-         	 DB::table('medicos')->insert(['persona_id'=>'1','legajo'=>'1000','matricula'=>'1000']);
+         	 DB::table('medicos')->insert(['persona_id'=>'31','legajo'=>'1000','matricula'=>'1000']);
          	 DB::table('medicos')->insert(['persona_id'=>'2','legajo'=>'2000','matricula'=>'2000']);
          	 DB::table('medicos')->insert(['persona_id'=>'3','legajo'=>'3000','matricula'=>'3000']);
          	 DB::table('medicos')->insert(['persona_id'=>'4','legajo'=>'4000','matricula'=>'4000']);

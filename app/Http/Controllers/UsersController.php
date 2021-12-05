@@ -4,30 +4,26 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Models\Role;
+use App\Models\Persona;
 use App\Http\Requests\UsersFormRequest;
 use App\Http\Controllers\Controller;
 use Exception;
+use DB;
+
+use Illuminate\Http\Request;
 
 
 class UsersController extends Controller
 {
-
+     public function __construct()
+    {
+   //     $this->middleware('auth');
+    }
     // no deja entrar a la pagina si no esta logueado.
     /* public function __construct()
     {
         $this->middleware('auth');
     }*/
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Display a listing of the users.
@@ -36,7 +32,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-    
+     
         $users = User::with('role')->paginate(25);
 
         return view('users.index', compact('users'));
@@ -47,12 +43,17 @@ class UsersController extends Controller
      *
      * @return Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
       
         $roles = Role::pluck('name','id')->all();
+        $personas=DB::table("personas")
+                ->select('personas.id','personas.nombre','personas.apellido','personas.email')
+                ->where('personas.dni', $request->get('dni'))
+                ->get();
+
         
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles','personas'));
     }
 
     /**
@@ -104,9 +105,12 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = Role::pluck('name','id')->all();
+        $personas=Persona::findOrFail($user->persona_id);
 
-        return view('users.edit', compact('user','roles'));
+        $roles =DB::table('roles')
+            ->get();
+
+        return view('users.edit', compact('user','roles','personas'));
     }
 
     /**
@@ -122,7 +126,7 @@ class UsersController extends Controller
         try {
             
             $data = $request->getData();
-            
+           
             $user = User::findOrFail($id);
             $user->update($data);
 

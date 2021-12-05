@@ -6,17 +6,23 @@ use App\Models\Prioridad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PrioridadsFormRequest;
 use Exception;
+use Illuminate\Http\Request;
+use Auth;
 
 class PrioridadsController extends Controller
 {
-
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the prioridads.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['user', 'admin']);
         $prioridads = Prioridad::paginate(25);
 
         return view('prioridads.index', compact('prioridads'));

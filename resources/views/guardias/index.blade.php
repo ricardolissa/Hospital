@@ -9,7 +9,6 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
         </span>
     </button>
 </div>
@@ -21,22 +20,18 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            Guardias
+                            {{ !empty($title) ? $title : 'Guardias' }}
                         </h1>
                     </div>
-                            
-                                <div class="btn-group btn-group-xs pull-right" role="group">
-                                    <a class="btn btn-success" href="{{ route('guardias.guardia.create') }}" title="Crear Nueva Guardia">
-                                        <span aria-hidden="true" class="glyphicon glyphicon-plus">
-                                            Crear
-                                        </span>
-                                    </a>
-                                </div>
-                           
+                    <div class="btn-group btn-group-xs pull-right" role="group">
+                        <a class="btn btn-success" href="{{ route('guardias.guardia.create') }}" title="Crear Nueva Guardia">
+                            <span aria-hidden="true" class="glyphicon glyphicon-plus">
+                                Crear
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <br>
-
-                
                     @if(count($guardias) == 0)
                     <div class="panel-body text-center">
                         <h4>
@@ -46,7 +41,7 @@
                     @else
                     <div class="panel-body panel-body-with-table">
                         <div class="table-responsive">
-                            <table class="table table-striped ">
+                            <table align="center" class="table table-striped ">
                                 <thead>
                                     <tr>
                                         <th>
@@ -101,5 +96,4 @@
         </div>
     </div>
 </div>
-
 @endsection

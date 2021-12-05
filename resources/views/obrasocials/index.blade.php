@@ -9,7 +9,6 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
         </span>
     </button>
 </div>
@@ -21,7 +20,7 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            Obras Social
+                            {{ !empty($title) ? $title : 'Obra Social' }}
                         </h1>
                     </div>
                     <div class="btn-group btn-group-xs pull-right" role="group">
@@ -93,8 +92,8 @@
                     </div>
                     @endif
                 </br>
-            </div></div></div></div>
-            @endsection
+            </div>
         </div>
     </div>
 </div>
+@endsection

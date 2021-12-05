@@ -13,11 +13,11 @@ class PacientesSeeder extends Seeder
     public function run()
     {
 
-        DB::table('pacientes')->insert(['persona_id' => '46', 'obrasocial_id' => '1', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);
-        DB::table('pacientes')->insert(['persona_id' => '47', 'obrasocial_id' => '2', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);
-        DB::table('pacientes')->insert(['persona_id' => '48', 'obrasocial_id' => '3', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);
-        DB::table('pacientes')->insert(['persona_id' => '49', 'obrasocial_id' => '4', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);
-         DB::table('pacientes')->insert(['persona_id' => '50', 'obrasocial_id' => '5', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);
+        DB::table('pacientes')->insert(['persona_id' => '46', 'obrasocial_id' => '1', 'antecedentes_familiares' => 'los padres murieron de cancer', 'antecedentes_patologico' => 'operacion de rodilla', 'antecedentes_nopatologico' => '']);
+        DB::table('pacientes')->insert(['persona_id' => '47', 'obrasocial_id' => '2', 'antecedentes_familiares' => '', 'antecedentes_patologico' => 'operacion de apendice', 'antecedentes_nopatologico' => '']);
+        DB::table('pacientes')->insert(['persona_id' => '48', 'obrasocial_id' => '3', 'antecedentes_familiares' => '', 'antecedentes_patologico' => 'operacion de rinon', 'antecedentes_nopatologico' => '']);
+        DB::table('pacientes')->insert(['persona_id' => '49', 'obrasocial_id' => '4', 'antecedentes_familiares' => '', 'antecedentes_patologico' => 'operacion del ojo izquierdo', 'antecedentes_nopatologico' => '']);
+         DB::table('pacientes')->insert(['persona_id' => '50', 'obrasocial_id' => '5', 'antecedentes_familiares' => '', 'antecedentes_patologico' => 'operacion en dedo pulgar del pie izquierdo', 'antecedentes_nopatologico' => '']);
         DB::table('pacientes')->insert(['persona_id' => '51', 'obrasocial_id' => '6', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);
         DB::table('pacientes')->insert(['persona_id' => '52', 'obrasocial_id' => '7', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);
         DB::table('pacientes')->insert(['persona_id' => '53', 'obrasocial_id' => '8', 'antecedentes_familiares' => '', 'antecedentes_patologico' => '', 'antecedentes_nopatologico' => '']);

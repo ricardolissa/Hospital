@@ -9,7 +9,6 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
         </span>
     </button>
 </div>
@@ -21,7 +20,7 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            Administrativos
+                            {{ !empty($title) ? $title : 'Personal Administrativo' }}
                         </h1>
                     </div>
                     <div class="btn-group btn-group-xs pull-right" role="group">
@@ -36,7 +35,7 @@
                     @if(count($padministrativos) == 0)
                     <div class="panel-body text-center">
                         <h4>
-                            No Administrativos Disponibles!
+                            No hay Personal Administrativo Disponibles!
                         </h4>
                     </div>
                     @else
@@ -107,7 +106,7 @@
                     @endif
                 </br>
             </div>
-            @endsection
         </div>
     </div>
 </div>
+@endsection

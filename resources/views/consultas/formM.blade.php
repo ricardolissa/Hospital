@@ -1,84 +1,184 @@
+<div class="form-group">
+    <input class="form-control" id="paciente_id" minlength="1" name="paciente_id" type="hidden" value="{{ $consulta->paciente_id }}">
+    </input>
+    <input class="form-control" id="guardia_id" minlength="1" name="guardia_id" type="hidden" value="{{ $consulta->guardia_id }}">
+    </input>
+    <input class="form-control" id="medico_id" minlength="1" name="medico_id" type="hidden" value="{{ $medicos[0]->id }}">
+    </input>
 
-
-
+</div>
 <div class="form-group {{ $errors->has('fecha') ? 'has-error' : '' }}">
-    <label for="fecha" class="col-md-2 control-label">Fecha : {{ $consulta->fecha}} </label>
-    <div class="col-md-10">
-        <input class="form-control" name="fecha" type="text" id="fecha" value="{{  $consulta->fecha }}" minlength="1" readonly="readonly"  style="visibility:hidden">
-        {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Fecha
+                    </h5>
+                    <p class="card-text">
+                        <h3>
+                            {{ $consulta->fecha }} // 
+                           
+                        </h3>
+                        <input class="form-control" id="fecha" minlength="1" name="fecha" readonly="readonly" type="hidden" value="{{ $consulta->fecha }}">
+                        </input>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Arribo
+                    </h5>
+                    <p class="card-text">
+                        <h3>
+                            {{ $consulta->arribo }}
+                        </h3>
+                        <input class="form-control" id="arribo" minlength="1" name="arribo" readonly="readonly" type="hidden" value="{{ $consulta->arribo}}">
+                        </input>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Paciente
+                    </h5>
+                    <p class="card-text">
+                        <h3>
+                            {{ $consulta->paciente->persona->apellido }}  {{ $consulta->paciente->persona->nombre}}
+                        </h3>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Padecimiento Actual
+                    </h5>
+                    <p class="card-text">
+                        <h3>
+                            {{ $consulta->padecimiento_actual}}
+                        </h3>
+                        <input class="form-control" id="padecimiento_actual" minlength="1" name="padecimiento_actual" readonly="readonly" type="hidden" value="{{ $consulta->padecimiento_actual}}">
+                        </input>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="form-group {{ $errors->has('arribo') ? 'has-error' : '' }}">
-    <label for="arribo" class="col-md-4 control-label">Arribo : {{ $consulta->arribo}} </label>
-    <div class="col-md-10">
-        <input class="form-control" name="arribo" type="text" id="arribo" value="{{  $consulta->arribo }}" minlength="1" readonly="readonly"  style="visibility:hidden">
-        {!! $errors->first('arribo', '<p class="help-block">:message</p>') !!}
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Antecedentes Familiares
+                    </h5>
+                    <p class="card-text">
+                        <h3>
+                            {{ $consulta->paciente->antecedentes_familiares}}
+                        </h3>
+                        <input class="form-control" id="padecimiento_actual" minlength="1" name="padecimiento_actual" readonly="readonly" type="hidden" value="{{ $consulta->padecimiento_actual}}">
+                        </input>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Antecedentes Patologico
+                    </h5>
+                    <p class="card-text">
+                        <h3>
+                            {{ $consulta->paciente->antecedentes_patologico}}
+                        </h3>
+                        <input class="form-control" id="padecimiento_actual" minlength="1" name="padecimiento_actual" readonly="readonly" type="hidden" value="{{ $consulta->padecimiento_actual}}">
+                        </input>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Antecedentes Nopatologico
+                    </h5>
+                    <p class="card-text">
+                        <h3>
+                            {{ $consulta->paciente->antecedentes_nopatologico}}
+                        </h3>
+                        <input class="form-control" id="padecimiento_actual" minlength="1" name="padecimiento_actual" readonly="readonly" type="hidden" value="{{ $consulta->padecimiento_actual}}">
+                        </input>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-
-</div>
-
-<div class="form-group {{ $errors->has('paciente_id') ? 'has-error' : '' }}">
-    <label for="nombre" class="col-md-4 control-label">Nombre: {{ $consulta->paciente->persona->nombre}} </label>
-</div>
-
-<div class="form-group {{ $errors->has('paciente_id') ? 'has-error' : '' }}">
-    <label for="apellido" class="col-md-4 control-label">Apellido : {{ $consulta->paciente->persona->apellido}} </label>
-</div>
-
-
-<div class="form-group {{ $errors->has('padecimiento_actual') ? 'has-error' : '' }}">
-    <label for="arribo" class="col-md-4 control-label">Padecimiento Actual : {{ $consulta->padecimiento_actual}} </label>
-    <div class="col-md-10">
-        <input class="form-control" name="padecimiento_actual" type="text" id="arribo" value="{{  $consulta->padecimiento_actual }}" minlength="1" readonly="readonly"  style="visibility:hidden">
-        {!! $errors->first('padecimiento_actual', '<p class="help-block">:message</p>') !!}
-    </div>
-
-</div>
+    <br>
 
 <div class="form-group {{ $errors->has('diagnostico') ? 'has-error' : '' }}">
-    <label for="diagnostico" class="col-md-2 control-label">Diagnostico Muchos</label>
-    <div class="col-md-10">
-        <input class="form-control" name="diagnostico" type="text" id="diagnostico" value="{{ old('diagnostico', optional($consulta)->diagnostico) }}" minlength="1" placeholder="Enter diagnostico here...">
-        {!! $errors->first('diagnostico', '<p class="help-block">:message</p>') !!}
+    <label class="col-md-2 control-label" for="diagnostico">
+        Diagnostico
+    </label>
+    <div class="col-md-12">
+        <input class="form-control" id="diagnostico" minlength="1" name="diagnostico" placeholder="Enter diagnostico here..." type="text" value="{{ old('diagnostico', optional($consulta)->diagnostico) }}">
+            {!! $errors->first('diagnostico', '
+            <p class="help-block">
+                :message
+            </p>
+            ') !!}
+        </input>
     </div>
 </div>
-
 <div class="form-group {{ $errors->has('receta') ? 'has-error' : '' }}">
-    <label for="receta" class="col-md-2 control-label">Receta</label>
-    <div class="col-md-10">
-        <input class="form-control" name="receta" type="text" id="receta" value="{{ old('receta', optional($consulta)->receta) }}" minlength="1" placeholder="Enter receta here...">
-        {!! $errors->first('receta', '<p class="help-block">:message</p>') !!}
+    <label class="col-md-2 control-label" for="receta">
+        Receta
+    </label>
+    <div class="col-md-12">
+        <input class="form-control" id="receta" minlength="1" name="receta" placeholder="Enter receta here..." type="text" value="{{ old('receta', optional($consulta)->receta) }}">
+            {!! $errors->first('receta', '
+            <p class="help-block">
+                :message
+            </p>
+            ') !!}
+        </input>
     </div>
 </div>
-
-
-
-
-
-
-
 <div class="form-group {{ $errors->has('prioridad_id') ? 'has-error' : '' }}">
-    <label for="prioridad_id" class="col-md-2 control-label">Prioridad</label>
-    <div class="col-md-10">
-        <select class="form-control" id="prioridad_id" name="prioridad_id" readonly="readonly">
-        	    <option value="" style="display: none;" {{ old('prioridad_id', optional($consulta)->prioridad_id ?: '') == '' ? 'selected' : '' }} disabled selected>Select prioridad</option>
-        	@foreach ($prioridads as $key => $prioridad)
-			    <option value="{{ $key }}" {{ old('prioridad_id', optional($consulta)->prioridad_id) == $key ? 'selected' : '' }}>
-			    	{{ $prioridad }}
-			    </option>
-			@endforeach
-        </select>
-        
-        {!! $errors->first('prioridad_id', '<p class="help-block">:message</p>') !!}
+    <label class="col-md-2 control-label" for="prioridad_id">
+        Prioridad
+    </label>
+    <div class="col-md-12">
+        <input class="form-control" id="prioridad_id" minlength="1" name="prioridad_id" readonly="readonly" type="text" value="{{ old('receta', optional($consulta)->prioridad_id) }}">
+            {!! $errors->first('receta', '
+            <p class="help-block">
+                :message
+            </p>
+            ') !!}
+        </input>
     </div>
 </div>
-
 <div class="form-group {{ $errors->has('padecimiento_actual') ? 'has-error' : '' }}">
-    <label for="padecimiento_actual" class="col-md-2 control-label">Padecimiento Actual</label>
-    <div class="col-md-10">
-        <input class="form-control" name="padecimiento_actual" type="text" id="padecimiento_actual" value="{{ old('padecimiento_actual', optional($consulta)->padecimiento_actual) }}" minlength="1" readonly="readonly">
-        {!! $errors->first('padecimiento_actual', '<p class="help-block">:message</p>') !!}
+    <label class="col-md-2 control-label" for="padecimiento_actual">
+        Padecimiento Actual
+    </label>
+    <div class="col-md-12">
+        <input class="form-control" id="padecimiento_actual" minlength="1" name="padecimiento_actual" readonly="readonly" type="text" value="{{ old('padecimiento_actual', optional($consulta)->padecimiento_actual) }}">
+            {!! $errors->first('padecimiento_actual', '
+            <p class="help-block">
+                :message
+            </p>
+            ') !!}
+        </input>
     </div>
 </div>
-

@@ -8,17 +8,23 @@ use App\Models\Obrasocial;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PacientesFormRequest;
 use Exception;
+use Illuminate\Http\Request;
 
 class PacientesController extends Controller
 {
-
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the pacientes.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['user', 'admin']);
+        
         $pacientes = Paciente::with('persona','obrasocial')->paginate(25);
 
         return view('pacientes.index', compact('pacientes'));
@@ -114,7 +120,7 @@ class PacientesController extends Controller
     {
         $paciente = Paciente::findOrFail($id);
         $personas = Persona::pluck('dni','id')->all();
-$obrasocials = Obrasocial::pluck('nombre','id')->all();
+        $obrasocials = Obrasocial::pluck('nombre','id')->all();
 
         return view('pacientes.edit', compact('paciente','personas','obrasocials'));
     }

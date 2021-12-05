@@ -10,14 +10,18 @@ use Auth;
 
 class PersonasController extends Controller
 {
-
+     public function __construct()
+    {
+   //     $this->middleware('auth');
+    }
     /**
      * Display a listing of the personas.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+    //    $request->user()->authorizeRoles(['user', 'admin']);
         $personas = Persona::paginate(25);
 
         return view('personas.index', compact('personas'));

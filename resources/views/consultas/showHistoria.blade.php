@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -78,7 +78,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -116,12 +116,25 @@
                     </div>
                 </div>
                 <br>
-                    <div align="center">
+                    <div class="row" align="center">
                         
-
- <button aling="center" aria-hidden="true" class="btn btn-info" type="submit">
-                                                     <a href="{{ url()->previous() }}">      VOLVER 
-                                                        </button>
+                            <div class="col-md">                                               
+                                <a class="btn btn-primary" href="{{ url()->previous($consultas->medico->persona->dni) }}" title="Mostrar todas las Consultas">
+                                <span aria-hidden="true" class="glyphicon glyphicon-th-list">
+                                    Volver 
+                                </span>
+                            </a>
+                            </div>
+                        
+                            <div class="col-md">
+                                <form accept-charset="UTF-8" action="{{ route('consultas.consulta.consultaPdf') }}" method="GET">
+                                    <input class="form-control" id="consultaPdf" name="consultaPdf" value="{{ $consultas->id}}" hidden=""></input>
+                                    <button aria-hidden="true" class="btn btn-info" type="submit">
+                                                        Descargar PDF
+                                                    </button>
+                                </form>
+                            </div>
+                        
                     </div>
                 </br>
             </div>

@@ -78,7 +78,8 @@ class Medico extends Model
      */
     public function especialidades()
     {
-        return $this->belongsToMany(Especialidad::class,'especialidad_medico');//,'medico_especialidads');
+        return $this->belongsToMany(Especialidad::class,'especialidad_medico');
+
     }
 
  public function scopeId($query, $medico_id)

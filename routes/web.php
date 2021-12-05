@@ -15,12 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('pdf', 'ReportController@generar');
+Route::get('/pdf', function () {
+    $pdf = PDF::loadView('personas.index');
+    return $pdf->stream();
+});
 
 //prueba de controlador
 Route::group(
     [
-        'prefix' => 'regpacientes',
+      
+        'prefix' => 'regpacientes',  
+        
+        
+    
     ], function () {
 
         Route::get('/', 'RegPacientesController@index')
@@ -65,11 +72,11 @@ Route::group(
             ->name('regpacientes.regpaciente.storePaciente');
 
 
-    });
+    }) ;
 
 Route::group(
     [
-        'prefix' => 'personas',
+        'prefix' => 'personas',//, 'middleware'=> 'admin'
     ], function () {
 
         Route::get('/', 'PersonasController@index')
@@ -241,6 +248,7 @@ Route::group(
 Route::group(
     [
         'prefix' => 'especialidades',
+        'middleware' => 'admin',
     ], function () {
 
         Route::get('/', 'EspecialidadesController@index')
@@ -381,6 +389,23 @@ Route::group(
         Route::get('/tiempodeconsulta', 'ConsultasController@calculoEstimadoConsulta')
             ->name('consultas.consulta.tiempodeconsulta');
 
+        Route::get('/historiaclinica', 'ConsultasController@historiaclinica')
+            ->name('consultas.consulta.historiaclinica');
+
+        Route::get('/showHistoria/{consulta}', 'ConsultasController@showHistoria')
+            ->name('consultas.consulta.showHistoria')
+            ->where('id', '[0-9]+');
+
+        Route::get('/historiaPdf', 'ConsultasController@historiaPdf')
+            ->name('consultas.consulta.historiaPdf');
+
+        Route::get('/consultaPdf', 'ConsultasController@consultaPdf')
+            ->name('consultas.consulta.consultaPdf');
+           
+        
+
+
+
     });
 
 Route::group(
@@ -454,14 +479,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login', function () {
     return view('auth.login');});
 
+Route::get('/contacto', function () {
+    return view('contacto');
+});
+
+
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 
 Route::get('/vistadm', 'VistadmController@index')->name('index');
 
 Route::group(
     [
-        'prefix' => 'vistadms',
+        'prefix' => 'vistadms', 'middleware' => 'auth'
     ], function () {
 
         Route::get('/', 'VistadmController@index')
@@ -480,3 +511,7 @@ Route::group(
             ->name('vistadms.vistadm.mensaje');
 
     });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

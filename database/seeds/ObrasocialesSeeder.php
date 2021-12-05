@@ -16,7 +16,7 @@ class ObrasocialesSeeder extends Seeder
     public function run()
     {
         DB::table('obrasociales')->insert(['nombre'=>'OSDE',]);
-        DB::table('obrasociales')->insert(['nombre'=>'OSDEF',]);
+        DB::table('obrasociales')->insert(['nombre'=>'OSEF',]);
         DB::table('obrasociales')->insert(['nombre'=>'SANCORD',]);
         DB::table('obrasociales')->insert(['nombre'=>'UNION PERSONAL',]);
         DB::table('obrasociales')->insert(['nombre'=>'UOM',]);

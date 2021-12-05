@@ -8,19 +8,26 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Editar Consulta' }}
-                        </h1>
+                            {{ !empty($title) ? $title : 'Consulta Medica' }}
+                       </h1>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
                     <div class="col-md-12">
                         <div class="btn-group btn-group-xs pull-right" role="group">
                             <a class="btn btn-primary" href="{{ route('consultas.consulta.consultamedico') }}" title="Mostar todas las Consultas">
                                 <span aria-hidden="true" class="glyphicon glyphicon-th-list">
-                                    Mostrar Consultas
+                                    Volver
                                 </span>
                             </a>
                         </div>
                     </div>
-                </div>
+
+                
+
                 <br>
                     <div class="panel-body">
                         @if ($errors->any())
@@ -39,11 +46,11 @@
                                         'consulta' => $consulta,
                                       ])
                                 <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input class="btn btn-primary" type="submit" value="Actualizar">
-                                        </input>
-                                    </div>
+                                <div align="center" class="col-md-12">
+                                    <input class="btn btn-success" type="submit" value="Actualizar">
+                                    </input>
                                 </div>
+                            </div>
                             </input>
                         </form>
                     </div>

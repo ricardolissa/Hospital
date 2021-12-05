@@ -6,17 +6,23 @@ use App\Models\Obrasocial;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ObrasocialsFormRequest;
 use Exception;
+use Illuminate\Http\Request;
 
 class ObrasocialsController extends Controller
 {
 
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the obrasocials.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+       $request->user()->authorizeRoles(['user', 'admin']);
         $obrasocials = Obrasocial::paginate(25);
 
         return view('obrasocials.index', compact('obrasocials'));

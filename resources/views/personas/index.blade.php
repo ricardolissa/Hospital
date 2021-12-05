@@ -9,7 +9,6 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
         </span>
     </button>
 </div>
@@ -24,15 +23,13 @@
                             {{ !empty($title) ? $title : 'Personas' }}
                         </h1>
                     </div>
-                    
-                        <div class="btn-group btn-group-xs pull-right" role="group">
+                    <div class="btn-group btn-group-xs pull-right" role="group">
                             <a class="btn btn-success" href="{{ route('personas.persona.create') }}" title="Creae Nueva Persona">
                                 <span aria-hidden="true" class="glyphicon glyphicon-plus">
                                     Crear
                                 </span>
                             </a>
-                        </div>
-                    
+                    </div>
                 </div>
                 <br>
                     @if(count($personas) == 0)
@@ -65,9 +62,6 @@
                                         <th>
                                             Edad
                                         </th>
-                                        <th>
-                                            Telefono
-                                        </th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -92,8 +86,7 @@
                                         <td>
                                             {{ $persona->edad }}
                                         </td>
-                                        <td>{{ $persona->telefono1 }}</td>
-                                        <td>
+                                       <td>
                                             <form accept-charset="UTF-8" action="{!! route('personas.persona.destroy', $persona->id) !!}" method="POST">
                                                 <input name="_method" type="hidden" value="DELETE">
                                                     {{ csrf_field() }}

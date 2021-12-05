@@ -12,6 +12,15 @@ class PersonasSeeder extends Seeder
      */
     public function run()
     {
+         DB::table('personas')->insert([
+
+            'nombre'           => 'SuperAdministrador',
+            'apellido'         => 'SA',
+            'dni'              => '666',
+            'email'            => 'admin@admin.com',
+            'fecha_nacimiento' => '26/03/90',
+            'edad'             => '30',
+        ]); //
         DB::table('personas')->insert([
 
             'nombre'           => 'Mauro',

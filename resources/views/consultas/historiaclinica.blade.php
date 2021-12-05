@@ -20,7 +20,7 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Historia Clinica : '  }}
+                            {{ !empty($title) ? $title : 'Historia Clinica'  }}
                         </h1>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                                                 <div class="col-md">
                                                 </div>
                                                 <div align="center" class="col-md">
-                                                    <input align="left" class="form-control" id="dni" minlength="1" name="dni" placeholder="Ingrese el DNI" type="text">
+                                                    <input align="left" class="form-control" id="dni" minlength="1" name="dni" placeholder="Ingrese el DNI" required="" type="text">
                                                     </input>
                                                     <br>
                                                         <button aling="pull-right" aria-hidden="true" class="btn btn-info" type="submit">
@@ -99,7 +99,8 @@
                                                         {{ $historiaclinica->fecha }}
                                                     </td>
                                                     <td>
-                                                        {{ $persona->nombre }} {{ $persona->apellido }}
+                                                        {{ $historiaclinica->medico->persona->nombre}}
+                                                        {{ $historiaclinica->medico->persona->apellido}}
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-primary" href="{{ route('consultas.consulta.showHistoria', $historiaclinica->id ) }}" title="Seleccionar">
@@ -116,6 +117,25 @@
                                     </div>
                                 </div>
                             </br>
+                            <div >
+                               <div class="row" >
+                                    <div class="col-md-12">
+                                        <div>
+                                            @if ($historiaclinicas != null)
+                                            <form accept-charset="UTF-8" action="{{ route('consultas.consulta.historiaPdf') }}" method="GET">
+                                                <input class="form-control" id="historiaPdf" name="historiaPdf" value="{{ $paciente_id}}" hidden="">
+                                                </input>
+                                                <br>
+                                                    <button aria-hidden="true" class="btn btn-info" type="submit">
+                                                        Descargar PDF
+                                                    </button>
+                                                </br>
+                                            </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
                         </br>
                     </div>
                 </br>

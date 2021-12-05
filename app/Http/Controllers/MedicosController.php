@@ -13,14 +13,18 @@ use Illuminate\Http\Request;
 
 class MedicosController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the medicos.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['user', 'admin']);
         $medicosObjects = Medico::with('persona')->paginate(25);
 
         return view('medicos.index', compact('medicosObjects'));
@@ -34,21 +38,13 @@ class MedicosController extends Controller
     public function create(Request $request)
     {
 
-        // $personas = Persona::pluck('nombre','id')->all();
-
-        //dd($especialidad);
         $personas = DB::table('personas')
             ->select('personas.id', 'personas.nombre', 'personas.apellido', 'personas.dni')
             ->where('personas.dni', $request->get('dni'))
             ->get();
 
-        // $especialidades= Especialidad::pluck('id')->all();
-        //este trae el nombre// $especialidades= Especialidad::pluck('nombre')->all();
-//Ver esto  
         $especialidades = DB::table('especialidades')
-        //->select('especialidades.nombre','especialidades.id')
             ->get();
-        //dd($especialidades);
 
         return view('medicos.create', compact('personas', 'especialidades'));
     }
@@ -128,9 +124,10 @@ class MedicosController extends Controller
     public function edit($id)
     {
 
-        $medicos        = Medico::findOrFail($id);
-        $personas       = Persona::pluck('nombre', 'id')->all();
-        $especialidades = Especialidad::pluck('id')->all();
+        $medicos  = Medico::findOrFail($id);
+        $personas = Persona::findOrFail($medicos->persona_id);
+        $especialidades = DB::table('especialidades')
+            ->get();
 
         return view('medicos.edit', compact('medicos', 'personas', 'especialidades'));
     }

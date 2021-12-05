@@ -78,13 +78,7 @@
                     <a href="/login">
                         Login
                     </a>
-                    <a href="https://laracasts.com">
-                        Institución
-                    </a>
-                    <a href="https://laravel-news.com">
-                        Noticias
-                    </a>
-                    <a href="https://forge.laravel.com">
+                    <a href="/contacto">
                         Contacto
                     </a>
                 </div>

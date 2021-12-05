@@ -6,17 +6,29 @@ use App\Models\Especialidad;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EspecialidadesFormRequest;
 use Exception;
+use Illuminate\Http\Request;
 
 class EspecialidadesController extends Controller
 {
+
+
+
+ public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the especialidades.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+   
+    public function index(Request $request)
+    
     {
+        $request->user()->authorizeRoles(['user', 'admin']);
+       
         $especialidades = Especialidad::paginate(25);
 
         return view('especialidades.index', compact('especialidades'));

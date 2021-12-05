@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="container">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -12,44 +11,49 @@
                             {{ !empty($title) ? $title : 'Crear Prioridad' }}
                         </h1>
                     </div>
-                    <div class="col-md-12">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="btn-group btn-group-xs pull-right" role="group">
-                <a href="{{ route('prioridads.prioridad.index') }}" class="btn btn-primary" title="Mostrar todas las Prioridades">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true">Mostrar</span>
+                <a class="btn btn-primary" href="{{ route('prioridads.prioridad.index') }}" title="Mostrar todas las Prioridades">
+                    <span aria-hidden="true" class="glyphicon glyphicon-th-list">
+                        Volver
+                    </span>
                 </a>
             </div>
-
         </div>
-</div>
-<br>
-<div class="col-md-12">
-        <div class="panel-body">
-        
-            @if ($errors->any())
-                <ul class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-            <form method="POST" action="{{ route('prioridads.prioridad.store') }}" accept-charset="UTF-8" id="create_prioridad_form" name="create_prioridad_form" class="form-horizontal">
-            {{ csrf_field() }}
+    </div>
+    <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    @if ($errors->any())
+                    <ul class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif
+                    <form accept-charset="UTF-8" action="{{ route('prioridads.prioridad.store') }}" class="form-horizontal" id="create_prioridad_form" method="POST" name="create_prioridad_form">
+                        {{ csrf_field() }}
             @include ('prioridads.form', [
                                         'prioridad' => null,
                                       ])
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Add">
-                    </div>
+                        <div class="form-group">
+                            <div align="center" class="col-md-12">
+                                <input class="btn btn-success" type="submit" value="Crear">
+                                </input>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-            </form>
-
+            </div>
         </div>
-    </div>
-
+    </br>
+</div>
 @endsection
-
-

@@ -16,7 +16,7 @@ class CreateGuardiasTable extends Migration
         {
             $table->increments('id');
             $table->timestamps();
-            $table->date('fecha')->nullable();
+            $table->date('fecha')->nullable()->unique();
 
         });
     }

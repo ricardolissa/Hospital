@@ -18,11 +18,17 @@ class DatabaseSeeder extends Seeder
 */
 
     $this->call(PersonasSeeder::class);
-     $this->call(TelefonosSeeder::class);
-     $this->call(ObrasocialesSeeder::class);
+         $this->call(ObrasocialesSeeder::class);
      $this->call(PrioridadesSeeder::class);
       $this->call(MedicosSeeder::class);
        $this->call(PadministrativosSeeder::class);
          $this->call(PacientesSeeder::class);
+         $this->call(RolesSeeder::class);
+          $this->call(EspecialidadesSeeder::class); 
+
+         
                }
 }
+ 
+
+  

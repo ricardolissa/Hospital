@@ -2,6 +2,13 @@
 
 @section('content')
 
+<script type="text/javascript">
+    //document.write('it is '+Date() + '<br /> ');
+ setTimeout(function () { 
+      location.reload();
+    },6000);
+</script>
+
     @if(Session::has('success_message'))
 <div class="alert alert-success">
     <span class="glyphicon glyphicon-ok">
@@ -28,7 +35,7 @@
                 @if(count($consultas) == 0)
                 <div class="panel-body text-center">
                     <h4>
-                        No Consultas Disponibles!
+                        No Hay Consultas Disponibles!
                     </h4>
                 </div>
                 @else

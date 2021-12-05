@@ -8,20 +8,31 @@ use App\Models\Guardia;
 use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\Prioridad;
+use App\Models\Persona;
 use Carbon\Carbon;
+use DB;
 use Exception;
 use Illuminate\Http\Request;
+use PDF;
 
 class ConsultasController extends Controller
 {
+
+   public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the consultas.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+
+     $request->user()->authorizeRoles(['user', 'admin','jmedico','medico']);
+
         $consultasObjects = Consulta::with('paciente', 'medico', 'guardia', 'prioridad')->paginate(25);
 
         return view('consultas.index', compact('consultasObjects'));
@@ -34,10 +45,10 @@ class ConsultasController extends Controller
      */
     public function create()
     {
-        $pacientes  = Paciente::pluck('antecedentes_familiares', 'id')->all();
-        $medicos    = Medico::pluck('foto', 'id')->all();
-        $guardias   = Guardia::pluck('id', 'id')->all();
-        $prioridads = Prioridad::pluck('nombre', 'id')->all();
+        $pacientes  = Paciente::all();
+        $medicos    = Medico::all();
+        $guardias   = Guardia::all();
+        $prioridads = Prioridad::all();
 
         return view('consultas.create', compact('pacientes', 'medicos', 'guardias', 'prioridads'));
     }
@@ -52,10 +63,11 @@ class ConsultasController extends Controller
     public function store(Request $request)
     {
         try {
+ 
 
             $fecha = $request->fecha;
             $data  = $this->getData($request);
-
+       
             $consulta = Consulta::create($data);
 
             $consulta->guardia()->sync();
@@ -68,7 +80,7 @@ class ConsultasController extends Controller
             return back()->withInput()
                 ->withErrors(['unexpected_error' => 'Se produjo un error inesperado al intentar procesar su solicitud.']);
         }
-    }
+ }
 
     /**
      * Display the specified consultas.
@@ -80,6 +92,7 @@ class ConsultasController extends Controller
     public function show($id)
     {
         $consultas = Consulta::with('paciente', 'medico', 'guardia', 'prioridad')->findOrFail($id);
+        
 
         return view('consultas.show', compact('consultas'));
     }
@@ -94,10 +107,11 @@ class ConsultasController extends Controller
     public function edit($id)
     {
         $consultas  = Consulta::findOrFail($id);
-        $pacientes  = Paciente::pluck('antecedentes_familiares', 'id')->all();
-        $medicos    = Medico::pluck('foto', 'id')->all();
-        $guardias   = Guardia::pluck('id', 'id')->all();
-        $prioridads = Prioridad::pluck('nombre', 'id')->all();
+       // dd($consultas);
+        $pacientes  = Paciente::findOrFail($consultas->paciente_id);
+        $medicos    = Medico::findOrFail($consultas->medico_id);
+        $guardias   = Guardia::findOrFail($consultas->guardia_id);
+        $prioridads = Prioridad::findOrFail($consultas->prioridad_id);
 
         return view('consultas.edit', compact('consultas', 'pacientes', 'medicos', 'guardias', 'prioridads'));
     }
@@ -163,14 +177,14 @@ class ConsultasController extends Controller
         $rules = [
             'diagnostico'         => 'string|min:1|nullable',
             'receta'              => 'string|min:1|nullable',
-            'fecha'               => 'string|min:1|nullable',
+            'fecha'               => 'string|min:1|required',
             'arribo'              => 'string|min:1|nullable',
             'egreso'              => 'string|min:1|nullable',
             'tiempo_consulta'     => 'string|min:1|nullable',
-            'paciente_id'         => 'nullable',
+            'paciente_id'         => 'required',
             'medico_id'           => 'nullable',
-            'guardia_id'          => 'nullable',
-            'prioridad_id'        => 'nullable',
+            'guardia_id'          => 'required',
+            'prioridad_id'        => 'required',
             'padecimiento_actual' => 'string|min:1|nullable',
             'atendido'            => 'string|min:1|nullable',
         ];
@@ -185,7 +199,7 @@ class ConsultasController extends Controller
 
         $consultas = Consulta::with('paciente')
             ->where('consultas.atendido', '=', null)
-            ->orderBy('prioridad_id', '<=', '4')
+            ->orderBy('prioridad_id', 'ASC')
             ->paginate(25);
 
         return view('consultas.consultamedico', compact('consultas'));
@@ -196,10 +210,24 @@ class ConsultasController extends Controller
     {
 
         $consulta   = Consulta::findOrFail($id);
-        $pacientes  = Paciente::pluck('id', 'id')->all();
-        $medicos    = Medico::pluck('id', 'id')->all();
-        $guardias   = Guardia::pluck('id', 'id')->all();
-        $prioridads = Prioridad::pluck('nombre', 'id')->all();
+        
+        $userpersonaid = auth()->user()->persona_id;
+        
+        $medicos = DB::table('medicos')
+        ->select('id')
+        ->where('persona_id','=',$userpersonaid)
+        ->get();
+
+       
+
+      $pacientes  = Paciente::findOrFail($consulta->paciente_id);
+
+     //   $medicos    = Medico::findOrFail($medico_id->persona_id=5);
+     //dd($medicos);
+     //   dd($pacientes);
+        $guardias   = Guardia::findOrFail($consulta->guardia_id);
+        $prioridads = Prioridad::findOrFail($consulta->prioridad_id);
+
 
         return view('consultas.consultamedicoedit', compact('consulta', 'pacientes', 'medicos', 'guardias', 'prioridads'));
 
@@ -208,10 +236,11 @@ class ConsultasController extends Controller
     public function ConsultaMedicoUpdate($id, Request $request)
     {
         //actualiza datos despues que termina la consulta, egreso, tiempo de atencion, y faltantes
-        try {
-
+      try {
+            
             $tconsulta      = Consulta::findOrFail($id);
             $data           = $this->getData($request);
+         
             $data['egreso'] = Carbon::now();
 
             $arribo = $tconsulta->arribo;
@@ -227,6 +256,23 @@ class ConsultasController extends Controller
 
             $data['tiempo_consulta'] = $diferencia;
             $data['atendido']        = 'SI';
+
+
+            //// tengo que obtener el id del usuarios que es medico 
+            //y guardarlo en $data[medico_id]
+            $persona_id=$request->user()->persona_id;
+            $persona = Persona::findOrFail($persona_id);
+            
+            
+            $medico = DB::table('medicos')
+            ->select('medicos.id')
+            ->where('medicos.persona_id', $persona_id)
+            ->get();
+
+
+          $data['medico_id']=$medico[0]->id;
+            
+          //  dd($data['medico_id']);
 
             $consultas = Consulta::findOrFail($id);
             $consultas->update($data);
@@ -253,9 +299,9 @@ class ConsultasController extends Controller
 /** Realiza la consulta a la base de datos, obteniendo las consultas segun las condiciones **/
         $consultasAtendidas = Consulta::where('arribo', '<=', 'now') //'2021-04-11 00:01:01')
             ->where('consultas.atendido', '=', 'SI')
+            ->where('consultas.fecha','=',Carbon::now())
             ->get();
 
-//dd($consultas);
         /** como es una coleccion se debe posicionar en cada uno de los elementos de la mismas, es
         tipo DateTime -> tenemos que dar el formato de hora que es lo que necesitamos */
 
@@ -274,18 +320,15 @@ class ConsultasController extends Controller
             $resultado = 0;
         }
 
-
         $tiempo_espera = date("H:i:s", $resultado); //00:02:42 promedio obtenido pasado al formato H:i:s
-        
-        $tiempo_espera_hora  = Carbon::parse($tiempo_espera)->hour * 3600; 
-        
-        $tiempo_espera_minute = Carbon::parse($tiempo_espera)->minute; 
-        
-        $tiempo_espera_second = Carbon::parse($tiempo_espera)->second;
-     
-        
-        $tiempo_espera_time = Carbon::createFromTime($tiempo_espera_hora, $tiempo_espera_minute, (int)$tiempo_espera_second); 
+//dd($tiempo_espera, $consultasAtendidas,Carbon::now());
+        $tiempo_espera_hora = Carbon::parse($tiempo_espera)->hour;
 
+        $tiempo_espera_minute = Carbon::parse($tiempo_espera)->minute;
+
+        $tiempo_espera_second = Carbon::parse($tiempo_espera)->second;
+
+        $tiempo_espera_time = Carbon::createFromTime($tiempo_espera_hora, $tiempo_espera_minute, (int) $tiempo_espera_second);
 
         $consultasNoAtendidas = Consulta::with('paciente')
             ->where('arribo', '<=', 'now')
@@ -293,111 +336,114 @@ class ConsultasController extends Controller
             ->where('consultas.prioridad_id', '>=', 3)
             ->orderBy('consultas.prioridad_id', 'ASC')
             ->get();
+//dd($consultasNoAtendidas);
 
+        for ($i = 0; $i < count($consultasNoAtendidas); $i++) {
 
+            if ($consultasNoAtendidas[$i]->prioridad_id == 5) {
 
-for ($i = 0; $i < count($consultasNoAtendidas); $i++) {
+                $tiempo_espera_time = $tiempo_espera_time->addMinutes(4);
+                //addHours($tiempo_espera_hora)->addMinutes($tiempo_espera_minute)->addSecond($tiempo_espera_second);
+            
 
-
- if($consultasNoAtendidas[$i]->prioridad_id == 5){ 
-
-     $tiempo_espera_time = $tiempo_espera_time->addHours($tiempo_espera_hora)->addMinutes($tiempo_espera_minute)->addSecond($tiempo_espera_second);
-      
-    }
-    if($consultasNoAtendidas[$i]->prioridad_id == 4){
-
-       $tiempo_espera_time = $tiempo_espera_time->addHours($tiempo_espera_hora)->addMinutes($tiempo_espera_minute)->addSecond($tiempo_espera_second);
-      
-        }
-    if($consultasNoAtendidas[$i]->prioridad_id == 3){
-
-        $tiempo_espera_time = $tiempo_espera_time->addMinutes(20);
-        
-        }
-
-       
-        $consultasNoAtendidas[$i]['horaE'] = $tiempo_espera_time;
-        $consultasNoAtendidas[$i]['horaE'] = $consultasNoAtendidas[$i]['horaE']->format("H:i:s");
-   
-}
-
-
-
-
-
-
-
-
-       /*
-//fuciona--------------
-            $arribohora      = Carbon::parse($consultasNoAtendidas[0]->arribo)->hour * 3600;
-            $arribominute    = Carbon::parse($consultasNoAtendidas[0]->arribo)->minute * 60;
-            $arribosecond    = Carbon::parse($consultasNoAtendidas[0]->arribo)->second; //23:37
-            $resultadohora   = Carbon::parse($tiempo_espera)->hour * 3600;
-            $resultadominute = Carbon::parse($tiempo_espera)->minute * 60;
-            $resultadosecond = Carbon::parse($tiempo_espera)->second;
-
-            $sumahora   = ($arribohora + $resultadohora) / 3600;
-            $sumaminute = ($arribominute + $resultadominute) / 60;
-            $sumasecond = ($arribosecond + $resultadosecond);
-
-            echo Carbon::createFromTime($sumahora, $sumaminute, $sumasecond);
-*//*
-            for ($i = 0; $i < count($consultasNoAtendidas); $i++) {
-
-                $arribohora      = Carbon::parse($consultasNoAtendidas[$i]->arribo)->hour * 3600;
-                $arribominute    = Carbon::parse($consultasNoAtendidas[$i]->arribo)->minute * 60;
-                $arribosecond    = Carbon::parse($consultasNoAtendidas[$i]->arribo)->second; //23:37
-                $resultadohora   = Carbon::parse($tiempo_espera)->hour * 3600;
-                $resultadominute = Carbon::parse($tiempo_espera)->minute * 60;
-                $resultadosecond = Carbon::parse($tiempo_espera)->second;
-
-                $sumahora   = ($arribohora + $resultadohora) / 3600;
-                $sumaminute = ($arribominute + $resultadominute) / 60;
-                $sumasecond = ($arribosecond + $resultadosecond) /60;
-
-                $horaE = Carbon::createFromTime($sumahora, $sumaminute, (int)$sumasecond);
-                $consultasNoAtendidas[$i]['horaE'] = $horaE;
-                echo Carbon::now() . " Carbon / --- / horaE ";
-                echo $horaE . " / tiempo_espera "; echo $tiempo_espera . "   /  ";
-$ahora = Carbon::now();
-                echo Carbon::parse($horaE)->minute + Carbon::parse($tiempo_espera)->minute . " / ----------- / ";
-                 $hora= ($horaE->hour - $ahora->hour)/1000;
-                 $minute=  ($horaE->minute - $ahora->minute)/1000;
-                 $limite = (60*1000)/1000;
-                 if($hora <= $limite){
-                    if($minute <= $limite){
-                     $horaE = $horaE->addMinutes(1);
-
-                 }
-                 echo ($horaE->hour - $ahora->hour)  . " ->diferencia horas:    ";
-                 echo ($horaE->minute - $ahora->minute)  . " ->diferencia minutes:    ";
-                 echo $horaE  . " ->HoraE    ";
-                    }
-                //if (Carbon::now()>$horaE ){
-                
-                 $diffInHours = $horaE->diffInHours($ahora);
-                 $diffInMinutes = $horaE->diffInMinutes($ahora);
-                 $diffInSeconds = $horaE->diffInSeconds($ahora);
-                 
-               
-                if($horaE <= $ahora){
-                $horaE = $horaE->addMinutes(0);
-                $consultasNoAtendidas[$i]['horaE'] = $horaE;
-                $consultasNoAtendidas[$i]['horaE'] = $consultasNoAtendidas[$i]['horaE']->format("H:i:s");
-                // $tiempo_espera_time = $tiempo_espera_time->addMinutes(3);
-               
-                }
-               
-     
             }
-  
-        }       
-       */
-//AutoReload => https://www.youtube.com/watch?v=Z0QRNeUYsMM
+            if ($consultasNoAtendidas[$i]->prioridad_id == 4) {
 
+                $tiempo_espera_time = $tiempo_espera_time->addMinutes(3);
+                //addHours($tiempo_espera_hora)->addMinutes($tiempo_espera_minute)->addSecond($tiempo_espera_second);
+
+            }
+            if ($consultasNoAtendidas[$i]->prioridad_id == 3) {
+
+                $tiempo_espera_time = $tiempo_espera_time->addMinutes(2);
+
+            }
+
+            $consultasNoAtendidas[$i]['horaE'] = $tiempo_espera_time;
+            $consultasNoAtendidas[$i]['horaE'] = $consultasNoAtendidas[$i]['horaE']->format("H:i:s");
+
+        }
+
+     
         return view('consultas.tiempodeconsulta', compact('consultasNoAtendidas'));
 
     }
 
+    public function historiaclinica(Request $request)
+    {
+
+        // id del paciente
+   //   try {
+            $paciente_id = DB::table('pacientes')
+                ->join('personas', 'personas.id', '=', 'pacientes.persona_id')
+                ->join('obrasociales', 'obrasociales.id', '=', 'pacientes.obrasocial_id')
+                ->select('pacientes.id')
+                ->where('personas.dni', $request->get('dni'))
+                ->get();
+ 
+ $historiaclinicas = null;
+
+ if ($paciente_id->first() != null)
+    { 
+         
+        $historiaclinicas  = Consulta::All()
+                ->where('paciente_id', '=', $paciente_id->first()->id);
+        $paciente_id = $paciente_id->first()->id;
+    }        
+        
+                  
+
+            return view('consultas.historiaclinica', compact('historiaclinicas','persona','medico','paciente_id'));
+     /* } catch (Exception $exception) {
+
+            return back()->withInput()
+                ->withErrors(['unexpected_error' => 'DNI invalido']);
+        }
+*/
+    }
+
+    public function showHistoria($id)
+    {
+        $consultas = Consulta::with('paciente', 'medico', 'guardia', 'prioridad')->findOrFail($id);
+
+        return view('consultas.showHistoria', compact('consultas'));
+    }
+
+   public function historiaPdf(Request $request){
+ 
+
+                $historiaclinicas  = Consulta::All()
+                ->where('paciente_id', '=', $request->historiaPdf);
+                
+                $paciente = Paciente::findOrFail($request->historiaPdf);
+
+                $fecha=Carbon::now();
+                //dd($paciente->persona->nombre, $paciente->persona->apellido);
+       
+                  $pdf = PDF::loadView('pdf.historiaPdf', compact('historiaclinicas','persona','medico','paciente','fecha'));
+                  $pdf->setPaper('A4');
+                  $a=1;
+
+                  return $pdf->download( $paciente->persona->apellido.' '.$paciente->persona->nombre.' '.'Historia Clinica.pdf');
+
+         
+     
+   }
+   public function consultaPdf(Request $request) { 
+
+    $id = $request->consultaPdf;
+
+    $consultas = Consulta::with('paciente', 'medico', 'guardia', 'prioridad')->findOrFail($id);
+    $fecha=Carbon::now();
+
+    $pdf = PDF::loadView('pdf.consultaPdf', compact('consultas','fecha'));
+    $pdf->setPaper('A4');
+    
+    return $pdf->stream($consultas->fecha.' '.$consultas->paciente->persona->apellido.' '.$consultas->paciente->persona->nombre.' '.'Consulta.pdf');
+
+
+
+   }
+    
+   
 }

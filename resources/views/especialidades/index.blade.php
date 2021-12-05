@@ -9,19 +9,19 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
         </span>
     </button>
 </div>
 @endif
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <div class="pull-left" align="center">
-                        <h1 class="mt-5 mb-5">
-                            Especialidades
+                          <h1 class="mt-5 mb-5">
+                            {{ !empty($title) ? $title : 'Especialidades' }}
                         </h1>
                     </div>
                     <div class="btn-group btn-group-xs pull-right" role="group">
@@ -31,7 +31,8 @@
                             </span>
                         </a>
                     </div>
-                </div><br>
+                </div>
+                <br>
                 @if(count($especialidades) == 0)
                 <div class="panel-body text-center">
                     <h4>
@@ -92,8 +93,9 @@
                 </div>
                 @endif
             </div>
-            @endsection
+          
         </div>
     </div>
 </div></div></div>
 </div>
+  @endsection

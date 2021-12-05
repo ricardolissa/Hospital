@@ -26,7 +26,7 @@ class PacientesFormRequest extends FormRequest
     {
         $rules = [
             'persona_id' => 'nullable',
-            'obrasocial_id' => 'nullable',
+            'obrasocial_id' => 'required',
             'antecedentes_familiares' => 'string|min:1|nullable',
             'antecedentes_patologico' => 'string|min:1|nullable',
             'antecedentes_nopatologico' => 'string|min:1|nullable',

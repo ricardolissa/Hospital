@@ -1,7 +1,8 @@
 <div class="form-group {{ $errors->has('persona_id') ? 'has-error' : '' }}">
-    <label for="persona_id" class="col-md-2 control-label">Persona</label>
+    <label for="persona_id" class="col-md-2 control-label">Apellido y Nombre</label>
     <div class="col-md-10">
-     <input class="form-control" name="persona_id" type="text" id="persona_id" value="{{ $persona->id }}" minlength="1" >
+     <input class="form-control" name="persona_id" type="text" id="persona_id" value="{{ $persona->id }}" minlength="1"  hidden>
+     <label>{{ $persona->apellido }} {{ $persona->nombre }}</label>
        
     </div>
 </div>
@@ -9,10 +10,11 @@
 <div class="form-group {{ $errors->has('obrasocial_id') ? 'has-error' : '' }}">
     <label for="obrasocial_id" class="col-md-2 control-label">Obrasocial</label>
     <div class="col-md-10">
-        <select class="form-control" id="obrasocial_id" name="obrasocial_id">
-        	    <option value="" style="display: none;" {{ old('obrasocial_id', optional($paciente)->obrasocial_id ?: '') == '' ? 'selected' : '' }} disabled selected>Select obrasocial</option>
+        <select class="form-control" id="obrasocial_id" name="obrasocial_id" required>
+        	    <option value="" style="display: none;" {{ old('obrasocial_id', optional($paciente)->obrasocial_id ?: '') == '' ? 'selected' : '' }} disabled selected required>Select obrasocial</option>
+                <option></option>
         	@foreach ($obrasocials as $key => $obrasocial)
-			    <option value="{{ $key }}" {{ old('obrasocial_id', optional($paciente)->obrasocial_id) == $key ? 'selected' : '' }}>
+			    <option value="{{ $key }}" {{ old('obrasocial_id', optional($paciente)->obrasocial_id) == $key ? 'selected' : '' }} >
 			    	{{ $obrasocial }}
 			    </option>
 			@endforeach

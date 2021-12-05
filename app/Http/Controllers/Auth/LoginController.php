@@ -22,7 +22,7 @@ $credentials =  $this->validate(request(),[
 
 	if(Auth::attempt($credentials)){
 
-	return redirect('/regpacientes');
+	return redirect('/home');
 
 	} return back()->withErrors(['email'=> trans('auth.failed')]);
 		

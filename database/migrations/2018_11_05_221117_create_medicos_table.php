@@ -16,7 +16,7 @@ class CreateMedicosTable extends Migration
         {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('persona_id')->unsigned()->nullable()->index();
+            $table->integer('persona_id')->unsigned()->unique()->index();
             $table->string('foto')->nullable();
             $table->integer('legajo')->unique();
             $table->integer('matricula')->unique();

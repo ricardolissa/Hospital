@@ -8,19 +8,14 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Editar Medico' }}
+                            {{ $medicos->persona->apellido }} {{ $medicos->persona->nombre }}
                         </h1>
                     </div>
                     <div class="col-md-12">
                         <div class="btn-group btn-group-xs pull-right" role="group">
                             <a class="btn btn-primary" href="{{ route('medicos.medicos.index') }}" title="Mostrar todos los Medicos">
                                 <span aria-hidden="true" class="glyphicon glyphicon-th-list">
-                                    Mostrar
-                                </span>
-                            </a>
-                            <a class="btn btn-success" href="{{ route('medicos.medicos.create') }}" title="Crear Nuevo Medico">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus">
-                                    Crear
+                                    Volver
                                 </span>
                             </a>
                         </div>
@@ -44,8 +39,8 @@
 
                                         ])
                                     <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input class="btn btn-primary" type="submit" value="Actualizar">
+                                         <div align="center" class="col-md-12">
+                                            <input class="btn btn-success" type="submit" value="Actualizar">
                                             </input>
                                         </div>
                                     </div>

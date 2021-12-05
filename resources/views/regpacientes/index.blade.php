@@ -9,7 +9,7 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
+           
         </span>
     </button>
 </div>
@@ -21,7 +21,7 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Busqueda de Paciente' }}
+                            {{ !empty($title) ? $title : 'Busqueda de Paciente' }} 
                         </h1>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                                                     <input align="left" class="form-control" id="dni" minlength="1" name="dni" placeholder="Ingrese el DNI" type="text"> 
                                                     </input>
                                                     <br>
-                                                        <button aling="pull-right" aria-hidden="true" class="btn btn-primary" type="submit">
+                                                        <button aling="pull-right" aria-hidden="true" class="btn btn-info" type="submit">
                                                             Buscar
                                                         </button>
                                                     </br>
@@ -61,8 +61,17 @@
                                 </div>
                             </div>
                             <br>
+                             @if(count($pacientes) == 0)
+                <div class="panel-body text-center">
+                    <h4>
+                        No se encuentra el Paciente!
+                    </h4>
+                </div>
+                @else
                                 <div class="row">
+                                        
                                     <div class="col-md">
+
                                         <table class="table table-hover table-striped">
                                             <tbody align="center">
                                                 <tr>
@@ -81,6 +90,7 @@
                                                     <td>
                                                     </td>
                                                 </tr>
+
                                                 @foreach($pacientes as $paciente)
                                                 <tr>
                                                     <td>
@@ -115,6 +125,7 @@
                                         </table>
                                     </div>
                                 </div>
+                                @endif
                                 <br>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -129,6 +140,8 @@
                                                 <div class="col-md">
                                                 </div>
                                             </div>
+                                            
+                                         
                                         </div>
                                     </div>
                                 </br>

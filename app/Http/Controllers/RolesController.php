@@ -9,7 +9,10 @@ use Exception;
 
 class RolesController extends Controller
 {
-
+     public function __construct()
+    {
+  //      $this->middleware('auth');
+    }
     /**
      * Display a listing of the roles.
      *
@@ -17,6 +20,7 @@ class RolesController extends Controller
      */
     public function index()
     {
+       
         $roles = Role::paginate(25);
 
         return view('roles.index', compact('roles'));

@@ -4,76 +4,63 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">
-                <strong>
-                    MEDICO
-                </strong>
-            </h1>
-            <hr>
-                <div class="profile-card-6">
-                    <img class="img img-responsive" src="/images/{{$medicos->foto  }}">
-                        <div class="profile-name">
-                            {{ ($medicos->persona->apellido)}}
-                            <br>
-                                {{  ($medicos->persona->nombre) }}
-                            </br>
-                        </div>
-                        <div class="profile-position">
-                            @foreach ($medicos->especialidades as $especialidad)
-      
-                                     {{$especialidad->nombre}}
-                            <br>
-                                @endforeach
-                            </br>
-                        </div>
-                        <div class="profile-overview">
-                            <div class="profile-overview">
-                                <div class="row text-center">
-                                </div>
-                                <div class="col-xs-4">
-                                    <h3>
-                                        {{ $medicos->matricula }}
-                                    </h3>
-                                    <p>
-                                        Matricula
-                                    </p>
-                                </div>
-                                <div class="col-xs-4">
-                                    <h3>
-                                        {{ $medicos->legajo }}
-                                    </h3>
-                                    <p>
-                                        Legajo
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </img>
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div align="center" class="pull-left">
+                        <h1 class="mt-5 mb-5">
+                            {{ $medicos->persona->apellido }} {{ $medicos->persona->nombre }}
+                        </h1>
+                    </div>
                 </div>
-            </hr>
+            </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="row">
+    <div align="center" class="row">
         <div class="col-md-12">
-            <div align="center">
-            
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        <img src="/images/{{ $medicos->foto }}" width="100"/>
+                    </dt>
+                    <br>
+                        <dt>
+                            <h3>
+                                Matricula : {{ $medicos->matricula }}
+                            </h3>
+                        </dt>
+                        <dt>
+                            <h3>
+                                Legajo : {{ $medicos->legajo }}
+                            </h3>
+                        </dt>
+                        <dt>
+                            <h3>
+                                @foreach ($medicos->especialidades as $especialidad)
+      
+                                     {{$especialidad->nombre}}
+                                <br>
+                                    @endforeach
+                                </br>
+                            </h3>
+                        </dt>
+                    </br>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div align="center" class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
                 <form accept-charset="UTF-8" action="{!! route('medicos.medicos.destroy', $medicos->id) !!}" method="POST">
                     <input name="_method" type="hidden" value="DELETE">
                         {{ csrf_field() }}
                         <div class="btn-group btn-group-xs" role="group">
                             <a class="btn btn-primary" href="{{ route('medicos.medicos.index') }}" title="Mostrar todos los Medicos">
                                 <span aria-hidden="true" class="glyphicon glyphicon-th-list">
-                                    Mostrar
+                                    Volver
                                 </span>
                             </a>
-                            <a class="btn btn-success" href="{{ route('medicos.medicos.create') }}" title="Crear Nuevo Medico">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus">
-                                    Crear
-                                </span>
-                            </a>
-                            <a class="btn btn-primary" href="{{ route('medicos.medicos.edit', $medicos->id ) }}" title="Editar Medico">
+                            <a class="btn btn-success" href="{{ route('medicos.medicos.edit', $medicos->id ) }}" title="Editar Medico">
                                 <span aria-hidden="true" class="glyphicon glyphicon-pencil">
                                     Editar
                                 </span>

@@ -1,50 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="panel panel-default">
-
-        <div class="panel-heading clearfix">
-            
-            <span class="pull-left">
-                <h4 class="mt-5 mb-5">Crear Nuevo Paciente</h4>
-            </span>
-
-            <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('pacientes.paciente.index') }}" class="btn btn-primary" title="Show All Paciente">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="panel-body">
-        
-            @if ($errors->any())
-                <ul class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-            <form method="POST" action="{{ route('pacientes.paciente.store') }}" accept-charset="UTF-8" id="create_paciente_form" name="create_paciente_form" class="form-horizontal">
-            {{ csrf_field() }}
-            @include ('pacientes.form', [
-                                        'paciente' => null,
-                                      ])
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input class="btn btn-primary" type="submit" value="Add">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <div align="center" class="pull-left">
+                        <h1 class="mt-5 mb-5">
+                            {{ !empty($title) ? $title : 'Crear Paciente' }}
+                        </h1>
                     </div>
                 </div>
-
-            </form>
-
+            </div>
         </div>
     </div>
-
-@endsection
-
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-group btn-group-xs pull-right" role="group">
+                <a class="btn btn-primary" href="{{ route('pacientes.paciente.index') }}" title="Mostrar todos los Pacientes">
+                    <span aria-hidden="true" class="glyphicon glyphicon-th-list">
+                        Volver
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body">
+                    @if ($errors->any())
+                    <ul class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                        <li>
+                            {{ $error }}
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif
+                    <form accept-charset="UTF-8" action="{{ route('pacientes.paciente.store') }}" class="form-horizontal" id="create_paciente_form" method="POST" name="create_paciente_form">
+                        {{ csrf_field() }}
+                    @include ('pacientes.form', [
+                                                'paciente' => null,
+                                              ])
+                        <div class="form-group">
+                            <div align="center" class="col-md-12">
+                                <input class="btn btn-success" type="submit" value="Crear">
+                                </input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </br>
+</div>
+ @endsection

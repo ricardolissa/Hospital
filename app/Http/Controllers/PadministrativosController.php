@@ -12,14 +12,18 @@ use Illuminate\Http\Request;
 
 class PadministrativosController extends Controller
 {
-
+ public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the padministrativos.
      *
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $request->user()->authorizeRoles(['user', 'admin']);
         $padministrativos = Padministrativo::with('persona')->paginate(25);
 
         return view('padministrativos.index', compact('padministrativos'));

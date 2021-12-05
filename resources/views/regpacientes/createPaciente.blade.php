@@ -8,7 +8,7 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Reg Crear Paciente' }}
+                            {{ !empty($title) ? $title : 'Registrar Persona' }}
                         </h1>
                     </div>
                 </div>

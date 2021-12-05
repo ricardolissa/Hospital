@@ -7,7 +7,12 @@ use App\Models\Persona;
 
 class VistadmController extends Controller
 {
+   public function __construct()
+    {
+        $this->middleware('auth');
+    } 
   
+
   public function index()
     {
         return view('vistadm.admnewpersona');

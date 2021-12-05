@@ -35,7 +35,8 @@ use AuthenticableTrait;
       'name',
       'email',
       'password',
-      'role_id'
+      'role_id',
+      'persona_id'
   ];
 
     /**
@@ -109,6 +110,9 @@ use AuthenticableTrait;
 {
     $this->attributes['password'] = bcrypt($password);
 }
-
+  public function persona()
+    {
+        return $this->belongsTo('App\Models\Persona','persona_id');
+    }
 
 }

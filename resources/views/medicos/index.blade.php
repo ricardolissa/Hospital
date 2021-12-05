@@ -9,7 +9,6 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
         </span>
     </button>
 </div>
@@ -21,7 +20,7 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            Medicos
+                              {{ !empty($title) ? $title : 'Medicos' }}
                         </h1>
                     </div>
                     <div class="btn-group btn-group-xs pull-right" role="group">
@@ -42,8 +41,8 @@
                     @else
                     <div class="panel-body panel-body-with-table">
                         <div class="table-responsive">
-                            <table class="table table-striped ">
-                                <thead>
+                            <table class="table table-striped " >
+                                <thead align="center">
                                     <tr>
                                         <th>
                                             Nombre
@@ -62,11 +61,11 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody align="center">
                                     @foreach($medicosObjects as $medicos)
                                     <tr>
                                         <td>
-                                            {{ optional($medicos->persona)->nombre }}
+                                            {{ optional($medicos->persona)->apellido }}, {{ optional($medicos->persona)->nombre }}
                                         </td>
                                         <td>
                                             <img src="images/{{ $medicos->foto }}" width="100">
@@ -115,7 +114,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer" >
                         {!! $medicosObjects->render() !!}
                     </div>
                     @endif

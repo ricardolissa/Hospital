@@ -1,19 +1,6 @@
-<div class="form-group {{ $errors->has('persona_id') ? 'has-error' : '' }}">
-    <label class="col-md-2 control-label" for="persona_id">
-        Medico
-    </label>
-    <br>
-        <div class="col-md-10">
-            {{ ($medicos->persona->apellido)}} , {{  ($medicos->persona->nombre) }}
-        
-        {!! $errors->first('persona_id', '
-            <p class="help-block">
-                :message
-            </p>
-            ') !!}
-        </div>
-    </br>
-</div>
+<input class="form-control" id="persona_id" minlength="1" name="persona_id" type="hidden" value="{{ $medicos->persona->id }}" hidden>
+                        </input>
+
 <div class="form-group {{ $errors->has('foto') ? 'has-error' : '' }}">
     <div align="center" class="col-md-10">
         <label class="col-md-2 control-label" for="foto">
@@ -25,7 +12,7 @@
     <label class="col-md-2 control-label" for="foto">
         Foto
     </label>
-    <div class="col-md-10">
+    <div class="col-md-12">
         <input class="form-control" id="foto" minlength="1" name="foto" type="file" value=" {{ $medicos->foto }}">
             {!! $errors->first('foto', '
             <p class="help-block">
@@ -39,7 +26,7 @@
     <label class="col-md-2 control-label" for="legajo">
         Legajo
     </label>
-    <div class="col-md-10">
+    <div class="col-md-12">
         <input class="form-control" id="legajo" minlength="1" name="legajo" type="text" disabled value="{{ old('legajo', optional($medicos)->legajo) }}">
             {!! $errors->first('legajo', '
             <p class="help-block">
@@ -53,7 +40,7 @@
     <label class="col-md-2 control-label" for="matricula">
         Matricula
     </label>
-    <div class="col-md-10">
+    <div class="col-md-12">
         <input class="form-control" id="matricula" minlength="1" name="matricula" placeholder="Enter matricula here..." type="text" value="{{ old('matricula', optional($medicos)->matricula) }}">
             {!! $errors->first('matricula', '
             <p class="help-block">
@@ -64,27 +51,30 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-md-2 control-label" for="mespecialidad">
+    <label class="col-md control-label" for="mespecialidad">
         Especialidades Anteriores
     </label>
-    <div class="col-md-10">
-        @foreach ($medicos->especialidades as $especialidad)
+    @foreach ($medicos->especialidades as $especialidad)
+    <div class="col-md-12">
+    
       
-                                    / {{$especialidad->nombre}} 
+                                     {{$especialidad->nombre}} 
       
-                                @endforeach
+                                
     </div>
+     @endforeach
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label" for="especialidad">
-        Seleccionar Especialidad
+        Seleccionar Especialidad 
     </label>
-    <div class="col-md-10">
-        <select class="col-md-3 chosen-select" id="especialidades" multiple="multiple" name="especialidades[]">
+
+    <div class="col-md-12">
+        <select class="col-md chosen-select" id="especialidades" multiple="multiple" name="especialidades[]">
             @foreach($especialidades as $especialidad)
-            <option value="{{$especialidad}}">
-                {{$especialidad}}
-            </option>
+            <option value="{{$especialidad->id}}">
+                        {{$especialidad->nombre, $especialidad->id }}
+                    </option>
             @endforeach
         </select>
     </div>

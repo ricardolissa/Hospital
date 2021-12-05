@@ -8,19 +8,14 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Editar Administrativo' }}
+                            {{ $padministrativo->persona->apellido }} {{ $padministrativo->persona->nombre }}
                         </h1>
                     </div>
                     <div class="col-md-12">
                         <div class="btn-group btn-group-xs pull-right" role="group">
                             <a class="btn btn-primary" href="{{ route('padministrativos.padministrativo.index') }}" title="Mostrar todos los Administrativos">
                                 <span aria-hidden="true" class="glyphicon glyphicon-th-list">
-                                    Mostrar
-                                </span>
-                            </a>
-                            <a class="btn btn-success" href="{{ route('padministrativos.padministrativo.create') }}" title="Crear Nuevo Administrativo">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus">
-                                    Crear
+                                    Volver
                                 </span>
                             </a>
                         </div>
@@ -43,8 +38,8 @@
                                         'padministrativo' => $padministrativo,
                                       ])
                                     <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-10">
-                                            <input class="btn btn-primary" type="submit" value="Actualizar">
+                                        <div align="center" class="col-md-12">
+                                            <input class="btn btn-success" type="submit" value="Actualizar">
                                             </input>
                                         </div>
                                     </div>
@@ -56,6 +51,5 @@
             </div>
         </div>
     </div>
-   
 </div>
- @endsection
+@endsection

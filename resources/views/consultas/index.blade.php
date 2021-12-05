@@ -9,7 +9,6 @@
     {!! session('success_message') !!}
     <button aria-label="close" class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">
-            ×
         </span>
     </button>
 </div>
@@ -24,7 +23,6 @@
                             {{ !empty($title) ? $title : 'Consultas' }}
                         </h1>
                     </div>
-
                     <div class="btn-group btn-group-xs pull-right" role="group">
                         <a class="btn btn-success" href="{{ route('consultas.consulta.create') }}" title="Crear Nueva Consulta">
                             <span aria-hidden="true" class="glyphicon glyphicon-plus">
@@ -149,7 +147,7 @@
                     @endif
                 </br>
             </div>
-            @endsection
         </div>
     </div>
 </div>
+@endsection

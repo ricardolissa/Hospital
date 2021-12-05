@@ -24,7 +24,7 @@ class PadministrativosFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'persona_id' => 'nullable',
+            'persona_id' => 'required',
             'foto'       => 'file|min:1|nullable',
             'legajo'     => 'string|min:1|nullable',
 

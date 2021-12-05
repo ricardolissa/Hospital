@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -9,50 +8,60 @@
                 <div class="panel-heading clearfix">
                     <div align="center" class="pull-left">
                         <h1 class="mt-5 mb-5">
-                            {{ !empty($title) ? $title : 'Administrativo' }}
+                            {{ $padministrativo->persona->apellido }} {{ $padministrativo->persona->nombre }}
                         </h1>
                     </div>
-                     <div class="pull-right">
-
-            <form method="POST" action="{!! route('padministrativos.padministrativo.destroy', $padministrativo->id) !!}" accept-charset="UTF-8">
-            <input name="_method" value="DELETE" type="hidden">
-            {{ csrf_field() }}
-                <div class="btn-group btn-group-xs" role="group">
-                    <a href="{{ route('padministrativos.padministrativo.index') }}" class="btn btn-primary" title="Mostrar todos los Administrativos">
-                        <span class="glyphicon glyphicon-th-list" aria-hidden="true">Mostrar</span>
-                    </a>
-
-                    <a href="{{ route('padministrativos.padministrativo.create') }}" class="btn btn-success" title="Crear Nuevo Administrativo">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true">Crear</span>
-                    </a>
-                    
-                    <a href="{{ route('padministrativos.padministrativo.edit', $padministrativo->id ) }}" class="btn btn-primary" title="Editar Administrativo">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">Editar</span>
-                    </a>
-
-                    <button type="submit" class="btn btn-danger" title="Borrar Administrativo" onclick="return confirm(&quot;Delete Padministrativo??&quot;)">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true">Borrar</span>
-                    </button>
                 </div>
-            </form>
-
+            </div>
         </div>
-
     </div>
-<br><br>
-    <div class="panel-body">
-        <dl class="dl-horizontal">
-            <dt>Persona</dt>
-            <dd>{{ optional($padministrativo->persona)->nombre }}</dd>
-            <dt>Foto</dt>
-            <dd><img src="/images/{{ $padministrativo->foto }}" width="100"></dd>
-            <dt>Legajo</dt>
-            <dd>{{ $padministrativo->legajo }}</dd>
+    <div class="row" align="center">
+        <div class="col-md-12">
+            <div class="panel-body">
+                <dl class="dl-horizontal">
 
-        </dl>
-
+                   
+                    <dt>
+                        <img src="/images/{{ $padministrativo->foto }}" width="100"/>
+                    </dt>
+                    <br>
+                    <dt>
+                        <h3> Legajo : {{ $padministrativo->legajo }} </h3>
+                    </dt>
+                   
+                </dl>
+            </div>
+        </div>
     </div>
+    <br>
+        <div class="row" align="center">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <form accept-charset="UTF-8" action="{!! route('padministrativos.padministrativo.destroy', $padministrativo->id) !!}" method="POST">
+                        <input name="_method" type="hidden" value="DELETE">
+                            {{ csrf_field() }}
+                            <div class="btn-group btn-group-xs" role="group">
+                                <a class="btn btn-primary" href="{{ route('padministrativos.padministrativo.index') }}" title="Mostrar todos los Administrativos">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-th-list">
+                                        Volver
+                                    </span>
+                                </a>
+                                <a class="btn btn-success" href="{{ route('padministrativos.padministrativo.edit', $padministrativo->id ) }}" title="Editar Administrativo">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-pencil">
+                                        Editar
+                                    </span>
+                                </a>
+                                <button class="btn btn-danger" onclick='return confirm("Delete Padministrativo??")' title="Borrar Administrativo" type="submit">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-trash">
+                                        Borrar
+                                    </span>
+                                </button>
+                            </div>
+                        </input>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </br>
 </div>
-</div></div></div>
-
 @endsection

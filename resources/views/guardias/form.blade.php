@@ -4,8 +4,8 @@
     <label class="col-md-2 control-label" for="fecha">
         Fecha
     </label>
-    <div class="col-md-10">
-        <input class="form-control" id="fecha" minlength="1" name="fecha" placeholder="Enter fecha here..." type="date" value="{{ old('fecha', optional($guardia)->fecha) }}">
+    <div class="col-md-12">
+        <input class="form-control" id="fecha" minlength="1" name="fecha" placeholder="Enter fecha here..." type="date" value="{{ old('fecha', optional($guardia)->fecha) }}" required>
             {!! $errors->first('fecha', '
             <p class="help-block">
                 :message
@@ -29,11 +29,14 @@
         <label class="col-md-2 control-label" >
            Medico
         </label>
-        <div class="col-md-10">
-            <select class="chosen-select" id="medicoAsignado" multiple="multiple" name="medicoAsignado[]" required="required" style="width: 600px;">
+        <div class="col-md-12">
+            <select class="chosen-select" id="medicoAsignado" multiple="multiple" name="medicoAsignado[]" style="width: 600px;" required>
+               
                 @foreach($medicos as $medico)
-                <option value="{{$medico->id}}">
-                    {{$medico->persona->nombre, $medico->persona->id }}
+
+                <option value="{{$medico->id}}" >
+                    {{$medico->persona->apellido}} {{ $medico->persona->nombre }}
+
                 </option>
                 @endforeach
             </select>
